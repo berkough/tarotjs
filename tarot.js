@@ -36,9 +36,9 @@ function getDeck(){
 }
 let newDeck = getDeck();
 
-
+/** This function "shuffles" the deck. */
 function shuffle(deck){
-    for (i = 0; i < (Math.floor(Math.random()*1000)); i++){
+    for (i = 0; i < (Math.floor(Math.random()*10000)); i++){
         let one = Math.floor(Math.random()*deck.length);
         let two = Math.floor(Math.random()*deck.length);
         let three = deck[one];
@@ -48,7 +48,7 @@ function shuffle(deck){
     return;
 }
 shuffle(newDeck);
-console.log(newDeck[0],newDeck[1],newDeck[2],newDeck[3]);
+console.log(newDeck);
 
 let spreadNum = [3, 5, 12];
 let spread =  {Value: 3, Name:'Three Card', Value: 5, Name:'Cross', };
