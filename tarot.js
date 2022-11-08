@@ -10,28 +10,29 @@ class DECK {
     constructor(){
         this._deck = [];
         
-        this.majorArcana = [{Value:'0',Trump:'Fool'},{Value:'I',Trump:'Magician'},
-        {Value:'II',Trump:'High Priestess'},{Value:'III',Trump:'Empress'},{Value:'IV',Trump:'Emperor'},
-        {Value:'V',Trump:'Heirophant'},{Value:'VI',Trump:'Lovers'},{Value:'VII',Trump:'Chariot'},
-        {Value:'VIII',Trump:'Strength'},{Value:'IX',Trump:'Hermit'},{Value:'X',Trump:'Wheel of Fortune'},
-        {Value:'XI',Trump:'Justice'},{Value:'XII',Trump:'Hanged Man'},{Value:'XIII',Trump:'Death'},
-        {Value:'XIV',Trump:'Temperance'},{Value:'XV',Trump:'Devil'},{Value:'XVI',Trump:'Tower'},
-        {Value:'XVII',Trump:'Star'},{Value:'XVIII',Trump:'Moon'},{Value:'XIX',Trump:'Sun'},
-        {Value:'XX',Trump:'Judgement'},{Value:'XXI',Trump:'Universe'}];
+        this.majorArcana = [{Place:'0',Trump:'Fool'},{Place:'I',Trump:'Magician'},
+        {Place:'II',Trump:'High Priestess'},{Place:'III',Trump:'Empress'},{Place:'IV',Trump:'Emperor'},
+        {Place:'V',Trump:'Heirophant'},{Place:'VI',Trump:'Lovers'},{Place:'VII',Trump:'Chariot'},
+        {Place:'VIII',Trump:'Strength'},{Place:'IX',Trump:'Hermit'},{Place:'X',Trump:'Wheel of Fortune'},
+        {Place:'XI',Trump:'Justice'},{Place:'XII',Trump:'Hanged Man'},{Place:'XIII',Trump:'Death'},
+        {Place:'XIV',Trump:'Temperance'},{Place:'XV',Trump:'Devil'},{Place:'XVI',Trump:'Tower'},
+        {Place:'XVII',Trump:'Star'},{Place:'XVIII',Trump:'Moon'},{Place:'XIX',Trump:'Sun'},
+        {Place:'XX',Trump:'Judgement'},{Place:'XXI',Trump:'Universe'}];
         
-        this.minorValues = ['Ace','II','III','IV','V','VI','VII','VIII','IX','X',
+        this.minorPlaces = ['Ace','II','III','IV','V','VI','VII','VIII','IX','X',
         'Page','Knight','Queen','King'];
         
         this.suits = ['Cups','Swords','Wands','Pentacles'];
     }
+
     getDeck(){
         for (let i = 0; i < this.majorArcana.length; i++){
             this._deck.push(this.majorArcana[i]);
         }
         for (let i = 0; i < this.suits.length; i++){
-            for (let x = 0; x < this.minorValues.length; x++){
+            for (let x = 0; x < this.minorPlaces.length; x++){
                 let minorArcana = {
-                    Value: this.minorValues[x],
+                    Place: this.minorPlaces[x],
                     Suit: this.suits[i]
                 };
                 this._deck.push(minorArcana);
@@ -39,35 +40,24 @@ class DECK {
         }
         return this._deck;
     }
-    shuffle(inputDeck){
+    shuffle(input){
         for(let i = 0; i < (Math.floor(Math.random()*10000)); i++){
-            let one = Math.floor(Math.random()*inputDeck.length);
-            let two = Math.floor(Math.random()*inputDeck.length);
-            let three = inputDeck[one];
-            inputDeck[one] = inputDeck[two];
-            inputDeck[two] = three;
+            let one = Math.floor(Math.random()*input.length);
+            let two = Math.floor(Math.random()*input.length);
+            let three = input[one];
+            input[one] = input[two];
+            input[two] = three;
         }
-        return inputDeck;
+        return input;
     }
     splitDeck(){
-        let half = this._deck.length / 2;
-        return this.firstHalf = this._deck.splice(0,half), this.secondHalf = this._deck.splice(half,_deck.length);        
+        let half = Math.ceil(this._deck.length) / 2;
+        return this.firstHalf = this._deck.slice(0,half), this.secondHalf = this._deck.slice(half,this._deck.length);        
     }
 }
-let newDeck = new DECK();
-newDeck.getDeck();
-
-console.log(newDeck._deck);
-newDeck.shuffle(newDeck._deck);
-
-console.log(newDeck._deck);
-
-//DECK.shuffle(newDeck);
-//DECK.splitDeck(newDeck);
-//console.log(DECK.firstHalf);
 
 /*
- * Implementing the game of War using a tarot deck. This is an exercise  in manipulating the deck.
+ * Implementing the game of War using the tarot deck. This is an exercise  in manipulating the deck.
  */
 
 class Player {
@@ -81,32 +71,31 @@ class Player {
 
 class Game {
     constructor(){
+        this.deck = new DECK();
     }
     start(){
-        this.deck = new DECK();
-        this.deck.shuffle();
-        this.deck.splitDeck(this.deck);
+        this.deck.getDeck();
+        this.deck.shuffle(this.deck._deck);
+        this.deck.splitDeck();
 
         this.playerOne = new Player(this.deck.firstHalf);
-            console.log(this.playerOne);
+            console.log(this.playerOne.deck);
         this.playerTwo = new Player(this.deck.secondHalf);
-            console.log(this.playerTwo);
+            console.log(this.playerTwo.deck);
         
         this.turn();
+
     }
     turn(){
-        while (this.playerOne.length != 0 || this.playerTwo.length != 0 ){
-            let flip1 = this.playerOne.flipCard();
-            let flip2 = this.playerTwo.flipCard();
-            if(flip1 > flip2){
-                playerOne.push(flip1, flip2);
-            } else if (flip2 > flip1){
-                playerTwo.push(flip1, flip2);
-            }
-    }
-        return;
+        console.log(this.playerOne.deck[0]);
+        this.playerOne.flipCard();
+        console.log(this.playerOne.deck[0]);
+
+        console.log(this.playerTwo.deck[0]);
+        this.playerTwo.flipCard();
+        console.log(this.playerTwo.deck[0]);
     }
 }
 
-//let newGame = new Game();
-//console.log(newGame.start());
+let newGame = new Game();
+newGame.start();
