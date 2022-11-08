@@ -53,15 +53,10 @@ const DECK = {
         }
     },
     splitDeck(_deck){
-
+        let half = _deck.length / 2;
+        return firstHalf = _deck.splice(0,half), secondHalf = _deck.splice(half,_deck.length);        
     }
 }
-
-let newDeck = DECK.getDeck();
-console.log(newDeck[60].Suit);
-
-DECK.shuffle(newDeck);
-console.log(newDeck[10]);
 
 /*
  * Implementing the game of War using a tarot deck. This is an exercise  in manipulating the deck.
