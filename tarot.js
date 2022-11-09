@@ -85,16 +85,16 @@ class DECK {
 class Player {
     constructor(deck){
         this.playerDeck = deck;
+        this.points = 0;
     }
     flipCard(){
-        return this.playerDeck[0].Value, this.playerDeck.shift();
+        return this.playerDeck[0].Value;
     }
 }
 
 class Game {
     constructor(){
         this.deck = new DECK();
-        this.winner = false;
     }
     start(){
         this.deck.getDeck();
@@ -103,27 +103,49 @@ class Game {
         this.deck.splitDeck();
 
         this.playerOne = new Player(this.deck.firstHalf);
-            console.log(this.playerOne.playerDeck);
         this.playerTwo = new Player(this.deck.secondHalf);
-            console.log(this.playerTwo.playerDeck);
         
         this.turn();
 
     }
     turn(){ 
-        do {
-        this.flip1 = this.playerOne.flipCard();
-        this.flip2 = this.playerTwo.flipCard();
-        if (this.flip1 > this.flip2){
-            this.playerOne.playerDeck.push(this.playerOne.playerDeck[0],this.playerTwo.playerDeck[0]);
-        } else if (this.flip1 < this.flip2){
-            this.playerTwo.playerDeck.push(this.playerOne.playerDeck[0],this.playerTwo.playerDeck[0]);
-        } else {
-            this.playerOne.playerDeck.push(this.playerOne.playerDeck[0]);
-            this.playerTwo.playerDeck.push(this.playerTwo.playerDeck[0]);
+            do{
+            this.flip1 = this.playerOne.flipCard();
+            
+            if(typeof this.playerOne.playerDeck[0].Suit != 'undefined'){
+                console.log(`Player One flipped a ${this.playerOne.playerDeck[0].Place} of ${this.playerOne.playerDeck[0].Suit}`);
+            } else {
+                console.log(`Player One flipped the ${this.playerOne.playerDeck[0].Trump}(${this.playerOne.playerDeck[0].Place})`);
+            }
+
+            this.playerOne.playerDeck.shift();
+
+            this.flip2 = this.playerTwo.flipCard();
+            
+            if(typeof this.playerTwo.playerDeck[0].Suit != 'undefined'){
+                console.log(`Player One flipped a ${this.playerTwo.playerDeck[0].Place} of ${this.playerTwo.playerDeck[0].Suit}`);
+            } else {
+                console.log(`Player One flipped the ${this.playerTwo.playerDeck[0].Trump}(${this.playerTwo.playerDeck[0].Place})`);
+            }
+            
+            this.playerTwo.playerDeck.shift();
+                
+
+            if (this.flip1 > this.flip2){
+                this.playerOne.points += 1;
+                console.log('Player One wins the hand.')
+            } else if (this.flip1 < this.flip2){
+                this.playerTwo.points += 1;
+                console.log('Player Two wins the hand.');
+            } else if (this.flip1 === this.flip2){
+                console.log('This hand is a draw.')
+            }
+        } while (this.playerOne.playerDeck.length > 0);
+        if (this.playerOne.points > this.playerTwo.points) {
+            console.log('Player One wins the GAME!')
+        } else if (this.playerTwo.points > this.playerOne.points){
+            console.log('Player Two wins the GAME!')
         }
-        console.log(this.flip1,this.flip2,this.playerOne.playerDeck,this.playerTwo.playerDeck);
-        } while (this.playerOne.playerDeck.length !== 0 || this.playerTwo.playerDeck.length !== 0);
     }
 }
 
