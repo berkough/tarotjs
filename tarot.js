@@ -109,7 +109,10 @@ class Game {
 
     }
     turn(){ 
-            do{
+            let turnNum = 1;
+            do {
+            console.log(`>> Turn Number: ${turnNum} <<`);
+            
             this.flip1 = this.playerOne.flipCard();
             
             if(typeof this.playerOne.playerDeck[0].Suit != 'undefined'){
@@ -123,28 +126,44 @@ class Game {
             this.flip2 = this.playerTwo.flipCard();
             
             if(typeof this.playerTwo.playerDeck[0].Suit != 'undefined'){
-                console.log(`Player One flipped a ${this.playerTwo.playerDeck[0].Place} of ${this.playerTwo.playerDeck[0].Suit}`);
+                console.log(`Player Two flipped a ${this.playerTwo.playerDeck[0].Place} of ${this.playerTwo.playerDeck[0].Suit}`);
             } else {
-                console.log(`Player One flipped the ${this.playerTwo.playerDeck[0].Trump}(${this.playerTwo.playerDeck[0].Place})`);
+                console.log(`Player Two flipped the ${this.playerTwo.playerDeck[0].Trump}(${this.playerTwo.playerDeck[0].Place})`);
             }
             
             this.playerTwo.playerDeck.shift();
                 
-
+            console.log('--------------------------------');
+           
             if (this.flip1 > this.flip2){
                 this.playerOne.points += 1;
-                console.log('Player One wins the hand.')
+                console.log('Player One wins the hand.');
             } else if (this.flip1 < this.flip2){
                 this.playerTwo.points += 1;
                 console.log('Player Two wins the hand.');
             } else if (this.flip1 === this.flip2){
-                console.log('This hand is a draw.')
+                console.log('This hand is a draw.');
             }
+            console.log('________________________________');
+
+            turnNum += 1;
+            
         } while (this.playerOne.playerDeck.length > 0);
+        
+        this.winCondition();
+    }
+        
+    winCondition(){
         if (this.playerOne.points > this.playerTwo.points) {
-            console.log('Player One wins the GAME!')
+            console.log(`
+            ********************************
+            Player One wins the GAME!
+            ********************************`);
         } else if (this.playerTwo.points > this.playerOne.points){
-            console.log('Player Two wins the GAME!')
+            console.log(`
+            ********************************
+            Player Two wins the GAME!
+            ********************************`);
         }
     }
 }
