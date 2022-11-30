@@ -4,14 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="tarot.js"></script>
     <title>tarot.js</title>
-    <style>
-        body{
-            background: black;
-        }
-    </style>
 </head>
 <body>
-    <script src="tarot.js"></script>
+    <h1>Tarotjs</h1>
+    <div id="instructions">
+        <h2>Instructions:</h2>
+        <ol>
+            <li>Ask a Question</li>
+            <li>Shuffle the Deck</li>
+            <li>Draw a Focus Card</li>
+            <li>Deal the Cards for a Spread</li>
+        </ol>
+    </div>
+    <div id="main">
+        <!--Enter question, grab deck, shuffle, draw focus card.-->
+        <div id="question" style="text-align:center">
+            <label for="question">What do you want to know?</label>
+            <input type="text" id="question" name="question">&nbsp;<input type="button" id="askBtn" value="Ask Question">
+        </div>
+        <br>
+        <span id="deck">
+            <img src="img/cards/CardBack.jpg" alt="Card Back"><br>
+            <input type="button" value="Shuffle Deck" id="shuffle"> <input type="button" value="Pull Focus Card">
+        </span>
+        <span id="focus_card"></span><br>
+    </div>
+    <div id="spread">
+        <!--Display the spread, let the user draw the cards (one by one?)-->
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+            const askBtn = document.getElementById('askBtn');
+            const question = document.getElementById('question');
+            askBtn.addEventListener('click',()=>{
+                const asked = question.value;
+                console.log(asked);
+            });
+        });
+    </script>
 </body>
 </html>

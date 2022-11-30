@@ -17,7 +17,7 @@ class DECK {
         {Place:'XI',Trump:'Justice', Value: 26},{Place:'XII',Trump:'Hanged Man', Value: 27},{Place:'XIII',Trump:'Death', Value: 28},
         {Place:'XIV',Trump:'Temperance', Value: 29},{Place:'XV',Trump:'Devil', Value: 30},{Place:'XVI',Trump:'Tower', Value: 31},
         {Place:'XVII',Trump:'Star', Value: 32},{Place:'XVIII',Trump:'Moon', Value: 33},{Place:'XIX',Trump:'Sun', Value: 34},
-        {Place:'XX',Trump:'Judgement', Value: 35},{Place:'XXI',Trump:'Universe', Value: 36}];
+        {Place:'XX',Trump:'Judgement', Value: 35},{Place:'XXI',Trump:'World', Value: 36}];
         
         this.minorPlaces = ['Ace','II','III','IV','V','VI','VII','VIII','IX','X',
         'Page','Knight','Queen','King'];
@@ -92,7 +92,7 @@ class Player {
     }
 }
 
-class Game {
+class War {
     constructor(){
         this.deck = new DECK();
     }
@@ -192,5 +192,5 @@ class Game {
     }
 }
 
-let newGame = new Game();
-newGame.start();
+//let newGame = new Game();
+//newGame.start();
