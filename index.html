@@ -36,12 +36,16 @@
         <!--Display the spread, let the user draw the cards (one by one?)-->
     </div>
     <script>
+        let deck = new DECK();
+        deck.getDeck();
+        console.log(deck);
+
         document.addEventListener('DOMContentLoaded',()=>{
             const askBtn = document.getElementById('askBtn');
             const question = document.getElementById('question');
-            askBtn.addEventListener('click',()=>{
-                const asked = question.value;
-                console.log(asked);
+            
+            askBtn.addEventListener('Click',()=>{
+                console.log(question);
             });
         });
     </script>

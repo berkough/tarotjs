@@ -26,10 +26,8 @@ class DECK {
     }
 
     getDeck(){
-        let tempDeck = [];
         for (let i = 0; i < this.majorArcana.length; i++){
             this._deck.push(this.majorArcana[i]);
-            tempDeck.push(this.majorArcana[i]);
         }
         for (let i = 0; i < this.suits.length; i++){
             for (let x = 0; x < this.minorPlaces.length; x++){
@@ -38,7 +36,6 @@ class DECK {
                     Suit: this.suits[i]
                 };
                 this._deck.push(minorArcana);
-                tempDeck.push(minorArcana);
             }
         }
         for (let i = 22; i < this._deck.length; i++){
@@ -59,7 +56,7 @@ class DECK {
                 case 'King': this._deck[i].Value = 14; break;
             }
         }
-        console.log('This is the original deck before being shuffled. \n',tempDeck);
+        //console.log('This is the original deck before being shuffled. \n',tempDeck);
         return this._deck;
     }
     shuffle(){
