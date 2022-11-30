@@ -11,10 +11,10 @@ class DECK {
         this._deck = [];
         
         this.majorArcana = [{Place:'0',Trump:'Fool', Value: 15},{Place:'I',Trump:'Magician', Value: 16},
-        {Place:'II',Trump:'High Priestess', Value: 17},{Place:'III',Trump:'Empress', Value: 18},{Place:'IV',Trump:'Emperor', Value: 19},
+        {Place:'II',Trump:'HighPriestess', Value: 17},{Place:'III',Trump:'Empress', Value: 18},{Place:'IV',Trump:'Emperor', Value: 19},
         {Place:'V',Trump:'Heirophant', Value: 20},{Place:'VI',Trump:'Lovers', Value: 21},{Place:'VII',Trump:'Chariot', Value: 22},
-        {Place:'VIII',Trump:'Strength', Value: 23},{Place:'IX',Trump:'Hermit', Value: 24},{Place:'X',Trump:'Wheel of Fortune', Value: 25},
-        {Place:'XI',Trump:'Justice', Value: 26},{Place:'XII',Trump:'Hanged Man', Value: 27},{Place:'XIII',Trump:'Death', Value: 28},
+        {Place:'VIII',Trump:'Strength', Value: 23},{Place:'IX',Trump:'Hermit', Value: 24},{Place:'X',Trump:'WheelOfFortune', Value: 25},
+        {Place:'XI',Trump:'Justice', Value: 26},{Place:'XII',Trump:'HangedMan', Value: 27},{Place:'XIII',Trump:'Death', Value: 28},
         {Place:'XIV',Trump:'Temperance', Value: 29},{Place:'XV',Trump:'Devil', Value: 30},{Place:'XVI',Trump:'Tower', Value: 31},
         {Place:'XVII',Trump:'Star', Value: 32},{Place:'XVIII',Trump:'Moon', Value: 33},{Place:'XIX',Trump:'Sun', Value: 34},
         {Place:'XX',Trump:'Judgement', Value: 35},{Place:'XXI',Trump:'World', Value: 36}];
@@ -56,7 +56,6 @@ class DECK {
                 case 'King': this._deck[i].Value = 14; break;
             }
         }
-        //console.log('This is the original deck before being shuffled. \n',tempDeck);
         return this._deck;
     }
     shuffle(){

@@ -21,33 +21,64 @@
     </div>
     <div id="main">
         <!--Enter question, grab deck, shuffle, draw focus card.-->
-        <div id="question" style="text-align:center">
+        <div style="text-align:center">
             <label for="question">What do you want to know?</label>
             <input type="text" id="question" name="question">&nbsp;<input type="button" id="askBtn" value="Ask Question">
         </div>
         <br>
-        <span id="deck">
-            <img src="img/cards/CardBack.jpg" alt="Card Back"><br>
-            <input type="button" value="Shuffle Deck" id="shuffle"> <input type="button" value="Pull Focus Card">
-        </span>
-        <span id="focus_card"></span><br>
+        <div style="text-align:center">
+            <span id="deck">
+                <img src="img/cards/CardBack.jpg" alt="Card Back">
+            </span><span id="focus_card"></span><br>
+            <input type="button" value="Shuffle Deck" id="shufBtn">
+            <input type="button" id="focusBtn" value="Pull Focus Card">
+        </div>
     </div>
     <div id="spread">
         <!--Display the spread, let the user draw the cards (one by one?)-->
+        <table>
+
+        </table>
     </div>
     <script>
-        let deck = new DECK();
+        //Make our deck.
+        const deck = new DECK();
         deck.getDeck();
-        console.log(deck);
+        
+        //Define some variables for later use.
+        let question;
+        let asked;
+        const askBtn = document.getElementById('askBtn');
+        const shufBtn = document.getElementById('shufBtn');
+        const focusBtn = document.getElementById('focusBtn');
+        const focusCard = document.getElementById('focus_card');
 
-        document.addEventListener('DOMContentLoaded',()=>{
-            const askBtn = document.getElementById('askBtn');
-            const question = document.getElementById('question');
-            
-            askBtn.addEventListener('Click',()=>{
-                console.log(question);
-            });
+        //Clear the user entry, but store the question as a value.
+        askBtn.addEventListener('click',()=>{
+            question = document.getElementById('question');
+            asked = question.value;
+            question.value = '';
         });
+        
+        //Call the shuffle method when the "Shuffle" button is pressed.
+        shufBtn.addEventListener('click',()=>{
+            deck.shuffle();
+        });
+
+        //Pull the focus card and put it in 
+        focusBtn.addEventListener('click',()=>{
+            let suitTrump;
+            if(deck._deck[0].Value >= 1 && deck._deck[0].Value <= 14){
+                suitTrump = deck._deck[0].Suit;
+            } else {
+                suitTrump = deck._deck[0].Trump;
+            }
+            focusCard.innerHTML = '<img src="img/cards/'+deck._deck[0].Place+'-'+suitTrump+'.jpg">';
+            deck._deck.pop();
+            console.log(deck._deck[0]);
+
+        });
+        
     </script>
 </body>
 </html>
