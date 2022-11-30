@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="tarot.js"></script>
-    <title>tarot.js</title>
+    <title>tarotjs</title>
 </head>
 <body>
-    <h1>Tarotjs</h1>
+    <h1>tarotjs</h1>
     <div id="instructions">
         <h2>Instructions:</h2>
         <ol>
@@ -31,11 +31,12 @@
                 <img src="img/cards/CardBack.jpg" alt="Card Back">
             </span><span id="focus_card"></span><br>
             <input type="button" value="Shuffle Deck" id="shufBtn">
-            <input type="button" id="focusBtn" value="Pull Focus Card">
+            <input type="button" id="sigBtn" value="Pull Signifactor">
         </div>
     </div>
-    <div id="spread">
+    <div>
         <!--Display the spread, let the user draw the cards (one by one?)-->
+        <input type="button" id="laySpread" value="Lay Spread">
         <table>
 
         </table>
@@ -43,15 +44,17 @@
     <script>
         //Make our deck.
         const deck = new DECK();
-        deck.getDeck();
+        deck.getDeck();     //Call this so you can always draw cards from an unshuffled deck.
         
         //Define some variables for later use.
         let question;
         let asked;
+        let spread = false;
         const askBtn = document.getElementById('askBtn');
         const shufBtn = document.getElementById('shufBtn');
-        const focusBtn = document.getElementById('focusBtn');
+        const sigBtn = document.getElementById('sigBtn');
         const focusCard = document.getElementById('focus_card');
+        const laySpread = document.getElementById('laySpread');
 
         //Clear the user entry, but store the question as a value.
         askBtn.addEventListener('click',()=>{
@@ -62,23 +65,34 @@
         
         //Call the shuffle method when the "Shuffle" button is pressed.
         shufBtn.addEventListener('click',()=>{
-            deck.shuffle();
+            deck._deck = [];    //Empty this variable.
+            deck.getDeck();     //Re-assemble the deck.
+            deck.shuffle();     //Then shuffle it.
+            if (!spread){
+                focusCard.innerHTML = '';
+            }
         });
 
-        //Pull the focus card and put it in 
-        focusBtn.addEventListener('click',()=>{
-            let suitTrump;
+        //Pull the focus card when that button is clicked.
+        sigBtn.addEventListener('click',()=>{
+            let suitTrump; 
+            //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
             if(deck._deck[0].Value >= 1 && deck._deck[0].Value <= 14){
                 suitTrump = deck._deck[0].Suit;
             } else {
                 suitTrump = deck._deck[0].Trump;
             }
+            //Call the IMG and dump it into the span based on the top card of the deck.
             focusCard.innerHTML = '<img src="img/cards/'+deck._deck[0].Place+'-'+suitTrump+'.jpg">';
-            deck._deck.pop();
-            console.log(deck._deck[0]);
+            deck._deck.shift();
+            console.log(deck._deck);
 
         });
-        
+
+        //Pull the cards needed for the Spread and dump them into the table.
+        laySpread.addEventListener('click',()=>{
+            spread = true;
+        });
     </script>
 </body>
 </html>
