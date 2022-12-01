@@ -1,158 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <script src="tarot.js"></script>
     <title>tarotjs</title>
-</head>
-<body>
-<div style="max-width: 600px; margin: 0 auto;">
-    <div>
-        <img src="img/cards/CardBack.jpg" id="cardBack" alt="Card Back" style="max-width:100px; position: relative; float: right;">
+  </head>
+  <body>
+    <div style="max-width: 600px; margin: 0 auto">
+      <div>
+        <img
+          src="img/cards/CardBack.jpg"
+          id="cardBack"
+          alt="Card Back"
+          style="max-width: 100px; position: relative; float: right"
+        />
         <h1>tarotjs</h1>
-    </div>
-    <div id="instructions">
+      </div>
+      <div id="instructions">
         <h2>Instructions:</h2>
         <ol>
-            <li>Ask a Question</li>
-            <li>Shuffle the Deck</li>
-            <li>Draw a Signifactor</li>
-            <li>Draw a Cross Card</li>
-            <li>Draw a Crown Card</li>
-            <li>Deal the rest of the Spread</li>
+          <li>Ask a Question</li>
+          <li>Shuffle the Deck</li>
+          <li>Draw a Signifactor</li>
+          <li>Draw a Cross Card</li>
+          <li>Draw a Crown Card</li>
+          <li>Deal the rest of the Spread</li>
         </ol>
-    </div>
-    <hr>
-    <div>
+      </div>
+      <hr />
+      <div>
         <!--Enter question, grab deck, shuffle, draw focus card.-->
-        <label for="question">What do you want to know?</label><br>
-        <input type="text" id="question" name="question" size="40"><br>
-        <span class="spread" style="position: relative; float:left">
-            <input type="button" id="askBtn" value="Ask Question"><br>
-            <input type="button" value="Shuffle Deck" id="shufBtn"><br>
-            <input type="button" id="clear" value="Clear">
+        <label for="question">What do you want to know?</label><br />
+        <input type="text" id="question" name="question" size="40" /><br />
+        <span class="spread" style="position: relative; float: left">
+          <input type="button" id="askBtn" value="Ask Question" /><br />
+          <input type="button" value="Shuffle Deck" id="shufBtn" /><br />
+          <input type="button" id="clear" value="Clear" />
         </span>
-        <span class="spread" style="position: relative; float:right">
-                <input type="button" id="sigBtn" value="Pull Signifactor"><br>
-                <input type="button" id="coverBtn" value="Pull Cover Card"><br>
-                <input type="button" id="crossBtn" value="Pull Cross Card"><br>
-                <input type="button" id="laySpread" value="Lay Spread"><br>
+        <span class="spread" style="position: relative; float: right">
+          <input type="button" id="sigBtn" value="Pull Signifactor" /><br />
+          <input type="button" id="coverBtn" value="Pull Cover Card" /><br />
+          <input type="button" id="crossBtn" value="Pull Cross Card" /><br />
+          <input type="button" id="laySpread" value="Lay Spread" /><br />
         </span>
-    </div>
+      </div>
 
-    <!--Structure for the Spread, using a table because of week 7, but a canvas element would probably be ideal.-->
-    <div>
+      <!--Structure for the Spread, using a table because of week 7, but a canvas element would probably be ideal.-->
+      <div>
         <span class="spread">
-            <table>
-                <tr>
-                    <td></td>
-                    <td id="pos3"></td>
-                    <td></td>
-                    <td id="pos10"></td>
-                </tr>
-                <tr>
-                    <td id="pos6"></td>
-                    <td id="pos0" class="parent"></td>
-                    <td id="pos5"></td>
-                    <td id="pos9"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td id="pos4"></td>
-                    <td></td>
-                    <td id="pos8"></td>
-                </tr>
-                <tr>
-                    <td id="pos1"></td> <!-- pos1 and pos2 are just so that those ids exist, they aren't used. -->
-                    <td id="pos2"></td>
-                    <td></td>
-                    <td id="pos7"></td>
-                </tr>
-            </table>
+          <table>
+            <tr>
+              <td></td>
+              <td id="pos3"></td>
+              <td></td>
+              <td id="pos10"></td>
+            </tr>
+            <tr>
+              <td id="pos6"></td>
+              <td id="pos0" class="parent"></td>
+              <td id="pos5"></td>
+              <td id="pos9"></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td id="pos4"></td>
+              <td></td>
+              <td id="pos8"></td>
+            </tr>
+            <tr>
+              <td id="pos1"></td>
+              <!-- pos1 and pos2 are just so that those ids exist, they aren't used. -->
+              <td id="pos2"></td>
+              <td></td>
+              <td id="pos7"></td>
+            </tr>
+          </table>
         </span>
-    </div>
-<!--Start new section for interpretation of the cards.-->
-    <div>
+      </div>
+      <!--Start new section for interpretation of the cards.-->
+      <div>
         <!--Insert some descriptions and maybe formulate some text generation based on the question asked?-->
-    </div>
-<!--Being Script for Spread-->
-    <script>
+      </div>
+      <!--Being Script for Spread-->
+      <script>
         //Make our deck.
         const deck = new DECK();
-        deck.getDeck();     //Call this so you can always draw cards from an unshuffled deck.
-        
+        deck.getDeck(); //Call this so you can always draw cards from an unshuffled deck.
+
         //Define some variables for later use.
         let question;
         let asked;
         //Clear the user entry, but store the question as a value. This will be used later.
-        document.getElementById('askBtn').addEventListener('click',()=>{
-            question = document.getElementById('question');
-            asked = question.value;
-            question.value = '';
+        document.getElementById("askBtn").addEventListener("click", () => {
+          question = document.getElementById("question");
+          asked = question.value;
+          question.value = "";
         });
-        
+
         //Call the shuffle method when the "Shuffle" button is pressed.
-        document.getElementById('shufBtn').addEventListener('click',()=>{
-            document.getElementById('cardBack').classList.add('shuffle'); // Add an animation so the deck "shuffles".
-            deck._deck = [];    //Empty this variable.
-            deck.getDeck();     //Re-assemble the deck.
-            deck.shuffle();     //Then shuffle it.
-            setTimeout(()=>{document.getElementById('cardBack').classList.remove('shuffle')},1001); //Remove the animation class so it can be re-applied when the button is clicked again.
-            console.log(deck._deck);
+        document.getElementById("shufBtn").addEventListener("click", () => {
+          document.getElementById("cardBack").classList.add("shuffle"); // Add an animation so the deck "shuffles".
+          deck._deck = []; //Empty this variable.
+          deck.getDeck(); //Re-assemble the deck.
+          deck.shuffle(); //Then shuffle it.
+          setTimeout(() => {
+            document.getElementById("cardBack").classList.remove("shuffle");
+          }, 1001); //Remove the animation class so it can be re-applied when the button is clicked again.
+          console.log(deck._deck);
         });
 
         //Pull the Signifactor when that button is clicked.
-        document.getElementById('sigBtn').addEventListener('click',()=>{
-            //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
-            deck.suitTrumpM(0);
-            //Call the IMG and dump it into the span based on the top card of the deck.
-            document.getElementById('pos0').innerHTML = '<img src="img/cards/'+deck._deck[0].Place+'-'+deck.suitTrump+'.jpg" class="signifactor">';
-            console.log('Signifactor', deck._deck[0]);
-
+        document.getElementById("sigBtn").addEventListener("click", () => {
+          //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
+          deck.suitTrumpM(0);
+          //Call the IMG and dump it into the span based on the top card of the deck.
+          document.getElementById("pos0").innerHTML =
+            '<img src="img/cards/' +
+            deck._deck[0].Place +
+            "-" +
+            deck.suitTrump +
+            '.jpg" class="signifactor">';
+          console.log("Signifactor", deck._deck[0]);
         });
-        
-        //Pull the Cover Card.
-        document.getElementById('coverBtn').addEventListener('click',()=>{
-            //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
-            deck.suitTrumpM(1);
-            //Call the IMG and dump it into the span based on the top card of the deck.
-            document.getElementById('pos0').innerHTML += '<img src="img/cards/'+deck._deck[1].Place+'-'+deck.suitTrump+'.jpg" class="covers">';
-            console.log('Cover', deck._deck[1]);
 
+        //Pull the Cover Card.
+        document.getElementById("coverBtn").addEventListener("click", () => {
+          //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
+          deck.suitTrumpM(1);
+          //Call the IMG and dump it into the span based on the top card of the deck.
+          document.getElementById("pos0").innerHTML +=
+            '<img src="img/cards/' +
+            deck._deck[1].Place +
+            "-" +
+            deck.suitTrump +
+            '.jpg" class="covers">';
+          console.log("Cover", deck._deck[1]);
         });
 
         //Pull the Cross Card.
-        document.getElementById('crossBtn').addEventListener('click',()=>{
-            //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
-            deck.suitTrumpM(2);
-            //Call the IMG and dump it into the span based on the top card of the deck.
-            document.getElementById('pos0').innerHTML += '<img src="img/cards/'+deck._deck[2].Place+'-'+deck.suitTrump+'.jpg" class="cross">';
-            console.log('Cross', deck._deck[2]);
-
+        document.getElementById("crossBtn").addEventListener("click", () => {
+          //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
+          deck.suitTrumpM(2);
+          //Call the IMG and dump it into the span based on the top card of the deck.
+          document.getElementById("pos0").innerHTML +=
+            '<img src="img/cards/' +
+            deck._deck[2].Place +
+            "-" +
+            deck.suitTrump +
+            '.jpg" class="cross">';
+          console.log("Cross", deck._deck[2]);
         });
 
         //Pull the rest of the cards needed for the Spread using a for loop and dump them into the table. We don't do them one at a time because they are just pulled in order, no fancy CSS.
-        document.getElementById('laySpread').addEventListener('click',()=>{
-            for (i = 3; i < 11; i++){
-                deck.suitTrumpM(i);
-                let position = 'pos'+i.toString();
-                document.getElementById(position).innerHTML = '<img src="img/cards/'+deck._deck[i].Place+'-'+deck.suitTrump+'.jpg">';
-                console.log(position, deck._deck[i]);
-            }
+        document.getElementById("laySpread").addEventListener("click", () => {
+          for (i = 3; i < 11; i++) {
+            deck.suitTrumpM(i);
+            let position = "pos" + i.toString();
+            document.getElementById(position).innerHTML =
+              '<img src="img/cards/' +
+              deck._deck[i].Place +
+              "-" +
+              deck.suitTrump +
+              '.jpg">';
+            console.log(position, deck._deck[i]);
+          }
         });
 
         //Clear the field!
-        document.getElementById('clear').addEventListener('click',()=>{
-            for (i = 0; i < 11; i++){
-                deck.suitTrumpM(i);
-                let position = 'pos'+i.toString();
-                document.getElementById(position).innerHTML = '';
-            }
+        document.getElementById("clear").addEventListener("click", () => {
+          for (i = 0; i < 11; i++) {
+            deck.suitTrumpM(i);
+            let position = "pos" + i.toString();
+            document.getElementById(position).innerHTML = "";
+          }
         });
-    </script>
-</div>
-</body>
+      </script>
+    </div>
+  </body>
 </html>

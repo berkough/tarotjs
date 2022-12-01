@@ -1,81 +1,83 @@
 /* Basic foramtting */
-html, body{
-    background: #353535;
-    color-scheme: dark !important;
-    font-family: monospace;
-    font-size: 14px;
-    margin: 4px;
+html,
+body {
+  background: #353535;
+  color-scheme: dark !important;
+  font-family: monospace;
+  font-size: 14px;
+  margin: 4px;
 }
 /*I wanted to use a specialty font instead of creating an img for a logo.*/
 @font-face {
-    font-family: caligraphy;
-    src: url(fonts/pentagrams.woff);
+  font-family: caligraphy;
+  src: url(fonts/pentagrams.woff);
 }
 /*Apply the special font to he h1 element. It only gets used once.*/
-h1{
-    font-family: caligraphy;
-    font-size: 8em;
-    padding: 0;
-    margin: 0;
-    text-align: center;
+h1 {
+  font-family: caligraphy;
+  font-size: 8em;
+  padding: 0;
+  margin: 0;
+  text-align: center;
 }
 /*Setting the h2 margin to zero fixed a spacing issue I had.*/
-h2{
-    margin: 0;
+h2 {
+  margin: 0;
 }
 /*There are several divs, but one div that encloses everything in the body, setting the max-wdith made 
     the page look better.*/
-div{
-    max-width: 600px;
-    height: auto;
+div {
+  max-width: 600px;
+  height: auto;
 }
 /*Normalizing all image elements so the whole spread scales semi-responsively.*/
-img{
-    max-width: 100%;
-    height: auto;
-    object-fit: scale-down;
-
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: scale-down;
 }
 
 /* Fancy CSS to position images on top of one another. This was pulle together from various sources.*/
 .parent {
-    position: relative;
-    top: 0;
-    left: 0;
+  position: relative;
+  top: 0;
+  left: 0;
 }
-.signifactor{
-    position: relative;
-    top: 0;
-    left: 0;
+.signifactor {
+  position: relative;
+  top: 0;
+  left: 0;
 }
-.covers{
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    transform: rotate(5deg);
-    max-height: 100%;
-    object-fit: scale-down;
+.covers {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  transform: rotate(5deg);
+  max-height: 100%;
+  object-fit: scale-down;
 }
-.cross{
-    position: absolute;
-    top: 20px;
-    left: 5px;
-    transform: rotate(-90deg);
-    max-height: 100%;
-    object-fit: scale-down;
+.cross {
+  position: absolute;
+  top: 20px;
+  left: 5px;
+  transform: rotate(-90deg);
+  max-height: 100%;
+  object-fit: scale-down;
 }
 
 /* Setting the spread class used for span elements. Helpful for the spread table so it doesn't 
     scrunch inbetween the buttons. */
-.spread{
-    margin: 4px;
-    padding: 1px;
-    display: inline-block;
-    align-content: flex-start;
+.spread {
+  margin: 4px;
+  padding: 1px;
+  display: inline-block;
+  align-content: flex-start;
 }
-table,tr,td{
-    max-width: 100%;
-    object-fit: contain;
+table,
+tr,
+td {
+  max-width: 100%;
+  object-fit: contain;
 }
 
 /* 
@@ -83,22 +85,44 @@ Shamelessly stolen from W3 Schools
 https://www.w3schools.com/howto/howto_css_shake_image.asp
 */
 img.shuffle {
-    /* Start the shake animation and make the animation last for 0.5 seconds */
-    animation: shake 0.5s;
-  
-    /* Stop after 1 second */
-    animation-iteration-count: 1s;
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 0.5s;
+
+  /* Stop after 1 second */
+  animation-iteration-count: 1s;
+}
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
   }
-  @keyframes shake {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    10% { transform: translate(-1px, -2px) rotate(-1deg); }
-    20% { transform: translate(-3px, 0px) rotate(1deg); }
-    30% { transform: translate(3px, 2px) rotate(0deg); }
-    40% { transform: translate(1px, -1px) rotate(1deg); }
-    50% { transform: translate(-1px, 2px) rotate(-1deg); }
-    60% { transform: translate(-3px, 1px) rotate(0deg); }
-    70% { transform: translate(3px, 1px) rotate(-1deg); }
-    80% { transform: translate(-1px, -1px) rotate(1deg); }
-    90% { transform: translate(1px, 2px) rotate(0deg); }
-    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
   }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
