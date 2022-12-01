@@ -20,8 +20,9 @@
             <li>Ask a Question</li>
             <li>Shuffle the Deck</li>
             <li>Draw a Signifactor</li>
-            <li>Draw</li>
-            <li>Deal the Cards for a Spread</li>
+            <li>Draw a Cross Card</li>
+            <li>Draw a Crown Card</li>
+            <li>Deal the rest of the Spread</li>
         </ol>
     </div>
     <hr>
@@ -36,8 +37,8 @@
         </span>
         <span class="spread" style="position: relative; float:right">
                 <input type="button" id="sigBtn" value="Pull Signifactor"><br>
+                <input type="button" id="coverBtn" value="Pull Cover Card"><br>
                 <input type="button" id="crossBtn" value="Pull Cross Card"><br>
-                <input type="button" id="crownBtn" value="Pull Crown Card"><br>
                 <input type="button" id="laySpread" value="Lay Spread"><br>
         </span>
     </div>
@@ -112,6 +113,16 @@
             console.log(deck._deck);
 
         });
+        
+        //Pull the Cover Card.
+        document.getElementById('coverBtn').addEventListener('click',()=>{
+            //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
+            deck.suitTrumpM(2);
+            //Call the IMG and dump it into the span based on the top card of the deck.
+            document.getElementById('pos0').innerHTML += '<img src="img/cards/'+deck._deck[2].Place+'-'+deck.suitTrump+'.jpg" class="covers">';
+            console.log(deck._deck);
+
+        });
 
         //Pull the Cross Card.
         document.getElementById('crossBtn').addEventListener('click',()=>{
@@ -119,16 +130,6 @@
             deck.suitTrumpM(1);
             //Call the IMG and dump it into the span based on the top card of the deck.
             document.getElementById('pos0').innerHTML += '<img src="img/cards/'+deck._deck[1].Place+'-'+deck.suitTrump+'.jpg" class="cross">';
-            console.log(deck._deck);
-
-        });
-
-        //Pull the Crown Card.
-        document.getElementById('crownBtn').addEventListener('click',()=>{
-            //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
-            deck.suitTrumpM(2);
-            //Call the IMG and dump it into the span based on the top card of the deck.
-            document.getElementById('pos0').innerHTML += '<img src="img/cards/'+deck._deck[2].Place+'-'+deck.suitTrump+'.jpg" class="crown">';
             console.log(deck._deck);
 
         });
