@@ -1,3 +1,4 @@
+/* Basic foramtting */
 html, body{
     background: #353535;
     color-scheme: dark !important;
@@ -5,12 +6,12 @@ html, body{
     font-size: 14px;
     margin: 4px;
 }
-
+/*I wanted to use a specialty font instead of creating an img for a logo.*/
 @font-face {
     font-family: caligraphy;
     src: url(fonts/pentagrams.woff);
 }
-
+/*Apply the special font to he h1 element. It only gets used once.*/
 h1{
     font-family: caligraphy;
     font-size: 8em;
@@ -18,25 +19,17 @@ h1{
     margin: 0;
     text-align: center;
 }
-
+/*Setting the h2 margin to zero fixed a spacing issue I had.*/
 h2{
     margin: 0;
 }
-
+/*There are several divs, but one div that encloses everything in the body, setting the max-wdith made 
+    the page look better.*/
 div{
     max-width: 600px;
     height: auto;
 }
-
-#logo{
-    margin-right:auto;
-    margin-left:auto;
-}
-
-#main{
-    text-align: center;
-}
-
+/*Normalizing all image elements so the whole spread scales semi-responsively.*/
 img{
     max-width: 100%;
     height: auto;
@@ -44,6 +37,7 @@ img{
 
 }
 
+/* Fancy CSS to position images on top of one another. This was pulle together from various sources.*/
 .parent {
     position: relative;
     top: 0;
@@ -54,7 +48,14 @@ img{
     top: 0;
     left: 0;
 }
-
+.covers{
+    position: absolute;
+    top: -15px;
+    left: 10px;
+    transform: rotate(5deg);
+    max-height: 100%;
+    object-fit: scale-down;
+}
 .cross{
     position: absolute;
     top: 20px;
@@ -64,19 +65,11 @@ img{
     object-fit: scale-down;
 }
 
-.covers{
-    position: absolute;
-    top: -15px;
-    left: 10px;
-    transform: rotate(5deg);
-    max-height: 100%;
-    object-fit: scale-down;
-}
-
+/* Setting the spread class used for span elements. Helpful for the spread table so it doesn't 
+    scrunch inbetween the buttons. */
 .spread{
     margin: 4px;
     padding: 1px;
-    border: 1px black round;
     display: inline-block;
     align-content: flex-start;
 }
