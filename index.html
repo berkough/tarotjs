@@ -110,7 +110,7 @@
             deck.suitTrumpM(0);
             //Call the IMG and dump it into the span based on the top card of the deck.
             document.getElementById('pos0').innerHTML = '<img src="img/cards/'+deck._deck[0].Place+'-'+deck.suitTrump+'.jpg" class="signifactor">';
-            console.log(deck._deck[0]);
+            console.log('Signifactor', deck._deck[0]);
 
         });
         
@@ -120,7 +120,7 @@
             deck.suitTrumpM(1);
             //Call the IMG and dump it into the span based on the top card of the deck.
             document.getElementById('pos0').innerHTML += '<img src="img/cards/'+deck._deck[1].Place+'-'+deck.suitTrump+'.jpg" class="covers">';
-            console.log(deck._deck);
+            console.log('Cover', deck._deck[1]);
 
         });
 
@@ -130,7 +130,7 @@
             deck.suitTrumpM(2);
             //Call the IMG and dump it into the span based on the top card of the deck.
             document.getElementById('pos0').innerHTML += '<img src="img/cards/'+deck._deck[2].Place+'-'+deck.suitTrump+'.jpg" class="cross">';
-            console.log(deck._deck);
+            console.log('Cross', deck._deck[2]);
 
         });
 
@@ -150,7 +150,6 @@
                 deck.suitTrumpM(i);
                 let position = 'pos'+i.toString();
                 document.getElementById(position).innerHTML = '';
-                console.log(position, deck._deck[i]);
             }
         });
     </script>
