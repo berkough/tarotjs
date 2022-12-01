@@ -10,6 +10,8 @@ class DECK {
     constructor(){
         this._deck = [];
         
+        this.suitTrump = '';
+
         this.majorArcana = [{Place:'0',Trump:'Fool', Value: 15},{Place:'I',Trump:'Magician', Value: 16},
         {Place:'II',Trump:'HighPriestess', Value: 17},{Place:'III',Trump:'Empress', Value: 18},{Place:'IV',Trump:'Emperor', Value: 19},
         {Place:'V',Trump:'Heirophant', Value: 20},{Place:'VI',Trump:'Lovers', Value: 21},{Place:'VII',Trump:'Chariot', Value: 22},
@@ -72,10 +74,17 @@ class DECK {
         let half = Math.ceil(this._deck.length) / 2;
         return this.firstHalf = this._deck.slice(0,half), this.secondHalf = this._deck.slice(half,this._deck.length);        
     }
+    suitTrumpM(i){
+            if(this._deck[i].Value >= 1 && this._deck[i].Value <= 14){
+                this.suitTrump = this._deck[i].Suit;
+            } else {
+                this.suitTrump = this._deck[i].Trump;
+            }
+    }
 }
 
 /*
- * Implementing the game of War using the tarot deck. This is an exercise  in manipulating the deck.
+ * Implementing the game of War using the tarot deck. This is an exercise in manipulating the deck.
  */
 
 class Player {
