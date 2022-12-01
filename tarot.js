@@ -77,7 +77,7 @@ class DECK {
         let half = Math.ceil(this._deck.length) / 2;
         return this.firstHalf = this._deck.slice(0,half), this.secondHalf = this._deck.slice(half,this._deck.length);        
     }
-    //Method for pulling the right keypair.
+    //Method for pulling the right keypair when interpolating the object properties elsewhere.
     suitTrumpM(i){
             if(this._deck[i].Value >= 1 && this._deck[i].Value <= 14){
                 this.suitTrump = this._deck[i].Suit;

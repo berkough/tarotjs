@@ -43,9 +43,9 @@
         </span>
     </div>
 
-    <!--Structure for the Spread-->
+    <!--Structure for the Spread, using a table because of week 7, but a canvas element would probably be ideal.-->
     <div>
-        <span class="spread"> <!--This class isn't used... yet?-->
+        <span class="spread">
             <table>
                 <tr>
                     <td></td>
@@ -74,11 +74,11 @@
             </table>
         </span>
     </div>
-    <!---->
+<!--Start new section for interpretation of the cards.-->
     <div>
-
+        <!--Insert some descriptions and maybe formulate some text generation based on the question asked?-->
     </div>
-<!--Being Script for Spreads-->
+<!--Being Script for Spread-->
     <script>
         //Make our deck.
         const deck = new DECK();
@@ -87,7 +87,7 @@
         //Define some variables for later use.
         let question;
         let asked;
-        //Clear the user entry, but store the question as a value.
+        //Clear the user entry, but store the question as a value. This will be used later.
         document.getElementById('askBtn').addEventListener('click',()=>{
             question = document.getElementById('question');
             asked = question.value;
@@ -134,7 +134,7 @@
 
         });
 
-        //Pull the rest of the cards needed for the Spread and dump them into the table.
+        //Pull the rest of the cards needed for the Spread using a for loop and dump them into the table. We don't do them one at a time because they are just pulled in order, no fancy CSS.
         document.getElementById('laySpread').addEventListener('click',()=>{
             for (i = 3; i < 11; i++){
                 deck.suitTrumpM(i);
