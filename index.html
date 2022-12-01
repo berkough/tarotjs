@@ -19,42 +19,49 @@
             <li>Deal the Cards for a Spread</li>
         </ol>
     </div>
-    <div id="main">
+    <div>
         <!--Enter question, grab deck, shuffle, draw focus card.-->
-        <div style="text-align:center">
+        <div>
             <label for="question">What do you want to know?</label>
             <input type="text" id="question" name="question">&nbsp;<input type="button" id="askBtn" value="Ask Question">
         </div>
         <br>
-        <div style="text-align:center">
-            <span id="deck">
-                <img src="img/cards/CardBack.jpg" alt="Card Back">
-            </span><span id="focus_card"></span><br>
-            <input type="button" value="Shuffle Deck" id="shufBtn">
-            <input type="button" id="sigBtn" value="Pull Signifactor">
+        <div>
+            <img src="img/cards/CardBack.jpg" alt="Card Back"><br>
+            <input type="button" value="Shuffle Deck" id="shufBtn"><br>
+            <input type="button" id="sigBtn" value="Pull Signifactor"><br>
+            <input type="button" id="crossBtn" value="Pull Cross Card"><br>
+            <input type="button" id="laySpread" value="Lay Spread">
         </div>
     </div>
-    <div>
-        <!--Display the spread, let the user draw the cards (one by one?)-->
-        <input type="button" id="laySpread" value="Lay Spread">
-        <table>
-            <tr>
-                <td>1</td>
-                <td id="pos3">2</td>
-                <td>3</td>
+
+    <!--Structure for the Spread-->
+    <span style="margin: right 0">
+    <table width=50% style="margin: right 0">
+        <tr>
+            <td></td>
+            <td id="pos3"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td id="pos6"></td>
+            <td id="pos012"></td>
+            <td id="pos5"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td id="pos4"></td>
+            <td></td>
             </tr>
-            <tr>
-                <td id="pos6">4</td>
-                <td id="pos012">5</td>
-                <td id="pos5">6</td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td id="pos4">8</td>
-                <td>9</td>
-            </tr>
-        </table>
-    </div>
+    </table>
+    </span>
+    <span width=50% style="margin: left 0">
+        <p id="pos10"></p>
+        <p id="pos9"></p>
+        <p id="pos8"></p>
+        <p id="pos7"></p>
+    </span>
+<!--Being Script for Spreads-->
     <script>
         //Make our deck.
         const deck = new DECK();
@@ -67,11 +74,6 @@
         const askBtn = document.getElementById('askBtn');
         const shufBtn = document.getElementById('shufBtn');
         const sigBtn = document.getElementById('sigBtn');
-        const pos012 = document.getElementById('pos012');
-        const pos3 = document.getElementById('pos3');
-        const pos4 = document.getElementById('pos4');
-        const pos5 = document.getElementById('pos5');
-        const pos6 = document.getElementById('pos6');
         const laySpread = document.getElementById('laySpread');
 
         //Clear the user entry, but store the question as a value.
@@ -93,8 +95,7 @@
             //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
             deck.suitTrumpM(0);
             //Call the IMG and dump it into the span based on the top card of the deck.
-            pos012.innerHTML = '<img src="img/cards/'+deck._deck[0].Place+'-'+deck.suitTrump+'.jpg">';
-            deck._deck.shift();
+            document.getElementById('pos012').innerHTML = '<img src="img/cards/'+deck._deck[0].Place+'-'+deck.suitTrump+'.jpg">';
             console.log(deck._deck);
 
         });
@@ -102,15 +103,11 @@
         //Pull the cards needed for the Spread and dump them into the table.
         laySpread.addEventListener('click',()=>{
             spread = true;
-            deck.suitTrumpM(3);
-            pos3.innerHTML = '<img src="img/cards/'+deck._deck[3].Place+'-'+deck.suitTrump+'.jpg">';
-            deck.suitTrumpM(4);
-            pos4.innerHTML = '<img src="img/cards/'+deck._deck[4].Place+'-'+deck.suitTrump+'.jpg">';
-            deck.suitTrumpM(5);
-            pos5.innerHTML = '<img src="img/cards/'+deck._deck[5].Place+'-'+deck.suitTrump+'.jpg">';
-            deck.suitTrumpM(6);
-            pos6.innerHTML = '<img src="img/cards/'+deck._deck[6].Place+'-'+deck.suitTrump+'.jpg">';
-
+            for (i = 3; i < 11; i++){
+                deck.suitTrumpM(i);
+                let position = 'pos'+i.toString();
+                document.getElementById(position).innerHTML = '<img src="img/cards/'+deck._deck[i].Place+'-'+deck.suitTrump+'.jpg">';
+            }
         });
     </script>
 </body>
