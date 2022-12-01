@@ -45,7 +45,7 @@
 
     <!--Structure for the Spread-->
     <div>
-        <span class="spread">
+        <span class="spread"> <!--This class isn't used... yet?-->
             <table>
                 <tr>
                     <td></td>
@@ -66,7 +66,7 @@
                     <td id="pos8"></td>
                 </tr>
                 <tr>
-                    <td id="pos1"></td>
+                    <td id="pos1"></td> <!-- pos1 and pos2 are just so that those ids exist, they aren't used. -->
                     <td id="pos2"></td>
                     <td></td>
                     <td id="pos7"></td>
@@ -96,11 +96,11 @@
         
         //Call the shuffle method when the "Shuffle" button is pressed.
         document.getElementById('shufBtn').addEventListener('click',()=>{
-            document.getElementById('cardBack').classList.add('shuffle');
+            document.getElementById('cardBack').classList.add('shuffle'); // Add an animation so the deck "shuffles".
             deck._deck = [];    //Empty this variable.
             deck.getDeck();     //Re-assemble the deck.
             deck.shuffle();     //Then shuffle it.
-            setTimeout(()=>{document.getElementById('cardBack').classList.remove('shuffle')},1001);
+            setTimeout(()=>{document.getElementById('cardBack').classList.remove('shuffle')},1001); //Remove the animation class so it can be re-applied when the button is clicked again.
             console.log(deck._deck);
         });
 
@@ -110,16 +110,16 @@
             deck.suitTrumpM(0);
             //Call the IMG and dump it into the span based on the top card of the deck.
             document.getElementById('pos0').innerHTML = '<img src="img/cards/'+deck._deck[0].Place+'-'+deck.suitTrump+'.jpg" class="signifactor">';
-            console.log(deck._deck);
+            console.log(deck._deck[0]);
 
         });
         
         //Pull the Cover Card.
         document.getElementById('coverBtn').addEventListener('click',()=>{
             //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
-            deck.suitTrumpM(2);
+            deck.suitTrumpM(1);
             //Call the IMG and dump it into the span based on the top card of the deck.
-            document.getElementById('pos0').innerHTML += '<img src="img/cards/'+deck._deck[2].Place+'-'+deck.suitTrump+'.jpg" class="covers">';
+            document.getElementById('pos0').innerHTML += '<img src="img/cards/'+deck._deck[1].Place+'-'+deck.suitTrump+'.jpg" class="covers">';
             console.log(deck._deck);
 
         });
@@ -127,14 +127,14 @@
         //Pull the Cross Card.
         document.getElementById('crossBtn').addEventListener('click',()=>{
             //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
-            deck.suitTrumpM(1);
+            deck.suitTrumpM(2);
             //Call the IMG and dump it into the span based on the top card of the deck.
-            document.getElementById('pos0').innerHTML += '<img src="img/cards/'+deck._deck[1].Place+'-'+deck.suitTrump+'.jpg" class="cross">';
+            document.getElementById('pos0').innerHTML += '<img src="img/cards/'+deck._deck[2].Place+'-'+deck.suitTrump+'.jpg" class="cross">';
             console.log(deck._deck);
 
         });
 
-        //Pull the cards needed for the Spread and dump them into the table.
+        //Pull the rest of the cards needed for the Spread and dump them into the table.
         document.getElementById('laySpread').addEventListener('click',()=>{
             for (i = 3; i < 11; i++){
                 deck.suitTrumpM(i);
