@@ -4,7 +4,6 @@ html, body{
     font-family: monospace;
     font-size: 14px;
     margin: 4px;
-    align-content: center;
 }
 
 @font-face {
@@ -27,7 +26,6 @@ h2{
 div{
     max-width: 600px;
     height: auto;
-    border: black 2px round;
 }
 
 #logo{
