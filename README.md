@@ -14,7 +14,10 @@ We are currently in Week 8 and this project has been updated to achieve the goal
 
 ## TODO
 
-1. ~~Implement some type of system for generating different spreads.~~
-2. Incorporate text from the *The Pictorial Key to the Tarot* by A.E. Waite and/or from other public domain sources.
-3. ~~Display scans of the Tarot cards for various different spreads.~~
+- ~~Implement some type of system for generating different spreads.~~
+- Incorporate text from the *The Pictorial Key to the Tarot* by A.E. Waite and/or from other public domain sources.
+- ~~Display scans of the Tarot cards for various different spreads.~~
     Scans courtesty of [luciellaes on itch.io](https://luciellaes.itch.io/rider-waite-smith-tarot-cards-cc0).
+- Add some animations to the cards as they are laid down for the spread.
+- Incorporate interactive elements for reading the cards, either hovers or click events that pull up additional information.
+- Complete the interpretation section: have each card's description laid out with the postion explanation.

@@ -50,7 +50,7 @@ img{
 }
 .covers{
     position: absolute;
-    top: -15px;
+    top: -10px;
     left: 10px;
     transform: rotate(5deg);
     max-height: 100%;
