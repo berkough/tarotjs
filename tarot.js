@@ -26,7 +26,7 @@ class DECK {
         
         this.suits = ['Cups','Swords','Wands','Pentacles'];
     }
-
+    //Method for building a deck from the card arrays.
     getDeck(){
         for (let i = 0; i < this.majorArcana.length; i++){
             this._deck.push(this.majorArcana[i]);
@@ -40,6 +40,7 @@ class DECK {
                 this._deck.push(minorArcana);
             }
         }
+        //Let's assign a value to the minor arcana so that we can compare them again the Major Arcana.
         for (let i = 22; i < this._deck.length; i++){
             switch(this._deck[i].Place){
                 case 'Ace': this._deck[i].Value = 1; break;
@@ -60,6 +61,7 @@ class DECK {
         }
         return this._deck;
     }
+    //Method for shuffling the cards.
     shuffle(){
         for(let i = 0; i < (Math.floor(Math.random()*10000)); i++){
             let one = Math.floor(Math.random()*this._deck.length);
@@ -70,10 +72,12 @@ class DECK {
         }
         return this._deck;
     }
+    //Method to split the deck in half.
     splitDeck(){
         let half = Math.ceil(this._deck.length) / 2;
         return this.firstHalf = this._deck.slice(0,half), this.secondHalf = this._deck.slice(half,this._deck.length);        
     }
+    //Method for pulling the right keypair.
     suitTrumpM(i){
             if(this._deck[i].Value >= 1 && this._deck[i].Value <= 14){
                 this.suitTrump = this._deck[i].Suit;

@@ -9,7 +9,10 @@
     <title>tarotjs</title>
 </head>
 <body>
-    <h1>tarotjs</h1>
+    <div>
+        <img src="img/cards/CardBack.jpg" id="cardBack" alt="Card Back" style="max-width:100px; position: relative; float: right;">
+        <h1>tarotjs</h1>
+    </div>
     <div id="instructions">
         <h2>Instructions:</h2>
         <ol>
@@ -19,48 +22,54 @@
             <li>Deal the Cards for a Spread</li>
         </ol>
     </div>
+    <hr>
     <div>
         <!--Enter question, grab deck, shuffle, draw focus card.-->
-        <div>
-            <label for="question">What do you want to know?</label>
-            <input type="text" id="question" name="question">&nbsp;<input type="button" id="askBtn" value="Ask Question">
-        </div>
-        <br>
-        <div>
-            <img src="img/cards/CardBack.jpg" alt="Card Back"><br>
-            <input type="button" value="Shuffle Deck" id="shufBtn"><br>
-            <input type="button" id="sigBtn" value="Pull Signifactor"><br>
-            <input type="button" id="crossBtn" value="Pull Cross Card"><br>
-            <input type="button" id="laySpread" value="Lay Spread">
-        </div>
+        <span class="spread" style="position: relative; float:left">
+            <label for="question">What do you want to know?</label><br>
+            <input type="text" id="question" name="question"><br>
+            <input type="button" id="askBtn" value="Ask Question"><br>
+            <input type="button" id="clear" value="Clear">
+        </span>
+        <span class="spread" style="position: relative; float:right">
+                <input type="button" value="Shuffle Deck" id="shufBtn"><br>
+                <input type="button" id="sigBtn" value="Pull Signifactor"><br>
+                <input type="button" id="crossBtn" value="Pull Cross Card"><br>
+                <input type="button" id="laySpread" value="Lay Spread"><br>
+        </span>
     </div>
 
     <!--Structure for the Spread-->
-    <span style="margin: right 0">
-    <table width=50% style="margin: right 0">
-        <tr>
-            <td></td>
-            <td id="pos3"></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td id="pos6"></td>
-            <td id="pos012"></td>
-            <td id="pos5"></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td id="pos4"></td>
-            <td></td>
-            </tr>
-    </table>
-    </span>
-    <span width=50% style="margin: left 0">
-        <p id="pos10"></p>
-        <p id="pos9"></p>
-        <p id="pos8"></p>
-        <p id="pos7"></p>
-    </span>
+    <div>
+        <span class="spread">
+            <table>
+                <tr>
+                    <td></td>
+                    <td id="pos3"></td>
+                    <td></td>
+                    <td id="pos10"></td>
+                </tr>
+                <tr>
+                    <td id="pos6"></td>
+                    <td id="pos0"></td>
+                    <td id="pos5"></td>
+                    <td id="pos9"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td id="pos4"></td>
+                    <td></td>
+                    <td id="pos8"></td>
+                </tr>
+                <tr>
+                    <td id="pos1"></td>
+                    <td id="pos2"></td>
+                    <td></td>
+                    <td id="pos7"></td>
+                </tr>
+            </table>
+        </span>
+    </div>
 <!--Being Script for Spreads-->
     <script>
         //Make our deck.
@@ -70,43 +79,49 @@
         //Define some variables for later use.
         let question;
         let asked;
-        let spread = false;
-        const askBtn = document.getElementById('askBtn');
-        const shufBtn = document.getElementById('shufBtn');
-        const sigBtn = document.getElementById('sigBtn');
-        const laySpread = document.getElementById('laySpread');
-
         //Clear the user entry, but store the question as a value.
-        askBtn.addEventListener('click',()=>{
+        document.getElementById('askBtn').addEventListener('click',()=>{
             question = document.getElementById('question');
             asked = question.value;
             question.value = '';
         });
         
         //Call the shuffle method when the "Shuffle" button is pressed.
-        shufBtn.addEventListener('click',()=>{
+        document.getElementById('shufBtn').addEventListener('click',()=>{
+            document.getElementById('cardBack').classList.add('shuffle');
             deck._deck = [];    //Empty this variable.
             deck.getDeck();     //Re-assemble the deck.
             deck.shuffle();     //Then shuffle it.
+            setTimeout(()=>{document.getElementById('cardBack').classList.remove('shuffle')},2000);
         });
 
-        //Pull the focus card when that button is clicked.
-        sigBtn.addEventListener('click',()=>{
+        //Pull the Signifactor when that button is clicked.
+        document.getElementById('sigBtn').addEventListener('click',()=>{
             //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
             deck.suitTrumpM(0);
             //Call the IMG and dump it into the span based on the top card of the deck.
-            document.getElementById('pos012').innerHTML = '<img src="img/cards/'+deck._deck[0].Place+'-'+deck.suitTrump+'.jpg">';
+            document.getElementById('pos0').innerHTML = '<img src="img/cards/'+deck._deck[0].Place+'-'+deck.suitTrump+'.jpg">';
             console.log(deck._deck);
 
         });
 
         //Pull the cards needed for the Spread and dump them into the table.
-        laySpread.addEventListener('click',()=>{
-            spread = true;
+        document.getElementById('laySpread').addEventListener('click',()=>{
             for (i = 3; i < 11; i++){
                 deck.suitTrumpM(i);
                 let position = 'pos'+i.toString();
                 document.getElementById(position).innerHTML = '<img src="img/cards/'+deck._deck[i].Place+'-'+deck.suitTrump+'.jpg">';
+                console.log(position, deck._deck[i]);
+            }
+        });
+
+        //Clear the field!
+        document.getElementById('clear').addEventListener('click',()=>{
+            for (i = 0; i < 11; i++){
+                deck.suitTrumpM(i);
+                let position = 'pos'+i.toString();
+                document.getElementById(position).innerHTML = '';
+                console.log(position, deck._deck[i]);
             }
         });
     </script>
