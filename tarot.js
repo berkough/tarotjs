@@ -184,8 +184,7 @@ class War {
         } while (this.playerOne.playerDeck.length > 0);
         
         this.winCondition();
-    }
-        
+    }  
     winCondition(){
         if (this.playerOne.points > this.playerTwo.points) {
             console.log(`
