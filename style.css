@@ -45,6 +45,36 @@ img{
     object-fit: scale-down;
 
 }
+
+.parent {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.signifactor{
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.cross{
+    position: absolute;
+    top: 20px;
+    left: 5px;
+    transform: rotate(-90deg);
+    max-height: 100%;
+    object-fit: scale-down;
+}
+
+.crown{
+    position: absolute;
+    top: 20px;
+    left: 5px;
+    transform: rotate(-10deg);
+    max-height: 100%;
+    object-fit: scale-down;
+}
+
 .spread{
     margin: 4px;
     padding: 1px;

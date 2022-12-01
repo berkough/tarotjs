@@ -9,6 +9,7 @@
     <title>tarotjs</title>
 </head>
 <body>
+<div style="max-width: 600px; margin: 0 auto;">
     <div>
         <img src="img/cards/CardBack.jpg" id="cardBack" alt="Card Back" style="max-width:100px; position: relative; float: right;">
         <h1>tarotjs</h1>
@@ -18,23 +19,25 @@
         <ol>
             <li>Ask a Question</li>
             <li>Shuffle the Deck</li>
-            <li>Draw a Focus Card</li>
+            <li>Draw a Signifactor</li>
+            <li>Draw</li>
             <li>Deal the Cards for a Spread</li>
         </ol>
     </div>
     <hr>
     <div>
         <!--Enter question, grab deck, shuffle, draw focus card.-->
+        <label for="question">What do you want to know?</label><br>
+        <input type="text" id="question" name="question" size="40"><br>
         <span class="spread" style="position: relative; float:left">
-            <label for="question">What do you want to know?</label><br>
-            <input type="text" id="question" name="question"><br>
             <input type="button" id="askBtn" value="Ask Question"><br>
+            <input type="button" value="Shuffle Deck" id="shufBtn"><br>
             <input type="button" id="clear" value="Clear">
         </span>
         <span class="spread" style="position: relative; float:right">
-                <input type="button" value="Shuffle Deck" id="shufBtn"><br>
                 <input type="button" id="sigBtn" value="Pull Signifactor"><br>
                 <input type="button" id="crossBtn" value="Pull Cross Card"><br>
+                <input type="button" id="crownBtn" value="Pull Crown Card"><br>
                 <input type="button" id="laySpread" value="Lay Spread"><br>
         </span>
     </div>
@@ -51,7 +54,7 @@
                 </tr>
                 <tr>
                     <td id="pos6"></td>
-                    <td id="pos0"></td>
+                    <td id="pos0" class="parent"></td>
                     <td id="pos5"></td>
                     <td id="pos9"></td>
                 </tr>
@@ -69,6 +72,10 @@
                 </tr>
             </table>
         </span>
+    </div>
+    <!---->
+    <div>
+
     </div>
 <!--Being Script for Spreads-->
     <script>
@@ -92,7 +99,8 @@
             deck._deck = [];    //Empty this variable.
             deck.getDeck();     //Re-assemble the deck.
             deck.shuffle();     //Then shuffle it.
-            setTimeout(()=>{document.getElementById('cardBack').classList.remove('shuffle')},2000);
+            setTimeout(()=>{document.getElementById('cardBack').classList.remove('shuffle')},1001);
+            console.log(deck._deck);
         });
 
         //Pull the Signifactor when that button is clicked.
@@ -100,7 +108,27 @@
             //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
             deck.suitTrumpM(0);
             //Call the IMG and dump it into the span based on the top card of the deck.
-            document.getElementById('pos0').innerHTML = '<img src="img/cards/'+deck._deck[0].Place+'-'+deck.suitTrump+'.jpg">';
+            document.getElementById('pos0').innerHTML = '<img src="img/cards/'+deck._deck[0].Place+'-'+deck.suitTrump+'.jpg" class="signifactor">';
+            console.log(deck._deck);
+
+        });
+
+        //Pull the Cross Card.
+        document.getElementById('crossBtn').addEventListener('click',()=>{
+            //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
+            deck.suitTrumpM(1);
+            //Call the IMG and dump it into the span based on the top card of the deck.
+            document.getElementById('pos0').innerHTML += '<img src="img/cards/'+deck._deck[1].Place+'-'+deck.suitTrump+'.jpg" class="cross">';
+            console.log(deck._deck);
+
+        });
+
+        //Pull the Crown Card.
+        document.getElementById('crownBtn').addEventListener('click',()=>{
+            //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
+            deck.suitTrumpM(2);
+            //Call the IMG and dump it into the span based on the top card of the deck.
+            document.getElementById('pos0').innerHTML += '<img src="img/cards/'+deck._deck[2].Place+'-'+deck.suitTrump+'.jpg" class="crown">';
             console.log(deck._deck);
 
         });
@@ -125,5 +153,6 @@
             }
         });
     </script>
+</div>
 </body>
 </html>
