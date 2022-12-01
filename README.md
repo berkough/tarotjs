@@ -10,7 +10,7 @@ I have also seen projects using [E Kelen](https://github.com/ekelen)'s "[tarot-a
 
 The current version of the script includes a class that also plays out a psuedo game of War using the Tarot deck. This was implemented based on the week 6 Promineo Tech front-end coding bootcamp, which is a course that I am taking as of the writing of this README. When the assignment was proposed I thought it would be a good way to learn how to manipulate a deck of cards, specifically this digital Tarot deck.
 
-We are currently in Week 8 and this project has been updated to achieve the goals set forth for the current assignment which involved HTML and CSS. Prior versions of the code only output to the console.
+We are currently in Week 8 and this project has been updated to achieve the goals set forth for the current assignment which involves HTML and CSS. Prior versions of the code only output to the console.
 
 ## TODO
 
