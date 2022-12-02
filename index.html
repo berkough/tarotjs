@@ -24,8 +24,8 @@
           <li>Ask a Question</li>
           <li>Shuffle the Deck</li>
           <li>Draw a Signifactor</li>
+          <li>Draw a Cover Card</li>
           <li>Draw a Cross Card</li>
-          <li>Draw a Crown Card</li>
           <li>Deal the rest of the Spread</li>
         </ol>
       </div>
@@ -128,44 +128,56 @@
 
         //Pull the Cover Card.
         document.getElementById("coverBtn").addEventListener("click", () => {
-          //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
-          deck.suitTrumpM(1);
-          //Call the IMG and dump it into the span based on the top card of the deck.
-          document.getElementById("pos0").innerHTML +=
-            '<img src="img/cards/' +
-            deck._deck[1].Place +
-            "-" +
-            deck.suitTrump +
-            '.jpg" class="covers">';
-          console.log("Cover", deck._deck[1]);
+          if (document.getElementById('pos0').innerHTML === '') {
+            alert('You need to pull a Signifactor first!');
+          } else {
+            //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
+            deck.suitTrumpM(1);
+            //Call the IMG and dump it into the span based on the top card of the deck.
+            document.getElementById("pos0").innerHTML +=
+              '<img src="img/cards/' +
+              deck._deck[1].Place +
+              "-" +
+              deck.suitTrump +
+              '.jpg" class="covers">';
+            console.log("Cover", deck._deck[1]);
+          }
         });
 
         //Pull the Cross Card.
         document.getElementById("crossBtn").addEventListener("click", () => {
-          //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
-          deck.suitTrumpM(2);
-          //Call the IMG and dump it into the span based on the top card of the deck.
-          document.getElementById("pos0").innerHTML +=
-            '<img src="img/cards/' +
-            deck._deck[2].Place +
-            "-" +
-            deck.suitTrump +
-            '.jpg" class="cross">';
-          console.log("Cross", deck._deck[2]);
+          if (document.getElementById('pos0').innerHTML === '') {
+            alert('You need to pull a Signifactor first!');
+          } else {
+            //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
+            deck.suitTrumpM(2);
+            //Call the IMG and dump it into the span based on the top card of the deck.
+            document.getElementById("pos0").innerHTML +=
+              '<img src="img/cards/' +
+              deck._deck[2].Place +
+              "-" +
+              deck.suitTrump +
+              '.jpg" class="cross">';
+            console.log("Cross", deck._deck[2]);
+          }
         });
 
         //Pull the rest of the cards needed for the Spread using a for loop and dump them into the table. We don't do them one at a time because they are just pulled in order, no fancy CSS.
         document.getElementById("laySpread").addEventListener("click", () => {
-          for (i = 3; i < 11; i++) {
-            deck.suitTrumpM(i);
-            let position = "pos" + i.toString();
-            document.getElementById(position).innerHTML =
-              '<img src="img/cards/' +
-              deck._deck[i].Place +
-              "-" +
-              deck.suitTrump +
-              '.jpg">';
-            console.log(position, deck._deck[i]);
+          if (document.getElementById('pos0').innerHTML === ''){
+            alert('You need to pull a Signifactor first!');
+          } else {
+            for (i = 3; i < 11; i++) {
+              deck.suitTrumpM(i);
+              let position = "pos" + i.toString();
+              document.getElementById(position).innerHTML =
+                '<img src="img/cards/' +
+                deck._deck[i].Place +
+                "-" +
+                deck.suitTrump +
+                '.jpg">';
+              console.log(position, deck._deck[i]);
+            }
           }
         });
 
