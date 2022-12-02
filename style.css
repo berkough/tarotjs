@@ -48,7 +48,7 @@ img {
   position: relative; 
   float: right;
 }
-
+/* Make the buttons look fancy and match the card back */
 button{
   background-color: #6b2274;
   border: 2px solid black;
@@ -58,6 +58,7 @@ button{
   width: 100%;
   position: relative;
 }
+/* This needed to be smaller than the others. */
 #askBtn{
   float: right;
   padding: 5px;
@@ -121,7 +122,7 @@ td {
 Shamelessly stolen from W3 Schools 
 https://www.w3schools.com/howto/howto_css_shake_image.asp
 */
-img.shuffle {
+.shuffle {
   /* Start the shake animation and make the animation last for 0.5 seconds */
   animation: shake 0.5s;
 

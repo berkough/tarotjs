@@ -93,6 +93,7 @@
         const deck = new DECK();
         deck.getDeck(); //Call this so you can always draw cards from an unshuffled deck.
 
+        /* ASK BUTTON */
         //Clear the user entry, but store the question as a value. This will be used later.
         document.getElementById("askBtn").addEventListener("click", () => {
           let question = document.getElementById("question");
@@ -100,6 +101,7 @@
           question.value = "";
         });
 
+        /* SHUFFLE BUTTON */
         //Call the shuffle method when the "Shuffle" button is pressed.
         document.getElementById("shufBtn").addEventListener("click", () => {
           document.getElementById("cardBack").classList.add("shuffle"); // Add an animation so the deck "shuffles".
@@ -112,6 +114,7 @@
           console.log(deck._deck);
         });
 
+        /* SIGNIFACTOR BUTTON */
         //Pull the Signifactor when that button is clicked.
         document.getElementById("sigBtn").addEventListener("click", () => {
           //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
@@ -126,6 +129,7 @@
           console.log("Signifactor", deck._deck[0]);
         });
 
+        /* COVER CARD BUTTON */
         //Pull the Cover Card.
         document.getElementById("coverBtn").addEventListener("click", () => {
           if (document.getElementById('pos0').innerHTML === '') {
@@ -144,6 +148,7 @@
           }
         });
 
+        /* CROSS CARD BUTTON */
         //Pull the Cross Card.
         document.getElementById("crossBtn").addEventListener("click", () => {
           if (document.getElementById('pos0').innerHTML === '') {
@@ -162,11 +167,12 @@
           }
         });
 
+        /* LAY SPREAD BUTTON */
         //Pull the rest of the cards needed for the Spread using a for loop and dump them into the table. We don't do them one at a time because they are just pulled in order, no fancy CSS.
         document.getElementById("laySpread").addEventListener("click", () => {
           if (document.getElementById('pos0').innerHTML === ''){
             alert('You need to pull a Signifactor first!');
-          } else {
+          } else { //Do the same thing as the others, but do it in a for loop to pull the other cards needed.
             for (i = 3; i < 11; i++) {
               deck.suitTrumpM(i);
               let position = "pos" + i.toString();
@@ -181,6 +187,7 @@
           }
         });
 
+        /* CLEAR BUTTON */
         //Clear everything!
         document.getElementById("clear").addEventListener("click", () => {
           for (i = 0; i < 11; i++) {
