@@ -9,13 +9,12 @@
     <title>tarotjs</title>
   </head>
   <body>
-    <div style="max-width: 600px; margin: 0 auto">
+    <div id="main">
       <div>
         <img
           src="img/cards/CardBack.jpg"
           id="cardBack"
           alt="Card Back"
-          style="max-width: 100px; position: relative; float: right"
         />
         <h1>tarotjs</h1>
       </div>
@@ -35,12 +34,12 @@
         <!--Enter question, grab deck, shuffle, draw focus card.-->
         <label for="question">What do you want to know?</label><br />
         <input type="text" id="question" name="question" size="40" /><br />
-        <span class="spread" style="position: relative; float: left">
+        <span class="spread" id="qSpan">
           <input type="button" id="askBtn" value="Ask Question" /><br />
-          <input type="button" value="Shuffle Deck" id="shufBtn" /><br />
+          <input type="button" id="shufBtn" value="Shuffle Deck" /><br />
           <input type="button" id="clear" value="Clear" />
         </span>
-        <span class="spread" style="position: relative; float: right">
+        <span class="spread" id="drawSpread">
           <input type="button" id="sigBtn" value="Pull Signifactor" /><br />
           <input type="button" id="coverBtn" value="Pull Cover Card" /><br />
           <input type="button" id="crossBtn" value="Pull Cross Card" /><br />

@@ -29,12 +29,18 @@ h2 {
 div {
   max-width: 600px;
   height: auto;
+  margin: 0 auto;
 }
 /*Normalizing all image elements so the whole spread scales semi-responsively.*/
 img {
   max-width: 100%;
   height: auto;
   object-fit: scale-down;
+}
+#cardBack{
+  max-width: 100px; 
+  position: relative; 
+  float: right;
 }
 
 /* Fancy CSS to position images on top of one another. This was pulle together from various sources.*/
@@ -50,9 +56,9 @@ img {
 }
 .covers {
   position: absolute;
-  top: -10px;
-  left: 10px;
-  transform: rotate(5deg);
+  top: -5px;
+  left: 1px;
+  transform: rotate(8deg);
   max-height: 100%;
   object-fit: scale-down;
 }
@@ -73,6 +79,15 @@ img {
   display: inline-block;
   align-content: flex-start;
 }
+#qSpread{
+  position: relative; 
+  float: left;
+}
+#drawSpread{
+  position: relative; 
+  float: right;
+}
+
 table,
 tr,
 td {
