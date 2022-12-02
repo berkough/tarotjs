@@ -33,17 +33,16 @@
       <div>
         <!--Enter question, grab deck, shuffle, draw focus card.-->
         <label for="question">What do you want to know?</label><br />
-        <input type="text" id="question" name="question" size="40" /><br />
+        <input type="text" id="question" name="question" size="40" /><input type="button" id="askBtn" value="Ask Question" /><br /><br />
         <span class="spread" id="qSpan">
-          <input type="button" id="askBtn" value="Ask Question" /><br />
           <input type="button" id="shufBtn" value="Shuffle Deck" /><br />
-          <input type="button" id="clear" value="Clear" />
+          <input type="button" id="clear" value="Clear" /><br />
+          <input type="button" id="laySpread" value="Lay Spread" /><br />
         </span>
         <span class="spread" id="drawSpread">
           <input type="button" id="sigBtn" value="Pull Signifactor" /><br />
           <input type="button" id="coverBtn" value="Pull Cover Card" /><br />
           <input type="button" id="crossBtn" value="Pull Cross Card" /><br />
-          <input type="button" id="laySpread" value="Lay Spread" /><br />
         </span>
       </div>
 
@@ -82,6 +81,7 @@
       <!--Start new section for interpretation of the cards.-->
       <div>
         <!--Insert some descriptions and maybe formulate some text generation based on the question asked?-->
+        <p id="asked"></p>
       </div>
       <!--Being Script for Spread-->
       <script>
@@ -89,13 +89,10 @@
         const deck = new DECK();
         deck.getDeck(); //Call this so you can always draw cards from an unshuffled deck.
 
-        //Define some variables for later use.
-        let question;
-        let asked;
         //Clear the user entry, but store the question as a value. This will be used later.
         document.getElementById("askBtn").addEventListener("click", () => {
-          question = document.getElementById("question");
-          asked = question.value;
+          let question = document.getElementById("question");
+          //document.getElementById("asked").innerHTML = question.value; //Save for later...
           question.value = "";
         });
 
@@ -168,7 +165,7 @@
           }
         });
 
-        //Clear the field!
+        //Clear everything!
         document.getElementById("clear").addEventListener("click", () => {
           for (i = 0; i < 11; i++) {
             deck.suitTrumpM(i);

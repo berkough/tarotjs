@@ -24,6 +24,10 @@ h1 {
 h2 {
   margin: 0;
 }
+ol{
+  padding: 0 0 0 20px;
+  margin: 5px;
+}
 /*There are several divs, but one div that encloses everything in the body, setting the max-wdith made 
     the page look better.*/
 div {
@@ -31,16 +35,33 @@ div {
   height: auto;
   margin: 0 auto;
 }
+
 /*Normalizing all image elements so the whole spread scales semi-responsively.*/
 img {
   max-width: 100%;
   height: auto;
   object-fit: scale-down;
 }
+/* Move the "deck" or the card back to the top right. */
 #cardBack{
   max-width: 100px; 
   position: relative; 
   float: right;
+}
+
+[type="button"]{
+  background-color: #6b2274;
+  border: 2px solid black;
+  padding: 8px;
+  display: inline-block;
+  font-size: 14px;
+  width: 100%;
+  position: relative;
+}
+#askBtn{
+  float: right;
+  padding: 5px;
+  width: 30%;
 }
 
 /* Fancy CSS to position images on top of one another. This was pulle together from various sources.*/
@@ -49,6 +70,7 @@ img {
   top: 0;
   left: 0;
 }
+
 .signifactor {
   position: relative;
   top: 0;
