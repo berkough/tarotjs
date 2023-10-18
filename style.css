@@ -1,78 +1,39 @@
-/* Basic foramtting */
-html,
-body {
-  background: #353535;
-  color-scheme: dark !important;
-  font-family: monospace;
-  font-size: 14px;
-  margin: 4px;
+html,body{
+    background: var(--bs-dark);
+    color: var(--bs-light);
 }
-/*I wanted to use a specialty font instead of creating an img for a logo.*/
 @font-face {
   font-family: caligraphy;
   src: url(fonts/pentagrams.woff);
 }
-/*Apply the special font to he h1 element. It only gets used once.*/
-h1 {
+p{
+  font-size: .95rem;
+  text-align: justify;
+  padding: 10px;
+}
+
+.desc{
+  width:100px;
+  height:auto;
+}
+.logo{
   font-family: caligraphy;
   font-size: 8em;
-  padding: 0;
-  margin: 0;
-  text-align: center;
+  padding: 10px;
 }
-/*Setting the h2 margin to zero fixed a spacing issue I had.*/
 h2 {
-  margin: 0;
-}
-ol{
-  padding: 0 0 0 20px;
-  margin: 5px;
-}
-/*There are several divs, but one div that encloses everything in the body, setting the max-wdith made 
-    the page look better.*/
-div {
-  max-width: 600px;
-  height: auto;
-  margin: 0 auto;
+  font-family: caligraphy;
+  font-size: 2em;
+  padding: 10px;
 }
 
-/*Normalizing all image elements so the whole spread scales semi-responsively.*/
-img {
-  max-width: 100%;
-  height: auto;
-  object-fit: scale-down;
-}
-/* Move the "deck" or the card back to the top right. */
-#cardBack{
-  max-width: 100px; 
-  position: relative; 
-  float: right;
-}
-/* Make the buttons look fancy and match the card back */
-button{
-  background-color: #6b2274;
-  border: 2px solid black;
-  padding: 8px;
-  display: inline-block;
-  font-size: 14px;
-  width: 100%;
-  position: relative;
-}
-/* This needed to be smaller than the others. */
-#askBtn{
-  float: right;
-  padding: 5px;
-  width: 30%;
-}
-
-/* Fancy CSS to position images on top of one another. This was pulle together from various sources.*/
-.parent {
+.parent { /*Assign to the div that will hold the signifactor, cover card, and cross card.*/
   position: relative;
   top: 0;
   left: 0;
 }
 
-.signifactor {
+.signifactor { /*Assign to the cards*/
   position: relative;
   top: 0;
   left: 0;
@@ -94,39 +55,9 @@ button{
   object-fit: scale-down;
 }
 
-/* Setting the spread class used for span elements. Helpful for the spread table so it doesn't 
-    scrunch inbetween the buttons. */
-.spread {
-  margin: 4px;
-  padding: 1px;
-  display: inline-block;
-  align-content: flex-start;
-}
-#qSpread{
-  position: relative; 
-  float: left;
-}
-#drawSpread{
-  position: relative; 
-  float: right;
-}
-
-table,
-tr,
-td {
-  max-width: 100%;
-  object-fit: contain;
-}
-
-/* 
-Shamelessly stolen from W3 Schools 
-https://www.w3schools.com/howto/howto_css_shake_image.asp
-*/
+/*  Shamelessly stolen from W3 Schools https://www.w3schools.com/howto/howto_css_shake_image.asp */
 .shuffle {
-  /* Start the shake animation and make the animation last for 0.5 seconds */
   animation: shake 0.5s;
-
-  /* Stop after 1 second */
   animation-iteration-count: 1s;
 }
 @keyframes shake {
@@ -163,4 +94,7 @@ https://www.w3schools.com/howto/howto_css_shake_image.asp
   100% {
     transform: translate(1px, -2px) rotate(-1deg);
   }
+}
+#deck{
+  padding: 16px 8px 16px 16px;
 }

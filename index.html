@@ -1,202 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="tarot.js"></script>
-    <title>tarotjs</title>
-  </head>
-  <body>
-    <div id="main">
-      <div>
-        <img
-          src="img/cards/CardBack.jpg"
-          id="cardBack"
-          alt="Card Back"
-        />
-        <h1>tarotjs</h1>
-      </div>
-      <div id="instructions">
-        <h2>Instructions:</h2>
-        <ol>
-          <li>Ask a Question</li>
-          <li>Shuffle the Deck</li>
-          <li>Draw a Signifactor</li>
-          <li>Draw a Cover Card</li>
-          <li>Draw a Cross Card</li>
-          <li>Deal the rest of the Spread</li>
-        </ol>
-      </div>
-      <hr />
-      <div>
-        <!--Enter question, grab deck, shuffle, draw focus card.-->
-        <label for="question">What do you want to know?</label><br />
-        <input type="text" id="question" name="question" size="40" /><button id="askBtn">Ask Question</button>
-        <br />
-        <br />
-        <span class="spread" id="qSpan">
-          <button id="shufBtn">Shuffle Deck</button><br />
-          <button id="clear">Clear</button><br />
-          <button id="laySpread">Lay Spread</button><br />
-        </span>
-        <span class="spread" id="drawSpread">
-          <button id="sigBtn">Pull Signifactor</button><br />
-          <button id="coverBtn">Pull Cover Card</button><br />
-          <button id="crossBtn">Pull Cross Card</button><br />
-          <br />
-          <br />
-        </span>
-      </div>
-
-      <!--Structure for the Spread, using a table because of week 7, but a canvas element would probably be ideal.-->
-      <div>
-        <span class="spread">
-          <table>
-            <tr>
-              <td></td>
-              <td id="pos3"></td>
-              <td></td>
-              <td id="pos10"></td>
-            </tr>
-            <tr>
-              <td id="pos6"></td>
-              <td id="pos0" class="parent"></td>
-              <td id="pos5"></td>
-              <td id="pos9"></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td id="pos4"></td>
-              <td></td>
-              <td id="pos8"></td>
-            </tr>
-            <tr>
-              <td id="pos1"></td>
-              <!-- pos1 and pos2 are just so that those ids exist, they aren't used. -->
-              <td id="pos2"></td>
-              <td></td>
-              <td id="pos7"></td>
-            </tr>
-          </table>
-        </span>
-      </div>
-      <!--Start new section for interpretation of the cards.-->
-      <div>
-        <!--Insert some descriptions and maybe formulate some text generation based on the question asked?-->
-        <p id="asked"></p>
-      </div>
-      <!--Being Script for Spread-->
-      <script>
-        //Make our deck.
-        const deck = new DECK();
-        deck.getDeck(); //Call this so you can always draw cards from an unshuffled deck.
-
-        /* ASK BUTTON */
-        //Clear the user entry, but store the question as a value. This will be used later.
-        document.getElementById("askBtn").addEventListener("click", () => {
-          let question = document.getElementById("question");
-          //document.getElementById("asked").innerHTML = question.value; //Save for later...
-          question.value = "";
-        });
-
-        /* SHUFFLE BUTTON */
-        //Call the shuffle method when the "Shuffle" button is pressed.
-        document.getElementById("shufBtn").addEventListener("click", () => {
-          document.getElementById("cardBack").classList.add("shuffle"); // Add an animation so the deck "shuffles".
-          deck._deck = []; //Empty this variable.
-          deck.getDeck(); //Re-assemble the deck.
-          deck.shuffle(); //Then shuffle it.
-          setTimeout(() => {
-            document.getElementById("cardBack").classList.remove("shuffle");
-          }, 1001); //Remove the animation class so it can be re-applied when the button is clicked again.
-          console.log(deck._deck);
-        });
-
-        /* SIGNIFACTOR BUTTON */
-        //Pull the Signifactor when that button is clicked.
-        document.getElementById("sigBtn").addEventListener("click", () => {
-          //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
-          deck.suitTrumpM(0);
-          //Call the IMG and dump it into the span based on the top card of the deck.
-          document.getElementById("pos0").innerHTML =
-            '<img src="img/cards/' +
-            deck._deck[0].Place +
-            "-" +
-            deck.suitTrump +
-            '.jpg" class="signifactor">';
-          console.log("Signifactor", deck._deck[0]);
-        });
-
-        /* COVER CARD BUTTON */
-        //Pull the Cover Card.
-        document.getElementById("coverBtn").addEventListener("click", () => {
-          if (document.getElementById('pos0').innerHTML === '') {
-            alert('You need to pull a Signifactor first!');
-          } else {
-            //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
-            deck.suitTrumpM(1);
-            //Call the IMG and dump it into the span based on the top card of the deck.
-            document.getElementById("pos0").innerHTML +=
-              '<img src="img/cards/' +
-              deck._deck[1].Place +
-              "-" +
-              deck.suitTrump +
-              '.jpg" class="covers">';
-            console.log("Cover", deck._deck[1]);
-          }
-        });
-
-        /* CROSS CARD BUTTON */
-        //Pull the Cross Card.
-        document.getElementById("crossBtn").addEventListener("click", () => {
-          if (document.getElementById('pos0').innerHTML === '') {
-            alert('You need to pull a Signifactor first!');
-          } else {
-            //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
-            deck.suitTrumpM(2);
-            //Call the IMG and dump it into the span based on the top card of the deck.
-            document.getElementById("pos0").innerHTML +=
-              '<img src="img/cards/' +
-              deck._deck[2].Place +
-              "-" +
-              deck.suitTrump +
-              '.jpg" class="cross">';
-            console.log("Cross", deck._deck[2]);
-          }
-        });
-
-        /* LAY SPREAD BUTTON */
-        //Pull the rest of the cards needed for the Spread using a for loop and dump them into the table. We don't do them one at a time because they are just pulled in order, no fancy CSS.
-        document.getElementById("laySpread").addEventListener("click", () => {
-          if (document.getElementById('pos0').innerHTML === ''){
-            alert('You need to pull a Signifactor first!');
-          } else { //Do the same thing as the others, but do it in a for loop to pull the other cards needed.
-            for (i = 3; i < 11; i++) {
-              deck.suitTrumpM(i);
-              let position = "pos" + i.toString();
-              document.getElementById(position).innerHTML =
-                '<img src="img/cards/' +
-                deck._deck[i].Place +
-                "-" +
-                deck.suitTrump +
-                '.jpg">';
-              console.log(position, deck._deck[i]);
-            }
-          }
-        });
-
-        /* CLEAR BUTTON */
-        //Clear everything!
-        document.getElementById("clear").addEventListener("click", () => {
-          for (i = 0; i < 11; i++) {
-            deck.suitTrumpM(i);
-            let position = "pos" + i.toString();
-            document.getElementById(position).innerHTML = "";
-          }
-        });
-      </script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="js/tarot.js"></script>
+    <title>tarojs 1.5</title>
+</head>
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Main</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="instructions.html">Instructions</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cards.html">Card Meanings</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <div class="float-start">
+        <h1 class="logo">tarotjs</h1>
+        <p>(Click the deck to shuffle.)</p>
     </div>
-  </body>
+    <div class="float-end p-3" id="deck">
+        <a href="#" id="shufBtn"><img src="cards/CardBack.jpg" class="desc" alt="deck" class="align-text-top" id="cardBack"></a>
+        <div class="d-grid gap-2"><button class="btn btn-primary" id="clear">Clear</button></div>
+    </div>
+    <div class="input-group">
+        <input type="text" class="form-control" id="question" placeholder="What do you wish to ask?" aria-label="question" aria-describedby="askBtn">
+        <button class="btn btn-primary" type="button" id="askBtn">Ask Question</button>
+    </div>
+    <div class="btn-group" id="controls">
+        <button class="btn btn-primary" id="sigBtn">Pull Signifactor</button>
+        <button class="btn btn-primary" id="coverBtn">Cover Card</button>
+        <button class="btn btn-primary" id="crossBtn">Cross Card</button>
+        <button class="btn btn-primary" id="laySpread">Lay Spread</button>
+    </div>
+    <div id="liveAlertPlaceholder"></div>
+    <div class="container-fluid float-start p-2" id="spread">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col" id="pos3"></div>
+            <div class="col"></div>
+            <div class="col" id="pos10"></div>
+        </div>
+        <div class="row">
+            <div class="col" id="pos6"></div>
+            <div class="col parent" id="pos0"></div>
+            <div class="col" id="pos5"></div>
+            <div class="col" id="pos9"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col" id="pos4"></div>
+            <div class="col"></div>
+            <div class="col" id="pos8"></div>
+        </div>
+        <div class="row">
+            <div class="col" id="pos1"></div>
+            <div class="col" id="pos2"></div>
+            <div class="col"></div>
+            <div class="col" id="pos7"></div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div id="asked"></div>
+        <div id="explanation"></div>
+    </div>
+
+<!-- START ALL THE JAVASCRIPT -->
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/index.js"></script>
+</body>
 </html>
