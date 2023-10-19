@@ -8,16 +8,13 @@ Since I didn't just want to just replicate and type the code that Guevara put to
 
 I have also seen projects using [E Kelen](https://github.com/ekelen)'s "[tarot-api](https://github.com/ekelen/tarot-api)," but it might be useful to expand on that work, or make something entirely self-contained.
 
-The current version of the script includes a class that also plays out a psuedo game of War using the Tarot deck. This was implemented based on the week 6 Promineo Tech front-end coding bootcamp, which is a course that I am taking as of the writing of this README. When the assignment was proposed I thought it would be a good way to learn how to manipulate a deck of cards, specifically this digital Tarot deck.
-
-We are currently in Week 8 and this project has been updated to achieve the goals set forth for the current assignment which involves HTML and CSS. Prior versions of the code only output to the console.
+Special thanks to [Luciella Elisabeth Scarlett](https://luciellaes.itch.io/rider-waite-smith-tarot-cards-cc0) for cleaning up the scans from [Wikipedia](https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot).
 
 ## TODO
 
-- ~~Implement some type of system for generating different spreads.~~
-- Incorporate text from the *The Pictorial Key to the Tarot* by A.E. Waite and/or from other public domain sources.
-- ~~Display scans of the Tarot cards for various different spreads.~~
-    Scans courtesty of [luciellaes on itch.io](https://luciellaes.itch.io/rider-waite-smith-tarot-cards-cc0).
-- Add some animations to the cards as they are laid down for the spread.
-- Incorporate interactive elements for reading the cards, either hovers or click events that pull up additional information.
-- Complete the interpretation section: have each card's description laid out with the postion explanation.
+-Click and go through each card. With the meaning.
+-"Floating" menu for selecting cards.
+-Implement Reversals.
+-Three Cards spread.
+-Remember the last spread…
+-Implement Chat or another AI to provide interpretations for the cards.
