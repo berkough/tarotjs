@@ -1,4 +1,5 @@
-/*
+
+  /*
  * A basic library for creating a tarot deck and doing various things to it like shuffling or
  * pulling cards in certain orders or quanitites to be placed in spreads. Eventually I would
  * also like to incorporate some sort of wiki-like functionality or allow the cards pulled in
@@ -6,7 +7,7 @@
  * Key of the Tarot.
  */
 
-class DECK {
+export class DECK {
   constructor() {
     this._deck = [];
 

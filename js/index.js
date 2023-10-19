@@ -1,3 +1,5 @@
+import { DECK } from './tarot';
+
 //Make our deck.
 const deck = new DECK();
 deck.getDeck(); //Call this so you can always draw cards from an unshuffled deck.
