@@ -1,4 +1,4 @@
-import { DECK } from './tarot';
+import { DECK } from './tarot.js';
 
 //Make our deck.
 const deck = new DECK();
@@ -102,7 +102,7 @@ document.getElementById("laySpread").addEventListener("click", () => {
 if (document.getElementById('pos0').innerHTML === ''){
     alert('You need to pull a Signifactor first!','danger');
 } else { //Do the same thing as the others, but do it in a for loop to pull the other cards needed.
-    for (i = 3; i < 11; i++) {
+    for (let i = 3; i < 11; i++) {
     deck.suitTrumpM(i);
     let position = "pos" + i.toString();
     document.getElementById(position).innerHTML =
