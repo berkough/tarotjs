@@ -12,9 +12,9 @@ Special thanks to [Luciella Elisabeth Scarlett](https://luciellaes.itch.io/rider
 
 ## TODO
 
--Click and go through each card. With the meaning.
--"Floating" menu for selecting cards.
--Implement Reversals.
--Three Cards spread.
--Remember the last spread…
--Implement Chat or another AI to provide interpretations for the cards.
+- Click and go through each card. With the meaning.
+- "Floating" menu for selecting cards.
+- Implement Reversals.
+- Three Cards spread.
+- Remember the last spread…
+- Implement Chat or another AI to provide interpretations for the cards.
