@@ -1,4 +1,5 @@
 import { DECK } from './tarot.js';
+import { callChatGipity } from './chatgipity.js';
 
 //Make our deck.
 const deck = new DECK();
@@ -125,4 +126,9 @@ for (i = 0; i < 11; i++) {
     document.getElementById(position).innerHTML = "";
 }
 explanation.innerHTML = "";
+});
+
+// Call ChatGipity
+document.getElementById('sreadSpread').addEventListener('click', () => {
+    console.log(deck._deck);
 });
