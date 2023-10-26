@@ -129,6 +129,6 @@ explanation.innerHTML = "";
 });
 
 // Call ChatGipity
-document.getElementById('sreadSpread').addEventListener('click', () => {
+document.getElementById('readSpread').addEventListener('click', () => {
     console.log(deck._deck);
 });
