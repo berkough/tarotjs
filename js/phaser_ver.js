@@ -11,6 +11,7 @@ class tableSpread extends Phaser.Scene {
         
         console.log(deck);
 
+        //Load the image for the "Deck" representation.
         this.load.image('cardback', '../cards/CardBack.jpg');
         
         //Load the Major Arcana images.
