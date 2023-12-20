@@ -1,5 +1,5 @@
 import { DECK } from './tarot.js';
-import { callChatGipity } from './chatgipity.js';
+// import { callChatGipity } from './chatgipity.js';
 
 //Make our deck.
 const deck = new DECK();
@@ -129,6 +129,6 @@ explanation.innerHTML = "";
 });
 
 // Call ChatGipity
-document.getElementById('readSpread').addEventListener('click', () => {
-    console.log(deck._deck);
-});
+// document.getElementById('readSpread').addEventListener('click', () => {
+//     console.log(deck._deck);
+// });
