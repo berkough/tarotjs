@@ -7,7 +7,7 @@
  * Key of the Tarot.
  */
 
-export class DECK {
+export class TAROTDECK {
   constructor() {
     this._deck = [];
 
