@@ -3,7 +3,7 @@
  * https://phasergames.com/scaling-games-in-phaser-3/
  */
 export class AlignGrid {
-    constructor(game, config){
+    constructor(config){
         if (!config.scene){
             console.log("Missing Scene!");
             return;
@@ -18,11 +18,11 @@ export class AlignGrid {
         }
 
         if (!config.width){
-            config.width = game.config.width;
+            config.width = window.game.config.width;
         }
 
         if (!config.height){
-            config.height = game.config.height;
+            config.height = window.game.config.height;
         }
         this.h = config.height;
         this.w = config.width;
