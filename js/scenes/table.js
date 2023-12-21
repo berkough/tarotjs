@@ -1,7 +1,7 @@
 import { TAROTDECK } from "../utils/tarot.js";
 import { AlignGrid } from "../utils/aligngrid.js";
 
-export class TableSpread extends Phaser.Scene {
+export class Table extends Phaser.Scene {
   constructor() {
     super();
   }
@@ -26,7 +26,7 @@ export class TableSpread extends Phaser.Scene {
     }
   }
   create() {
-    this.aGrid = new AlignGrid({ scene: this, cols: 10, rows: 10 });
+    this.aGrid = new AlignGrid({ scene: this, cols: 5, rows: 10 });
     this.aGrid.showGridRef();
 
     let cardGroup = this.add.container();
@@ -39,7 +39,7 @@ export class TableSpread extends Phaser.Scene {
       cardGroup.add(card);
     }
 
-    this.aGrid.placeAtIndex(18, cardGroup);
+    this.aGrid.placeAtIndex(9, cardGroup);
   }
   update() {
 
