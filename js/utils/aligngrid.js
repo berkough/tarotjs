@@ -1,6 +1,7 @@
 /**
  * This alignment grid was taken from William Clarkson
  * https://phasergames.com/scaling-games-in-phaser-3/
+ * Minor changes have been made...
  */
 export class AlignGrid {
     constructor(config){
@@ -32,7 +33,7 @@ export class AlignGrid {
         this.cw = this.w / this.cols;
         this.ch = this.h / this.rows;
     }
-    show(a = 1){
+    showGridRef(a = 1){
         this.graphics = this.scene.add.graphics();
         this.graphics.lineStyle(4, 0xff0000, a);
 
@@ -46,9 +47,7 @@ export class AlignGrid {
             this.graphics.lineTo(this.w,i);
         }
         this.graphics.strokePath();
-    }
-    showNumbers(a = 1){
-        this.show(a);
+
         let n = 0;
         for (let i = 0; i < this.rows; i++){
             for (let j = 0; j < this.cols; j++){
