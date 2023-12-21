@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+    <title>tarojs 1.5</title>
+</head>
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Main</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="instructions.html">Instructions</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cards.html">Card Meanings</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <div class="float-start">
+        <h1 class="logo">tarot.red</h1>
+    </div>
+    <div class="float-end" id="deck">
+        <p>Click Me</p>
+        <a href="#" id="shufBtn"><img src="cards/CardBack.jpg" class="desc" alt="deck" class="align-text-top" id="cardBack"></a>
+        <div class="d-grid gap-2"><button class="btn btn-primary" id="clear">Clear</button></div>
+    </div>
+    <div class="input-group">
+        <input type="text" class="form-control" id="question" placeholder="What do you wish to ask?" aria-label="question" aria-describedby="askBtn">
+        <button class="btn btn-primary" type="button" id="askBtn">Ask Question</button>
+    </div>
+    <div class="btn-group" id="controls">
+        <button class="btn btn-primary" id="sigBtn">Pull Signifactor</button>
+        <button class="btn btn-primary" id="coverBtn">Cover Card</button>
+        <button class="btn btn-primary" id="crossBtn">Cross Card</button>
+        <button class="btn btn-primary" id="laySpread">Lay Spread</button>
+        <button class="btn btn-primary" id="readSpread">Read Spread</button>
+    </div>
+    <div id="liveAlertPlaceholder"></div>
+    <div class="container-fluid float-start p-2" id="spread">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col" id="pos3"></div>
+            <div class="col"></div>
+            <div class="col" id="pos10"></div>
+        </div>
+        <div class="row">
+            <div class="col" id="pos6"></div>
+            <div class="col parent" id="pos0"></div>
+            <div class="col" id="pos5"></div>
+            <div class="col" id="pos9"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col" id="pos4"></div>
+            <div class="col"></div>
+            <div class="col" id="pos8"></div>
+        </div>
+        <div class="row">
+            <div class="col" id="pos1"></div>
+            <div class="col" id="pos2"></div>
+            <div class="col"></div>
+            <div class="col" id="pos7"></div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div id="asked"></div>
+        <div id="explanation"></div>
+    </div>
+
+<!-- START ALL THE JAVASCRIPT -->
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/index.js" type="module"></script>
+</body>
+</html>

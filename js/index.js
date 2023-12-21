@@ -1,134 +1,45 @@
-import { TAROTDECK } from './tarot.js';
-// import { callChatGipity } from './chatgipity.js';
+import { TAROTDECK } from './utils/tarot.js';
+import { AlignGrid } from './utils/aligngrid.js';
 
-//Make our deck.
-const deck = new TAROTDECK();
-deck.getDeck(); //Call this so you can always draw cards from an unshuffled deck.
+class tableSpread extends Phaser.Scene {
+    constructor(){
+        super('tableSpread');
+    }
+    preload(){
+        const deck = new TAROTDECK();
+        deck.getDeck();
 
-const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-const explanation = document.getElementById('explanation');
-const alert = (message, type) => {
-const wrapper = document.createElement('div');
-wrapper.innerHTML = [
-    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-    `   <div>${message}</div>`,
-    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-    '</div>'
-].join('');
+        //Load the image for the "Deck" representation.
+        this.load.image('cardback', '../cards/CardBack.jpg');
+        
+        //Load the Major Arcana images.
+        for (let i = 0; i < 21; i++){
+            let cardName = `${deck._deck[i].Place}-${deck._deck[i].Trump}`
+            this.load.image(cardName, '../cards/'+cardName+'.jpg');
+        }
 
-alertPlaceholder.append(wrapper);
-}
+        //Load the Minor Arcana images.
+        for (let i = 22; i < 77; i++){
+            let cardName = `${deck._deck[i].Place}-${deck._deck[i].Suit}`;
+            this.load.image(cardName, '../cards/'+cardName+'.jpg');
+        }
 
-/* ASK BUTTON */
-//Clear the user entry, but store the question as a value. This will be used later.
-document.getElementById("askBtn").addEventListener("click", () => {
-let question = document.getElementById("question");
-document.getElementById("asked").innerHTML = `<p>${question.value}</p>`; //Save for later...
-question.value = "";
-});
+    }
+    create(){
+        this.aGrid = new AlignGrid(game, {'scene': this, 'cols': 10, 'rows': 10});
+        this.aGrid.show();
+        this.aGrid.showNumbers();
 
-/* SHUFFLE BUTTON */
-//Call the shuffle method when the "Shuffle" button is pressed.
-document.getElementById("shufBtn").addEventListener("click", () => {
-document.getElementById("cardBack").classList.add("shuffle"); // Add an animation so the deck "shuffles".
-deck._deck = []; //Empty this variable.
-deck.getDeck(); //Re-assemble the deck.
-deck.shuffle(); //Then shuffle it.
-setTimeout(() => {
-    document.getElementById("cardBack").classList.remove("shuffle");
-}, 1001); //Remove the animation class so it can be re-applied when the button is clicked again.
-console.log(deck._deck);
-});
-
-/* SIGNIFACTOR BUTTON */
-//Pull the Signifactor when that button is clicked.
-document.getElementById("sigBtn").addEventListener("click", () => {
-//Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
-deck.suitTrumpM(0);
-//Call the IMG and dump it into the span based on the top card of the deck.
-document.getElementById("pos0").innerHTML =
-    '<img src="cards/' +
-    deck._deck[0].Place +
-    "-" +
-    deck.suitTrump +
-    '.jpg" class="signifactor img-fluid">';
-console.log("Signifactor", deck._deck[0]);
-explanation.innerHTML = `<p><h2><a href="cards.html#${deck._deck[0].Place}-${deck.suitTrump}">${deck._deck[0].Place} - ${deck.suitTrump}</h2></a><br>
-    </p>`;
-});
-
-/* COVER CARD BUTTON */
-//Pull the Cover Card.
-document.getElementById("coverBtn").addEventListener("click", () => {
-if (document.getElementById('pos0').innerHTML === '') {
-    alert('You need to pull a Signifactor first!','danger');
-} else {
-    //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
-    deck.suitTrumpM(1);
-    //Call the IMG and dump it into the span based on the top card of the deck.
-    document.getElementById("pos0").innerHTML +=
-    '<img src="cards/' +
-    deck._deck[1].Place +
-    "-" +
-    deck.suitTrump +
-    '.jpg" class="covers img-fluid">';
-    console.log("Cover", deck._deck[1]);
-    explanation.innerHTML += `<p><a href="cards.html#${deck._deck[1].Place}-${deck.suitTrump}">${deck._deck[1].Place} - ${deck.suitTrump}</a></p>`;
-}
-});
-
-/* CROSS CARD BUTTON */
-//Pull the Cross Card.
-document.getElementById("crossBtn").addEventListener("click", () => {
-if (document.getElementById('pos0').innerHTML === '') {
-    alert('You need to pull a Signifactor first!','danger');
-} else {
-    //Trumps do not have a "Suit" keypair and vice versa. Determine which to use.
-    deck.suitTrumpM(2);
-    //Call the IMG and dump it into the span based on the top card of the deck.
-    document.getElementById("pos0").innerHTML +=
-    '<img src="cards/' +
-    deck._deck[2].Place +
-    "-" +
-    deck.suitTrump +
-    '.jpg" class="cross img-fluid">';
-    console.log("Cross", deck._deck[2]);
-    explanation.innerHTML += `<p><a href="cards.html#${deck._deck[2].Place}-${deck.suitTrump}">${deck._deck[2].Place} - ${deck.suitTrump}</a></p>`;
-}
-});
-
-/* LAY SPREAD BUTTON */
-//Pull the rest of the cards needed for the Spread using a for loop and dump them into the table. We don't do them one at a time because they are just pulled in order, no fancy CSS.
-document.getElementById("laySpread").addEventListener("click", () => {
-if (document.getElementById('pos0').innerHTML === ''){
-    alert('You need to pull a Signifactor first!','danger');
-} else { //Do the same thing as the others, but do it in a for loop to pull the other cards needed.
-    for (let i = 3; i < 11; i++) {
-    deck.suitTrumpM(i);
-    let position = "pos" + i.toString();
-    document.getElementById(position).innerHTML =
-        '<img src="cards/' +
-        deck._deck[i].Place +
-        "-" +
-        deck.suitTrump +
-        '.jpg" class="img-fluid">';
-    console.log(position, deck._deck[i]);
-    explanation.innerHTML += `<p><a href="cards.html#${deck._deck[i].Place}-${deck.suitTrump}">${deck._deck[i].Place} - ${deck.suitTrump}</a></p>`;
+        this.cards = this.add.image(0,0,'cardback');
+        this.aGrid.placeAtIndex(18,this.cards);
+        
     }
 }
-});
 
-/* CLEAR BUTTON */
-//Clear everything!
-document.getElementById("clear").addEventListener("click", () => {
-for (i = 0; i < 11; i++) {
-    let position = "pos" + i.toString();
-    document.getElementById(position).innerHTML = "";
-}
-explanation.innerHTML = "";
-});
+const game = new Phaser.Game({
+    type: Phaser.AUTO,
+    width: window.innerWidth - 20,
+    height: window.innerHeight - 20,
+    scene: tableSpread,
 
-// Call ChatGipity
-// document.getElementById('readSpread').addEventListener('click', () => {
-//     console.log(deck._deck);
-// });
+});
