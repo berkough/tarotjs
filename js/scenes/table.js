@@ -10,10 +10,10 @@ export class Table extends Phaser.Scene {
     this.deck.getDeck();
     
     //Load menu icon.
-    this.load.image("menu", "../../assets/icons/menu.png");
+    this.load.image('menu', "../../assets/icons/menu.png");
 
     //Load the image for the "Deck" representation.
-    this.load.image("cardback", "../../assets/cards/CardBack.jpg");
+    this.load.image('cardback', "../../assets/cards/CardBack.jpg");
 
     //Load the Major Arcana images.
     for (let i = 0; i < 21; i++) {
@@ -37,33 +37,47 @@ export class Table extends Phaser.Scene {
 
     let menuIcon = this.add.sprite(0,0,"menu");
     menuIcon.setInteractive();
-    menuIcon.displayWidth = 50;
+    menuIcon.displayWidth = 30;
     menuIcon.scaleY = menuIcon.scaleX;
-    this.aGrid.placeAtIndex(1, menuIcon);
-
-    let cardGroup = this.add.container();
-    cardGroup.setSize(100,100);
-    cardGroup.setInteractive();
-    for (let i = 0; i < this.deck._deck.length; i++) {
-      let card = this.add.sprite(-i / 6, -i / 6, "cardback");
-      card.displayWidth = 75;
-      card.scaleY = card.scaleX;
-      cardGroup.add(card);
+    if (window.innerWidth > 475){
+      this.aGrid.placeAtIndex(0, menuIcon);
+    } else {
+      this.aGrid.placeAtIndex(1,menuIcon);
     }
 
-    this.aGrid.placeAtIndex(18, cardGroup);
+    let cards = [];
+
+    for (let i = 0; i < this.deck._deck.length; i++) {
+      cards.push(this.add.sprite(0,0, 'cardback'));
+      if (window.innerWidth > 475){
+        cards[i].displayWidth = 120;
+      } else {
+        cards[i].displayWidth = (window.innerWidth - 20) / 4;
+      }
+      cards[i].setInteractive({draggable:true});
+      cards[i].scaleY = cards[i].scaleX;
+      this.aGrid.placeAtIndex(18,cards[i]);
+    }
+
     let lastTime = 0;
     
-    cardGroup.on('pointerdown', () => {
-      let clickDelay = this.time.now - lastTime;
-      lastTime = this.time.now;
-      
-      if (clickDelay < 350){
-        this.deck.shuffleDeck();
-      }
-      
-      console.log("This is a mouse click.");
-    });
+    for (const card of cards){
+      card.on('pointerdown', (pointer) => {
+        let clickDelay = this.time.now - lastTime;
+        lastTime = this.time.now;
+        
+        if (clickDelay < 350){
+          this.deck.shuffleDeck();
+          console.log("This is a double-click.");
+          console.log(this.deck._deck);
+        }
+      });
+    }
+    
+    this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
+      gameObject.x = dragX;
+      gameObject.y = dragY;
+    })
 
   }
 }
