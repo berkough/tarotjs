@@ -1,4 +1,5 @@
 import { Table } from './scenes/table.js';
+import { Menu } from './scenes/menu.js';
 
 const game = new Phaser.Game({
     type: Phaser.AUTO,
@@ -6,7 +7,7 @@ const game = new Phaser.Game({
     height: window.innerHeight - 20,
     mode: Phaser.Scale.FIT,
     pixelArt: false,
-    scene: Table,
+    scene: Table, Menu,
 
 });
 

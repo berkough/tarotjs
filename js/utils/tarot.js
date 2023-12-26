@@ -148,3 +148,18 @@ export class TAROTDECK {
     }
   }
 }
+
+/**
+ * This SPREADS class relies on the aligngrid.js utility script.
+ */
+export class SPREADS {
+  constructor (deck){
+    this.deck = deck;
+  }
+
+  CelticCross(){
+    
+  }
+
+
+}
