@@ -8,7 +8,6 @@ export class Table extends Phaser.Scene {
   preload() {
     this.deck = new TAROTDECK();
     this.deck.getDeck();
-    console.log(this.deck._deck);
     
     //Load menu icon.
     this.load.image("menu", "../../assets/icons/menu.png");
@@ -19,16 +18,20 @@ export class Table extends Phaser.Scene {
     //Load the Major Arcana images.
     for (let i = 0; i < 21; i++) {
       let cardName = `${this.deck._deck[i].Place}-${this.deck._deck[i].Trump}`;
+      console.log(cardName);
       this.load.image(cardName, "../../assets/cards/" + cardName + ".jpg");
     }
 
     //Load the Minor Arcana images.
     for (let i = 22; i < 77; i++) {
       let cardName = `${this.deck._deck[i].Place}-${this.deck._deck[i].Suit}`;
+      console.log(cardName);
       this.load.image(cardName, "../../assets/cards/" + cardName + ".jpg");
     }
   }
-  create() {
+  create() {  
+    this.input.mouse.disableContextMenu();
+
     this.aGrid = new AlignGrid({ scene: this, cols: 10, rows: 12 });
     this.aGrid.showGridRef();
 
@@ -37,26 +40,30 @@ export class Table extends Phaser.Scene {
     menuIcon.displayWidth = 50;
     menuIcon.scaleY = menuIcon.scaleX;
     this.aGrid.placeAtIndex(1, menuIcon);
-    //this.menuIcon.
 
     let cardGroup = this.add.container();
-   // console.log(cardGroup);
-
+    cardGroup.setSize(100,100);
+    cardGroup.setInteractive();
     for (let i = 0; i < this.deck._deck.length; i++) {
       let card = this.add.sprite(-i / 6, -i / 6, "cardback");
-      card.setInteractive();
       card.displayWidth = 75;
       card.scaleY = card.scaleX;
       cardGroup.add(card);
     }
 
     this.aGrid.placeAtIndex(18, cardGroup);
-    console.log(cardGroup);
-
-    this.input.on('gameobjectdown', function (pointer, gameObject) {
-      this.deck.shuffleDeck();
-      console.log(this.deck._deck);
-
+    let lastTime = 0;
+    
+    cardGroup.on('pointerdown', () => {
+      let clickDelay = this.time.now - lastTime;
+      lastTime = this.time.now;
+      
+      if (clickDelay < 350){
+        this.deck.shuffleDeck();
+      }
+      
+      console.log("This is a mouse click.");
     });
+
   }
 }

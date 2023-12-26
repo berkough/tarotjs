@@ -142,6 +142,7 @@ export class TAROTDECK {
   }
   //Method for pulling the right keypair when interpolating the object properties elsewhere.
   suitTrumpM(i) {
+    console.log("Determing whether a suit or a trump.");
     if (this._deck[i].Value >= 1 && this._deck[i].Value <= 14) {
       this.suitTrump = this._deck[i].Suit;
     } else {
