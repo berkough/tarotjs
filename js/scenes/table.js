@@ -1,5 +1,6 @@
-import { TAROTDECK } from "../utils/tarot.js";
-import { AlignGrid } from "../utils/aligngrid.js";
+import * as Phaser from 'phaser';
+import { TAROTDECK } from '../utils/tarot';
+import { AlignGrid } from '../utils/aligngrid';
 
 export class Table extends Phaser.Scene {
   constructor() {
