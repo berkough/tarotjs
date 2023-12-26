@@ -10,8 +10,4 @@ export class Menu extends Phaser.Scene {
     create(){
 
     }
-
-    update(){
-        
-    }
 }

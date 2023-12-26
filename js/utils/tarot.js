@@ -121,7 +121,8 @@ export class TAROTDECK {
     return this._deck;
   }
   //Method for shuffling the cards.
-  shuffle() {
+  shuffleDeck() {
+    console.log("Ev'ry day I'm shufflin'...");
     for (let i = 0; i < Math.floor(Math.random() * 10000); i++) {
       let one = Math.floor(Math.random() * this._deck.length);
       let two = Math.floor(Math.random() * this._deck.length);
@@ -150,7 +151,8 @@ export class TAROTDECK {
 }
 
 /**
- * This SPREADS class relies on the aligngrid.js utility script.
+ * This SPREADS class relies on the aligngrid.js utility script. This script doesn't import it because
+ * it anticipates the spread being called inside of a Phaser scene.
  */
 export class SPREADS {
   constructor (deck){
@@ -158,7 +160,8 @@ export class SPREADS {
   }
 
   CelticCross(){
-    
+    // The cards need positions. Positions have spaces on the alignment grid.
+    this.pos = [];
   }
 
 

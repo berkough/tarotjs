@@ -8,7 +8,7 @@ export class Table extends Phaser.Scene {
   preload() {
     this.deck = new TAROTDECK();
     this.deck.getDeck();
-    console.log(this.deck._deck.length);
+    console.log(this.deck._deck);
     
     //Load menu icon.
     this.load.image("menu", "../../assets/icons/menu.png");
@@ -33,23 +33,30 @@ export class Table extends Phaser.Scene {
     this.aGrid.showGridRef();
 
     let menuIcon = this.add.sprite(0,0,"menu");
+    menuIcon.setInteractive();
     menuIcon.displayWidth = 50;
     menuIcon.scaleY = menuIcon.scaleX;
     this.aGrid.placeAtIndex(1, menuIcon);
+    //this.menuIcon.
 
     let cardGroup = this.add.container();
-    console.log(cardGroup);
+   // console.log(cardGroup);
 
     for (let i = 0; i < this.deck._deck.length; i++) {
       let card = this.add.sprite(-i / 6, -i / 6, "cardback");
+      card.setInteractive();
       card.displayWidth = 75;
       card.scaleY = card.scaleX;
       cardGroup.add(card);
     }
 
     this.aGrid.placeAtIndex(18, cardGroup);
-  }
-  update() {
+    console.log(cardGroup);
 
+    this.input.on('gameobjectdown', function (pointer, gameObject) {
+      this.deck.shuffleDeck();
+      console.log(this.deck._deck);
+
+    });
   }
 }
