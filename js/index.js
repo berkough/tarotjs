@@ -7,7 +7,7 @@ const game = new Phaser.Game({
     height: window.innerHeight - 20,
     mode: Phaser.Scale.FIT,
     pixelArt: false,
-    scene: Table, Menu,
+    scene: [Table, Menu],
 
 });
 
