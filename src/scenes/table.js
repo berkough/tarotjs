@@ -19,14 +19,12 @@ export class Table extends Phaser.Scene {
     //Load the Major Arcana images.
     for (let i = 0; i < 21; i++) {
       let cardName = `${this.deck._deck[i].Place}-${this.deck._deck[i].Trump}`;
-      console.log(cardName);
       this.load.image(cardName, "../../assets/cards/" + cardName + ".jpg");
     }
 
     //Load the Minor Arcana images.
     for (let i = 22; i < 77; i++) {
       let cardName = `${this.deck._deck[i].Place}-${this.deck._deck[i].Suit}`;
-      console.log(cardName);
       this.load.image(cardName, "../../assets/cards/" + cardName + ".jpg");
     }
   }
@@ -46,6 +44,10 @@ export class Table extends Phaser.Scene {
       this.aGrid.placeAtIndex(1,menuIcon);
     }
 
+    const cardGroup = this.add.container(0,0);
+    cardGroup.setSize(100,100);
+    cardGroup.setInteractive();
+    
     let cards = [];
 
     for (let i = 0; i < this.deck._deck.length; i++) {
@@ -57,13 +59,14 @@ export class Table extends Phaser.Scene {
       }
       cards[i].setInteractive({draggable:true});
       cards[i].scaleY = cards[i].scaleX;
-      this.aGrid.placeAtIndex(18,cards[i]);
+      cardGroup.add(cards[i]);
     }
 
+    this.aGrid.placeAtIndex(18,cardGroup);
+
     let lastTime = 0;
-    
-    for (const card of cards){
-      card.on('pointerdown', (pointer) => {
+    cardGroup.on('pointerdown', (pointer) => {
+        console.log(pointer);
         let clickDelay = this.time.now - lastTime;
         lastTime = this.time.now;
         
@@ -71,11 +74,11 @@ export class Table extends Phaser.Scene {
           this.deck.shuffleDeck();
           console.log("This is a double-click.");
           console.log(this.deck._deck);
-        }
-      });
-    }
-    
+      }
+    });
+
     this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
+      gameObject.bringToTop();
       gameObject.x = dragX;
       gameObject.y = dragY;
     })
