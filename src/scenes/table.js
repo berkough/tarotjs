@@ -32,7 +32,7 @@ export class Table extends Phaser.Scene {
     this.input.mouse.disableContextMenu();
 
     this.aGrid = new AlignGrid({ scene: this, cols: 10, rows: 12 });
-    //this.aGrid.showGridRef();
+    this.aGrid.showGridRef();
 
     let menuIcon = this.add.sprite(0,0,"menu");
     menuIcon.setInteractive();
@@ -51,23 +51,24 @@ export class Table extends Phaser.Scene {
     let cards = [];
 
     for (let i = 0; i < this.deck._deck.length; i++) {
-      cards.push(this.physics.add.sprite(0,0, 'cardback'));
+      cards.push(this.physics.add.sprite(0,0, 'cardback').setCollideWorldBounds(true));
       if (window.innerWidth > 475){
         cards[i].displayWidth = 120;
       } else {
         cards[i].displayWidth = (window.innerWidth - 20) / 4;
       }
+      cards[i].body.onCollide = true;
       cards[i].setInteractive({draggable:true});
       cards[i].scaleY = cards[i].scaleX;
     }
     
     cardGroup.add(cards);
+    console.log(cardGroup.list);
 
     this.aGrid.placeAtIndex(18,cardGroup);
 
     let lastTime = 0;
-    cardGroup.on('pointerdown', (pointer) => {
-        console.log(pointer);
+    cardGroup.on('pointerdown', (pointer, gameObject) => {
         let clickDelay = this.time.now - lastTime;
         lastTime = this.time.now;
         
@@ -79,11 +80,16 @@ export class Table extends Phaser.Scene {
     });
 
     this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
-      console.log(pointer);
-      gameObject.depth = 0;
+      gameObject.setDepth(78);
+      console.log(gameObject.depth);
       gameObject.x = dragX;
       gameObject.y = dragY;
-    })
+    });
+
+    this.physics.world.on('collide', (gameObject1, gameObject2, body1, body2) => {
+      gameObject2.depth -= 1;
+      console.log(gameObject2.depth);
+    });
 
   }
 }
