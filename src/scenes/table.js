@@ -32,7 +32,7 @@ export class Table extends Phaser.Scene {
     this.input.mouse.disableContextMenu();
 
     this.aGrid = new AlignGrid({ scene: this, cols: 10, rows: 12 });
-    this.aGrid.showGridRef();
+    //this.aGrid.showGridRef();
 
     let menuIcon = this.add.sprite(0,0,"menu");
     menuIcon.setInteractive();
@@ -51,7 +51,7 @@ export class Table extends Phaser.Scene {
     let cards = [];
 
     for (let i = 0; i < this.deck._deck.length; i++) {
-      cards.push(this.add.sprite(0,0, 'cardback'));
+      cards.push(this.physics.add.sprite(0,0, 'cardback'));
       if (window.innerWidth > 475){
         cards[i].displayWidth = 120;
       } else {
@@ -59,8 +59,9 @@ export class Table extends Phaser.Scene {
       }
       cards[i].setInteractive({draggable:true});
       cards[i].scaleY = cards[i].scaleX;
-      cardGroup.add(cards[i]);
     }
+    
+    cardGroup.add(cards);
 
     this.aGrid.placeAtIndex(18,cardGroup);
 
@@ -78,7 +79,8 @@ export class Table extends Phaser.Scene {
     });
 
     this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
-      gameObject.bringToTop();
+      console.log(pointer);
+      gameObject.depth = 0;
       gameObject.x = dragX;
       gameObject.y = dragY;
     })

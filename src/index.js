@@ -9,7 +9,12 @@ const game = new Phaser.Game({
     mode: Phaser.Scale.FIT,
     pixelArt: false,
     scene: [Table, Menu],
-
+    physics: {
+        default: 'arcade',
+        arcade: {
+            debug:true,
+        },
+    }
 });
 
 window.game = game;
