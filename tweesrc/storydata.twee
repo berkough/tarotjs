@@ -1,0 +1,10 @@
+:: StoryTitle
+tarotjs
+
+:: StoryData
+{
+    "ifid": "F2AA8B18-4B04-4121-8D06-67FB1E17DFE4",
+    "format": "Snowman",
+    "format-version": "2.0.2",
+    "start": "Main"
+}

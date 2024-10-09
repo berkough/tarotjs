@@ -1,0 +1,142 @@
+:: StoryScript [script]
+window.story.debug = false;
+
+window.deck = [];
+
+window.firstHalf;
+window.secondHalf;
+window.suitTrump = "";
+
+window.majorArcana [
+    { Place: "0", Trump: "Fool", Value: 15 },
+    { Place: "I", Trump: "Magician", Value: 16 },
+    { Place: "II", Trump: "HighPriestess", Value: 17 },
+    { Place: "III", Trump: "Empress", Value: 18 },
+    { Place: "IV", Trump: "Emperor", Value: 19 },
+    { Place: "V", Trump: "Heirophant", Value: 20 },
+    { Place: "VI", Trump: "Lovers", Value: 21 },
+    { Place: "VII", Trump: "Chariot", Value: 22 },
+    { Place: "VIII", Trump: "Strength", Value: 23 },
+    { Place: "IX", Trump: "Hermit", Value: 24 },
+    { Place: "X", Trump: "WheelOfFortune", Value: 25 },
+    { Place: "XI", Trump: "Justice", Value: 26 },
+    { Place: "XII", Trump: "HangedMan", Value: 27 },
+    { Place: "XIII", Trump: "Death", Value: 28 },
+    { Place: "XIV", Trump: "Temperance", Value: 29 },
+    { Place: "XV", Trump: "Devil", Value: 30 },
+    { Place: "XVI", Trump: "Tower", Value: 31 },
+    { Place: "XVII", Trump: "Star", Value: 32 },
+    { Place: "XVIII", Trump: "Moon", Value: 33 },
+    { Place: "XIX", Trump: "Sun", Value: 34 },
+    { Place: "XX", Trump: "Judgement", Value: 35 },
+    { Place: "XXI", Trump: "World", Value: 36 },
+];
+
+window.minorPlaces = [
+      "Ace",
+      "II",
+      "III",
+      "IV",
+      "V",
+      "VI",
+      "VII",
+      "VIII",
+      "IX",
+      "X",
+      "Page",
+      "Knight",
+      "Queen",
+      "King",
+];
+
+window.suits = ["Cups", "Swords", "Wands", "Pentacles"];
+
+window.getDeck() {
+    for (let i = 0; i < majorArcana.length; i++) {
+      deck.push(majorArcana[i]);
+    }
+    for (let i = 0; i < suits.length; i++) {
+      for (let x = 0; x < minorPlaces.length; x++) {
+        let minorArcana = {
+          Place: minorPlaces[x],
+          Suit: suits[i],
+        };
+        deck.push(minorArcana);
+      }
+    }
+    //Let's assign a value to the minor arcana so that we can compare them against the Major Arcana.
+    for (let i = 22; i < deck.length; i++) {
+      switch (deck[i].Place) {
+        case "Ace":
+          deck[i].Value = 1;
+          break;
+        case "II":
+          deck[i].Value = 2;
+          break;
+        case "III":
+          deck[i].Value = 3;
+          break;
+        case "IV":
+          deck[i].Value = 4;
+          break;
+        case "V":
+          deck[i].Value = 5;
+          break;
+        case "VI":
+          deck[i].Value = 6;
+          break;
+        case "VII":
+          deck[i].Value = 7;
+          break;
+        case "VIII":
+          deck[i].Value = 8;
+          break;
+        case "IX":
+          deck[i].Value = 9;
+          break;
+        case "X":
+          deck[i].Value = 10;
+          break;
+        case "Page":
+          deck[i].Value = 11;
+          break;
+        case "Knight":
+          deck[i].Value = 12;
+          break;
+        case "Queen":
+          deck[i].Value = 13;
+          break;
+        case "King":
+          deck[i].Value = 14;
+          break;
+      }
+    }
+    return deck;
+};
+
+window.shuffle() {
+    for (let i = 0; i < Math.floor(Math.random() * 10000); i++) {
+      let one = Math.floor(Math.random() * deck.length);
+      let two = Math.floor(Math.random() * deck.length);
+      let three = deck[one];
+      deck[one] = deck[two];
+      deck[two] = three;
+    }
+    return deck;
+};
+
+window.splitDeck() {
+    let half = Math.ceil(deck.length) / 2;
+    return (
+      (firstHalf = deck.slice(0, half)),
+      (secondHalf = deck.slice(half, deck.length))
+    );
+};
+
+window. suitTrumpM(i) {
+    if (deck[i].Value >= 1 && deck[i].Value <= 14) {
+      let suitTrump = deck[i].Suit;
+    } else {
+      let suitTrump = deck[i].Trump;
+    }
+};
