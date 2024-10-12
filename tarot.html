@@ -51,10 +51,10 @@
   }
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">window.story.debug = false;
 window.deck = [];
-
 window.firstHalf = "first";
 window.secondHalf = "second";
-window.suitTrump;
+window.suitTrump = "";
+window.currentCard = {};
 
 window.majorArcana = [
     { Place: "0", Trump: "Fool", Value: 15 },
@@ -99,7 +99,6 @@ window.minorPlaces = [
 ];
 
 window.suits = ["Cups", "Swords", "Wands", "Pentacles"];
-
 window.freshDeck = true;
 
 window.getDeck = function () {
@@ -187,11 +186,19 @@ window.splitDeck = function() {
 
 window.suitTrumpM = function(i) {
     if (deck[i].Value >= 1 && deck[i].Value <= 14) {
-      let suitTrump = deck[i].Suit;
+      suitTrump = deck[i].Suit;
     } else {
-      let suitTrump = deck[i].Trump;
+      suitTrump = deck[i].Trump;
     }
-};</script><tw-passagedata pid="1" name="Main" tags="" position="100,100" size="100,100">&lt;a href=&quot;#&quot; id=&quot;shufBtn&quot;&gt;&lt;img id=&quot;cardBack&quot; src=&quot;cards/CardBack.jpg&quot;&gt;&lt;/a&gt; &lt;button id=&quot;drawCard&quot; style=&quot;display:none;&quot;&gt;Draw Card&lt;/button&gt;
+
+};
+
+window.drawACardM = function() {
+  let card = deck[0];
+  suitTrumpM(0);
+  deck.shift();
+  currentCard = `<img id="${card.Place}-${suitTrump}" src="cards/${card.Place}-${suitTrump}.jpg">`;
+}</script><tw-passagedata pid="1" name="Main" tags="" position="100,100" size="100,100">&lt;a href=&quot;#&quot; id=&quot;shufBtn&quot;&gt;&lt;img id=&quot;cardBack&quot; src=&quot;cards/CardBack.jpg&quot;&gt;&lt;/a&gt; &lt;button id=&quot;drawCard&quot; style=&quot;display:none;&quot; onclick=&quot;drawACardM();&quot;&gt;Draw Card&lt;/button&gt;
 
 &lt;p id=&quot;hasShuffled&quot; style=&quot;display:none;&quot;&gt;The deck has been shuffled. Click on it again to reshuffle.&lt;/p&gt;
 
