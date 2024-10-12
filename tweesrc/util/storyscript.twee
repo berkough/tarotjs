@@ -1,7 +1,6 @@
 :: StoryScript [script]
 
 window.story.debug = false;
-
 window.deck = [];
 
 window.firstHalf = "first";
@@ -52,6 +51,7 @@ window.minorPlaces = [
 
 window.suits = ["Cups", "Swords", "Wands", "Pentacles"];
 
+window.freshDeck = true;
 
 window.getDeck = function () {
     for (let i = 0; i < majorArcana.length; i++) {
@@ -143,3 +143,9 @@ window.suitTrumpM = function(i) {
       let suitTrump = deck[i].Trump;
     }
 };
+
+window.drawACardM = function() {
+  let card = deck[0];
+  deck.shift();
+  return `<img src="cards/">`;
+}

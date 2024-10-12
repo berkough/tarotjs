@@ -1,10 +1,13 @@
 :: Main
+<a href="#" id="shufBtn"><img id="cardBack" src="cards/CardBack.jpg"></a> <button id="drawCard" style="display:none;">Draw Card</button>
 
-<a href="#" id="shufBtn"><img id="cardBack" src="cards/CardBack.jpg"></a>
+<p id="hasShuffled" style="display:none;">The deck has been shuffled. Click on it again to reshuffle.</p>
+
+
 
 <% 
     window.addEventListener('load', function() {
-        const element = document.getElementById("shufBtn");
+        let element = $("#shufBtn");
         if (element){
             $("#shufBtn").click(() => {
                 $("#cardBack").toggleClass("shuffle");
@@ -15,9 +18,14 @@
                     $("#cardBack").toggleClass("shuffle");
                 }, 1001);
                 console.log(deck);
+
+                if (freshDeck){
+                    $("#cardBack").width("20%");
+                    freshDeck = false;
+                    $("#hasShuffled").toggle();
+                    $("#drawCard").toggle();
+                }
             });
-        } else {
-            console.log("Shuffle Button not found!");
         }
-    })
+    });
 %>

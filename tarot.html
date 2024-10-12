@@ -50,7 +50,6 @@
     transform: translate(1px, -2px) rotate(-1deg);
   }
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">window.story.debug = false;
-
 window.deck = [];
 
 window.firstHalf = "first";
@@ -101,6 +100,7 @@ window.minorPlaces = [
 
 window.suits = ["Cups", "Swords", "Wands", "Pentacles"];
 
+window.freshDeck = true;
 
 window.getDeck = function () {
     for (let i = 0; i < majorArcana.length; i++) {
@@ -191,11 +191,15 @@ window.suitTrumpM = function(i) {
     } else {
       let suitTrump = deck[i].Trump;
     }
-};</script><tw-passagedata pid="1" name="Main" tags="" position="100,100" size="100,100">&lt;a href=&quot;#&quot; id=&quot;shufBtn&quot;&gt;&lt;img id=&quot;cardBack&quot; src=&quot;cards/CardBack.jpg&quot;&gt;&lt;/a&gt;
+};</script><tw-passagedata pid="1" name="Main" tags="" position="100,100" size="100,100">&lt;a href=&quot;#&quot; id=&quot;shufBtn&quot;&gt;&lt;img id=&quot;cardBack&quot; src=&quot;cards/CardBack.jpg&quot;&gt;&lt;/a&gt; &lt;button id=&quot;drawCard&quot; style=&quot;display:none;&quot;&gt;Draw Card&lt;/button&gt;
+
+&lt;p id=&quot;hasShuffled&quot; style=&quot;display:none;&quot;&gt;The deck has been shuffled. Click on it again to reshuffle.&lt;/p&gt;
+
+
 
 &lt;% 
     window.addEventListener(&#39;load&#39;, function() {
-        const element = document.getElementById(&quot;shufBtn&quot;);
+        let element = $(&quot;#shufBtn&quot;);
         if (element){
             $(&quot;#shufBtn&quot;).click(() =&gt; {
                 $(&quot;#cardBack&quot;).toggleClass(&quot;shuffle&quot;);
@@ -206,11 +210,16 @@ window.suitTrumpM = function(i) {
                     $(&quot;#cardBack&quot;).toggleClass(&quot;shuffle&quot;);
                 }, 1001);
                 console.log(deck);
+
+                if (freshDeck){
+                    $(&quot;#cardBack&quot;).width(&quot;20%&quot;);
+                    freshDeck = false;
+                    $(&quot;#hasShuffled&quot;).toggle();
+                    $(&quot;#drawCard&quot;).toggle();
+                }
             });
-        } else {
-            console.log(&quot;Shuffle Button not found!&quot;);
         }
-    })
+    });
 %&gt;</tw-passagedata></tw-storydata>
 		<script>
 		(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
