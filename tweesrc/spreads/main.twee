@@ -1,23 +1,19 @@
 :: Main
-<a href="#" id="shufBtn"><img id="cardBack" src="cards/CardBack.jpg"></a> <button id="drawCard" style="display:none;" onclick="drawACardM();">Draw Card</button>
+<a href="#" id="shufBtn"><img id="cardBack" src="cards/CardBack.jpg"></a><button id="drawCard" style="display:none;" onclick="drawACardM();">Draw Card</button>
+<p id="bodyContainer"><%= story.render("Body") %></p>
 
-<p id="hasShuffled" style="display:none;">The deck has been shuffled. Click on it again to reshuffle.</p>
-<p id="bodyContainer" style="display:none;"><%= story.render("Body"); %></p>
 <% window.addEventListener('load', function() {
     if ($("#shufBtn")){
         $("#shufBtn").click(() => {
             $("#cardBack").toggleClass("shuffle");
                 
             if(freshDeck){
-                deck = []; 
-                getDeck();
-                                        
-                $("#cardBack").width("20%");
                 freshDeck = false;
-                $("#hasShuffled").toggle();
+                deck = []; 
+                getDeck();                     
+                $("#cardBack").width("20%");
                 $("#drawCard").toggle();
-            } else {
-                $("#bodyContainer").toggle();
+                $("#spreadSelection").toggle();
             }
             
             shuffle();

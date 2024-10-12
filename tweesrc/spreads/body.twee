@@ -1,15 +1,20 @@
 :: Body
 <%
     window.addEventListener('load', function() {
-        window.celticCross = function (){
+        window.celticCross = function(){
             spreadSelected = true;
-            $("#celticCross").toggle();
-
+            $("#spreadSelection").toggle();
         }
 
+        window.threeCard = function(){
+            spreadSelected = true;
+            $("#spreadSelection").toggle();
+            // Create layout and inject it into #spreadLayout.
+        }
     });
 %>
-<p id="spreadSelection">
+<p id="spreadSelection" style="display:none;">
     <button id="celticCross" onclick="celticCross();">Celtic Cross</button>
+    <button id="threeCard" onclick="threeCard();">Three Card</button>
 </p>
 <p id="spreadLayout"></p>

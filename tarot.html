@@ -103,7 +103,7 @@ window.minorPlaces = [
 window.suits = ["Cups", "Swords", "Wands", "Pentacles"];
 window.freshDeck = true;
 
-window.getDeck = function () {
+window.getDeck = function (){
     for (let i = 0; i < majorArcana.length; i++) {
       deck.push(majorArcana[i]);
     }
@@ -167,7 +167,7 @@ window.getDeck = function () {
     console.log(deck);
 };
 
-window.shuffle = function() {
+window.shuffle = function(){
     for (let i = 0; i < Math.floor(Math.random() * 10000); i++) {
       let one = Math.floor(Math.random() * deck.length);
       let two = Math.floor(Math.random() * deck.length);
@@ -178,7 +178,7 @@ window.shuffle = function() {
     return deck;
 };
 
-window.splitDeck = function() {
+window.splitDeck = function(){
     let half = Math.ceil(deck.length) / 2;
     return (
       (firstHalf = deck.slice(0, half)),
@@ -186,7 +186,7 @@ window.splitDeck = function() {
     );
 };
 
-window.suitTrumpM = function(i) {
+window.suitTrumpM = function(i){
     if (deck[i].Value >= 1 && deck[i].Value <= 14) {
       suitTrump = deck[i].Suit;
     } else {
@@ -195,7 +195,7 @@ window.suitTrumpM = function(i) {
 
 };
 
-window.drawACardM = function() {
+window.drawACardM = function(){
   if (spreadSelected) {
     let card = deck[0];
     console.log(card);
@@ -204,6 +204,7 @@ window.drawACardM = function() {
     currentCard = `<img id="${card.Place}-${suitTrump}" src="cards/${card.Place}-${suitTrump}.jpg">`;
     pos += 1;
     console.log(pos);
+    console.log(currentCard);
   } else {
     alert("Select a spread.");
   }
@@ -213,36 +214,38 @@ window.advanceSpread = function(){
   // This will take the pos and reveal that section and insert the card into it.
 };</script><tw-passagedata pid="1" name="Body" tags="" position="100,100" size="100,100">&lt;%
     window.addEventListener(&#39;load&#39;, function() {
-        window.celticCross = function (){
+        window.celticCross = function(){
             spreadSelected = true;
-            $(&quot;#celticCross&quot;).toggle();
-
+            $(&quot;#spreadSelection&quot;).toggle();
         }
 
+        window.threeCard = function(){
+            spreadSelected = true;
+            $(&quot;#spreadSelection&quot;).toggle();
+
+        }
     });
 %&gt;
-&lt;p id=&quot;spreadSelection&quot;&gt;
+&lt;p id=&quot;spreadSelection&quot; style=&quot;display:none;&quot;&gt;
     &lt;button id=&quot;celticCross&quot; onclick=&quot;celticCross();&quot;&gt;Celtic Cross&lt;/button&gt;
+    &lt;button id=&quot;threeCard&quot; onclick=&quot;threeCard();&quot;&gt;Three Card&lt;/button&gt;
 &lt;/p&gt;
-&lt;p id=&quot;spreadLayout&quot;&gt;&lt;/p&gt;</tw-passagedata><tw-passagedata pid="2" name="Main" tags="" position="225,100" size="100,100">&lt;a href=&quot;#&quot; id=&quot;shufBtn&quot;&gt;&lt;img id=&quot;cardBack&quot; src=&quot;cards/CardBack.jpg&quot;&gt;&lt;/a&gt; &lt;button id=&quot;drawCard&quot; style=&quot;display:none;&quot; onclick=&quot;drawACardM();&quot;&gt;Draw Card&lt;/button&gt;
+&lt;p id=&quot;spreadLayout&quot;&gt;&lt;/p&gt;</tw-passagedata><tw-passagedata pid="2" name="Main" tags="" position="225,100" size="100,100">&lt;a href=&quot;#&quot; id=&quot;shufBtn&quot;&gt;&lt;img id=&quot;cardBack&quot; src=&quot;cards/CardBack.jpg&quot;&gt;&lt;/a&gt;&lt;button id=&quot;drawCard&quot; style=&quot;display:none;&quot; onclick=&quot;drawACardM();&quot;&gt;Draw Card&lt;/button&gt;
 
-&lt;p id=&quot;hasShuffled&quot; style=&quot;display:none;&quot;&gt;The deck has been shuffled. Click on it again to reshuffle.&lt;/p&gt;
-&lt;p id=&quot;bodyContainer&quot; style=&quot;display:none;&quot;&gt;&lt;%= story.render(&quot;Body&quot;); %&gt;&lt;/p&gt;
+&lt;p id=&quot;bodyContainer&quot;&gt;&lt;%= story.render(&quot;Body&quot;) %&gt;&lt;/p&gt;
+
 &lt;% window.addEventListener(&#39;load&#39;, function() {
     if ($(&quot;#shufBtn&quot;)){
         $(&quot;#shufBtn&quot;).click(() =&gt; {
             $(&quot;#cardBack&quot;).toggleClass(&quot;shuffle&quot;);
                 
             if(freshDeck){
-                deck = []; 
-                getDeck();
-                                        
-                $(&quot;#cardBack&quot;).width(&quot;20%&quot;);
                 freshDeck = false;
-                $(&quot;#hasShuffled&quot;).toggle();
+                deck = []; 
+                getDeck();                     
+                $(&quot;#cardBack&quot;).width(&quot;20%&quot;);
                 $(&quot;#drawCard&quot;).toggle();
-            } else {
-                $(&quot;#bodyContainer&quot;).toggle();
+                $(&quot;#spreadSelection&quot;).toggle();
             }
             
             shuffle();
