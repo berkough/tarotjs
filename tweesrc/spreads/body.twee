@@ -1,1 +1,15 @@
 :: Body
+<%
+    window.addEventListener('load', function() {
+        window.celticCross = function (){
+            spreadSelected = true;
+            $("#celticCross").toggle();
+
+        }
+
+    });
+%>
+<p id="spreadSelection">
+    <button id="celticCross" onclick="celticCross();">Celtic Cross</button>
+</p>
+<p id="spreadLayout"></p>

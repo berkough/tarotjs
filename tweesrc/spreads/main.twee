@@ -2,33 +2,30 @@
 <a href="#" id="shufBtn"><img id="cardBack" src="cards/CardBack.jpg"></a> <button id="drawCard" style="display:none;" onclick="drawACardM();">Draw Card</button>
 
 <p id="hasShuffled" style="display:none;">The deck has been shuffled. Click on it again to reshuffle.</p>
-
-
-
-<% 
-    window.addEventListener('load', function() {
-        let element = $("#shufBtn");
-        if (element){
-            $("#shufBtn").click(() => {
+<p id="bodyContainer" style="display:none;"><%= story.render("Body"); %></p>
+<% window.addEventListener('load', function() {
+    if ($("#shufBtn")){
+        $("#shufBtn").click(() => {
+            $("#cardBack").toggleClass("shuffle");
+                
+            if(freshDeck){
+                deck = []; 
+                getDeck();
+                                        
+                $("#cardBack").width("20%");
+                freshDeck = false;
+                $("#hasShuffled").toggle();
+                $("#drawCard").toggle();
+            } else {
+                $("#bodyContainer").toggle();
+            }
+            
+            shuffle();
+            
+            setTimeout(() => {
                 $("#cardBack").toggleClass("shuffle");
-                if(freshDeck){
-                    deck = []; 
-                    getDeck();
-                }
- 
-                shuffle();
-                setTimeout(() => {
-                    $("#cardBack").toggleClass("shuffle");
-                }, 1001);
-                console.log(deck);
-
-                if (freshDeck){
-                    $("#cardBack").width("20%");
-                    freshDeck = false;
-                    $("#hasShuffled").toggle();
-                    $("#drawCard").toggle();
-                }
-            });
-        }
-    });
-%>
+            }, 1001);
+            console.log(deck);
+        });
+    };
+}); %>

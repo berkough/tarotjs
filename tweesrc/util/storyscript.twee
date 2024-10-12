@@ -6,6 +6,7 @@ window.firstHalf = "first";
 window.secondHalf = "second";
 window.suitTrump = "";
 window.currentCard = {};
+window.spreadSelected = false;
 window.pos = 0;
 
 window.majorArcana = [
@@ -146,11 +147,17 @@ window.suitTrumpM = function(i) {
 };
 
 window.drawACardM = function() {
-  let card = deck[0];
-  suitTrumpM(0);
-  deck.shift();
-  currentCard = `<img id="${card.Place}-${suitTrump}" src="cards/${card.Place}-${suitTrump}.jpg">`;
-  pos+1;
+  if (spreadSelected) {
+    let card = deck[0];
+    console.log(card);
+    suitTrumpM(0);
+    deck.shift();
+    currentCard = `<img id="${card.Place}-${suitTrump}" src="cards/${card.Place}-${suitTrump}.jpg">`;
+    pos += 1;
+    console.log(pos);
+  } else {
+    alert("Select a spread.");
+  }
 };
 
 window.advanceSpread = function(){
