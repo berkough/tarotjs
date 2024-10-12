@@ -1,9 +1,23 @@
 :: Main
 
-<img id="cardBack" src="cards/CardBack.jpg">
+<a href="#" id="shufBtn"><img id="cardBack" src="cards/CardBack.jpg"></a>
 
 <% 
-    $("#cardBack").click(function(){
-        $(this).toggleClass("shuffle");
-    });
+    window.addEventListener('load', function() {
+        const element = document.getElementById("shufBtn");
+        if (element){
+            $("#shufBtn").click(() => {
+                $("#cardBack").toggleClass("shuffle");
+                deck = []; 
+                getDeck(); 
+                shuffle();
+                setTimeout(() => {
+                    $("#cardBack").toggleClass("shuffle");
+                }, 1001);
+                console.log(deck);
+            });
+        } else {
+            console.log("Shuffle Button not found!");
+        }
+    })
 %>
