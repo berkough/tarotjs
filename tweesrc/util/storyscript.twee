@@ -1,13 +1,14 @@
 :: StoryScript [script]
+
 window.story.debug = false;
 
 window.deck = [];
 
-window.firstHalf;
-window.secondHalf;
-window.suitTrump = "";
+window.firstHalf = "first";
+window.secondHalf = "second";
+window.suitTrump;
 
-window.majorArcana [
+window.majorArcana = [
     { Place: "0", Trump: "Fool", Value: 15 },
     { Place: "I", Trump: "Magician", Value: 16 },
     { Place: "II", Trump: "HighPriestess", Value: 17 },
@@ -29,7 +30,7 @@ window.majorArcana [
     { Place: "XVIII", Trump: "Moon", Value: 33 },
     { Place: "XIX", Trump: "Sun", Value: 34 },
     { Place: "XX", Trump: "Judgement", Value: 35 },
-    { Place: "XXI", Trump: "World", Value: 36 },
+    { Place: "XXI", Trump: "World", Value: 36 }
 ];
 
 window.minorPlaces = [
@@ -46,12 +47,13 @@ window.minorPlaces = [
       "Page",
       "Knight",
       "Queen",
-      "King",
+      "King"
 ];
 
 window.suits = ["Cups", "Swords", "Wands", "Pentacles"];
 
-window.getDeck() {
+
+window.getDeck = function () {
     for (let i = 0; i < majorArcana.length; i++) {
       deck.push(majorArcana[i]);
     }
@@ -64,7 +66,7 @@ window.getDeck() {
         deck.push(minorArcana);
       }
     }
-    //Let's assign a value to the minor arcana so that we can compare them against the Major Arcana.
+
     for (let i = 22; i < deck.length; i++) {
       switch (deck[i].Place) {
         case "Ace":
@@ -112,9 +114,10 @@ window.getDeck() {
       }
     }
     return deck;
+    console.log(deck);
 };
 
-window.shuffle() {
+window.shuffle = function() {
     for (let i = 0; i < Math.floor(Math.random() * 10000); i++) {
       let one = Math.floor(Math.random() * deck.length);
       let two = Math.floor(Math.random() * deck.length);
@@ -125,7 +128,7 @@ window.shuffle() {
     return deck;
 };
 
-window.splitDeck() {
+window.splitDeck = function() {
     let half = Math.ceil(deck.length) / 2;
     return (
       (firstHalf = deck.slice(0, half)),
@@ -133,7 +136,7 @@ window.splitDeck() {
     );
 };
 
-window. suitTrumpM(i) {
+window.suitTrumpM = function(i) {
     if (deck[i].Value >= 1 && deck[i].Value <= 14) {
       let suitTrump = deck[i].Suit;
     } else {

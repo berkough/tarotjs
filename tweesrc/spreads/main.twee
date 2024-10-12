@@ -1,0 +1,9 @@
+:: Main
+
+<img id="cardBack" src="cards/CardBack.jpg">
+
+<% 
+    $("#cardBack").click(function(){
+        $(this).toggleClass("shuffle");
+    });
+%>
