@@ -8,6 +8,8 @@ window.suitTrump = "";
 window.currentCard = {};
 window.spreadSelected = false;
 window.pos = 0;
+window.posOrder = [];
+window.reset = false;
 
 window.majorArcana = [
     { Place: "0", Trump: "Fool", Value: 15 },
@@ -152,15 +154,35 @@ window.drawACardM = function(){
     console.log(card);
     suitTrumpM(0);
     deck.shift();
-    currentCard = `<img id="${card.Place}-${suitTrump}" src="cards/${card.Place}-${suitTrump}.jpg">`;
-    pos += 1;
+    currentCard = `<img id="${card.Place}-${suitTrump}" width="${window.innerWidth*.2}" src="cards/${card.Place}-${suitTrump}.jpg">`;
+    advanceSpread(pos,currentCard);
     console.log(pos);
     console.log(currentCard);
+    pos += 1;
+    
   } else {
     alert("Select a spread.");
   }
 };
 
-window.advanceSpread = function(){
-  // This will take the pos and reveal that section and insert the card into it.
+window.advanceSpread = function(pos,currentCard){
+  console.log(pos,currentCard);
+  let cardPosition = "#pos"+posOrder[pos];
+  console.log(cardPosition);
+  $(cardPosition).html(currentCard);
+};
+
+window.reset = function(){
+  if (spreadSelected){
+    freshDeck = true;
+    pos = 0;
+    posOrder = [];
+    spreadSelected = false;
+    $("#cardBack").width("100%")
+    $("#spreadLayout").empty();
+    $("#drawCard").toggle();
+    $("#reset").toggle();
+  } else {
+    alert("Select a Spread before Resetting.")
+  }
 };

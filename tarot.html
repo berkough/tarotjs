@@ -10,7 +10,12 @@
 	</head>
 	<body>
 		<tw-story tags></tw-story>
-		<!-- UUID://F2AA8B18-4B04-4121-8D06-67FB1E17DFE4// --><tw-storydata name="tarotjs" startnode="2" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="F2AA8B18-4B04-4121-8D06-67FB1E17DFE4" zoom="1" format="Snowman" format-version="2.0.2" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.shuffle {
+		<!-- UUID://F2AA8B18-4B04-4121-8D06-67FB1E17DFE4// --><tw-storydata name="tarotjs" startnode="2" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="F2AA8B18-4B04-4121-8D06-67FB1E17DFE4" zoom="1" format="Snowman" format-version="2.0.2" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
+  background: black;
+  color: white;
+}
+
+.shuffle {
   animation: shake 0.5s;
   animation-iteration-count: 1s;
 }
@@ -49,6 +54,10 @@
   100% {
     transform: translate(1px, -2px) rotate(-1deg);
   }
+}
+
+#cardBack {
+  text-align: center;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">window.story.debug = false;
 window.deck = [];
 window.firstHalf = "first";
@@ -57,6 +66,8 @@ window.suitTrump = "";
 window.currentCard = {};
 window.spreadSelected = false;
 window.pos = 0;
+window.posOrder = [];
+window.reset = false;
 
 window.majorArcana = [
     { Place: "0", Trump: "Fool", Value: 15 },
@@ -201,28 +212,79 @@ window.drawACardM = function(){
     console.log(card);
     suitTrumpM(0);
     deck.shift();
-    currentCard = `<img id="${card.Place}-${suitTrump}" src="cards/${card.Place}-${suitTrump}.jpg">`;
-    pos += 1;
+    currentCard = `<img id="${card.Place}-${suitTrump}" width="${window.innerWidth*.2}" src="cards/${card.Place}-${suitTrump}.jpg">`;
+    advanceSpread(pos,currentCard);
     console.log(pos);
     console.log(currentCard);
+    pos += 1;
+    
   } else {
     alert("Select a spread.");
   }
 };
 
-window.advanceSpread = function(){
-  // This will take the pos and reveal that section and insert the card into it.
+window.advanceSpread = function(pos,currentCard){
+  console.log(pos,currentCard);
+  let cardPosition = "#pos"+posOrder[pos];
+  console.log(cardPosition);
+  $(cardPosition).html(currentCard);
+};
+
+window.reset = function(){
+  if (spreadSelected){
+    freshDeck = true;
+    pos = 0;
+    posOrder = [];
+    spreadSelected = false;
+    $("#cardBack").width("100%")
+    $("#spreadLayout").empty();
+    $("#drawCard").toggle();
+    $("#reset").toggle();
+  } else {
+    alert("Select a Spread before Resetting.")
+  }
 };</script><tw-passagedata pid="1" name="Body" tags="" position="100,100" size="100,100">&lt;%
     window.addEventListener(&#39;load&#39;, function() {
         window.celticCross = function(){
-            spreadSelected = true;
+            spreadSelected = &quot;Celtic Cross&quot;;
+            posOrder = [6,6,6,5,7,2,10,16,12,8,4];
             $(&quot;#spreadSelection&quot;).toggle();
+            $(&quot;#spreadLayout&quot;).html(`&lt;table id=&quot;spreadTable&quot; width=&quot;100%&quot;&gt;&lt;/table&gt;`);
+            $(&quot;#spreadTable&quot;).html(`
+                &lt;tr&gt;
+                    &lt;td id=&quot;pos1&quot;&gt;&lt;/td&gt;
+                    &lt;td id=&quot;pos2&quot;&gt;&lt;/td&gt;
+                    &lt;td id=&quot;pos3&quot;&gt;&lt;/td&gt;
+                    &lt;td id=&quot;pos4&quot;&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td id=&quot;pos5&quot;&gt;&lt;/td&gt;
+                    &lt;td id=&quot;pos6&quot;&gt;&lt;/td&gt;
+                    &lt;td id=&quot;pos7&quot;&gt;&lt;/td&gt;
+                    &lt;td id=&quot;pos8&quot;&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td id=&quot;pos9&quot;&gt;&lt;/td&gt;
+                    &lt;td id=&quot;pos10&quot;&gt;&lt;/td&gt;
+                    &lt;td id=&quot;pos11&quot;&gt;&lt;/td&gt;
+                    &lt;td id=&quot;pos12&quot;&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td id=&quot;pos13&quot;&gt;&lt;/td&gt;
+                    &lt;td id=&quot;pos14&quot;&gt;&lt;/td&gt;
+                    &lt;td id=&quot;pos15&quot;&gt;&lt;/td&gt;
+                    &lt;td id=&quot;pos16&quot;&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+            `);
+
         }
 
         window.threeCard = function(){
-            spreadSelected = true;
+            spreadSelected = &quot;Three Card&quot;;
+            posOrder = [2, 1, 3];
             $(&quot;#spreadSelection&quot;).toggle();
-
+            $(&quot;#spreadLayout&quot;).html(`&lt;table id=&quot;spreadTable&quot; width=&quot;100%&quot;&gt;&lt;/table&gt;`);
+            $(&quot;#spreadTable&quot;).html(`&lt;tr&gt;&lt;th&gt;Underlying&lt;/th&gt;&lt;th&gt;Subject&lt;/th&gt;&lt;th&gt;Advice&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td id=&quot;pos1&quot;&gt;&lt;/td&gt;&lt;td id=&quot;pos2&quot;&gt;&lt;/td&gt;&lt;td id=&quot;pos3&quot;&gt;&lt;/td&gt;&lt;/tr&gt;`);
         }
     });
 %&gt;
@@ -231,8 +293,8 @@ window.advanceSpread = function(){
     &lt;button id=&quot;threeCard&quot; onclick=&quot;threeCard();&quot;&gt;Three Card&lt;/button&gt;
 &lt;/p&gt;
 &lt;p id=&quot;spreadLayout&quot;&gt;&lt;/p&gt;</tw-passagedata><tw-passagedata pid="2" name="Main" tags="" position="225,100" size="100,100">&lt;a href=&quot;#&quot; id=&quot;shufBtn&quot;&gt;&lt;img id=&quot;cardBack&quot; src=&quot;cards/CardBack.jpg&quot;&gt;&lt;/a&gt;&lt;button id=&quot;drawCard&quot; style=&quot;display:none;&quot; onclick=&quot;drawACardM();&quot;&gt;Draw Card&lt;/button&gt;
-
-&lt;p id=&quot;bodyContainer&quot;&gt;&lt;%= story.render(&quot;Body&quot;) %&gt;&lt;/p&gt;
+&lt;button id=&quot;reset&quot; onclick=&quot;reset();&quot; style=&quot;display:none;&quot;&gt;Reset&lt;/button&gt;
+&lt;br&gt;&lt;p id=&quot;bodyContainer&quot;&gt;&lt;%= story.render(&quot;Body&quot;) %&gt;&lt;/p&gt;
 
 &lt;% window.addEventListener(&#39;load&#39;, function() {
     if ($(&quot;#shufBtn&quot;)){
@@ -244,8 +306,10 @@ window.advanceSpread = function(){
                 deck = []; 
                 getDeck();                     
                 $(&quot;#cardBack&quot;).width(&quot;20%&quot;);
+                $(&quot;#cardback&quot;).css(&quot;text-align:left&quot;);
                 $(&quot;#drawCard&quot;).toggle();
                 $(&quot;#spreadSelection&quot;).toggle();
+                $(&quot;#reset&quot;).toggle();
             }
             
             shuffle();

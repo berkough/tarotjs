@@ -1,6 +1,7 @@
 :: Main
 <a href="#" id="shufBtn"><img id="cardBack" src="cards/CardBack.jpg"></a><button id="drawCard" style="display:none;" onclick="drawACardM();">Draw Card</button>
-<p id="bodyContainer"><%= story.render("Body") %></p>
+<button id="reset" onclick="reset();" style="display:none;">Reset</button>
+<br><p id="bodyContainer"><%= story.render("Body") %></p>
 
 <% window.addEventListener('load', function() {
     if ($("#shufBtn")){
@@ -12,8 +13,10 @@
                 deck = []; 
                 getDeck();                     
                 $("#cardBack").width("20%");
+                $("#cardback").css("text-align:left");
                 $("#drawCard").toggle();
                 $("#spreadSelection").toggle();
+                $("#reset").toggle();
             }
             
             shuffle();

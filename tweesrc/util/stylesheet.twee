@@ -1,4 +1,8 @@
 :: StoryStylesheet [stylesheet]
+body {
+  background: black;
+  color: white;
+}
 
 .shuffle {
   animation: shake 0.5s;
@@ -39,4 +43,8 @@
   100% {
     transform: translate(1px, -2px) rotate(-1deg);
   }
+}
+
+#cardBack {
+  text-align: center;
 }
