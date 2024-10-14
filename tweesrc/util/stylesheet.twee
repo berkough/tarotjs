@@ -4,6 +4,18 @@ body {
   color: white;
 }
 
+button {
+  background-color: blue;
+  border-radius: 50%;
+  padding: 10px;
+
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .shuffle {
   animation: shake 0.5s;
   animation-iteration-count: 1s;
