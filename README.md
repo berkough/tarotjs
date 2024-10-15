@@ -12,11 +12,7 @@ I have also seen projects using [E Kelen](https://github.com/ekelen)'s "[tarot-a
 
 Special thanks to [Luciella Elisabeth Scarlett](https://luciellaes.itch.io/rider-waite-smith-tarot-cards-cc0) for cleaning up the scans from [Wikipedia](https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot).
 
-You can play a demo of the app [HERE](https://berkough.itch.io/tarotjs).
-
-### Why Continue?
-
-The original script, which is held in the legacy directory
+You can play a demo of the app [HERE](https://berkough.itch.io/tarotjs). 
 
 ### tweesrc/ and tarot.html
 
