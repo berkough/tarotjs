@@ -1,4 +1,6 @@
 :: Main
-<button id="shufBtn" onclick="shuffle();"><img id="cardBack" src="cards/CardBack.jpg"></button><button id="drawCard" style="display:none;" onclick="drawACardM();">Draw Card</button>
+<p id="bodyContainer"><%= story.render("SpreadBtns") %></p>
+<p><button id="shufBtn" onclick="shuffle();"><img id="cardBack" src="cards/CardBack.jpg"><br>Shuffle</button></p>
+<button id="drawCard" style="display:none;" onclick="drawACardM();">Draw Card</button>
 <button id="reset" onclick="reset();" style="display:none;">Reset</button>
-<br><p id="bodyContainer"><%= story.render("Body") %></p>
+<p id="tableContainer"><%= story.render("SpreadTable") %></p>

@@ -1,6 +1,0 @@
-:: Body
-<p id="spreadSelection" style="display:none;">
-    <button id="celticCross" onclick="celticCross();">Celtic Cross</button>
-    <button id="threeCard" onclick="threeCard();">Three Card</button>
-</p>
-<p id="spreadLayout"></p>

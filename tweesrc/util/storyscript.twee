@@ -1,8 +1,8 @@
 :: StoryScript [script]
 
 /* VARIABLES */
-window.story.debug = false;
 window.deck = [];
+window.freshDeck = true;
 window.firstHalf = "first";
 window.secondHalf = "second";
 window.suitTrump = "";
@@ -11,7 +11,6 @@ window.spreadSelected = false;
 window.pos = 0;
 window.cardWidth = 0;
 window.posOrder = [];
-window.reset = false;
 
 window.majorArcana = [
     { Place: "0", Trump: "Fool", Value: 15 },
@@ -38,6 +37,7 @@ window.majorArcana = [
     { Place: "XXI", Trump: "World", Value: 36 }
 ];
 
+window.suits = ["Cups", "Swords", "Wands", "Pentacles"];
 window.minorPlaces = [
       "Ace",
       "II",
@@ -54,9 +54,6 @@ window.minorPlaces = [
       "Queen",
       "King"
 ];
-
-window.suits = ["Cups", "Swords", "Wands", "Pentacles"];
-window.freshDeck = true;
 
 /* FUNCTIONS or METHODS */
 window.getDeck = function (){
@@ -130,8 +127,7 @@ window.shuffle = function(){
       freshDeck = false;
       deck = []; 
       getDeck();                     
-      $("#cardBack").width("20%");
-      $("#cardback").css("text-align:left");
+      $("#cardBack").width("30%");
       $("#drawCard").toggle();
       $("#spreadSelection").toggle();
       $("#reset").toggle();
@@ -198,18 +194,16 @@ window.reset = function(){
     $("#spreadLayout").empty();
     $("#drawCard").toggle();
     $("#reset").toggle();
-  } else {
-    alert("Select a Spread before Resetting.")
   }
 };
 
 /* Spreads */
 window.celticCross = function(){
   spreadSelected = "Celtic Cross";
-  cardWidth = `${(window.innerWidth/4)*.9}`;
+  cardWidth = `${(window.innerWidth/4)*.8}`;
   posOrder = [6,6,6,5,7,2,10,16,12,8,4];
   $("#spreadSelection").toggle();
-  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWdith)*.9}"></table>`);
+  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.9}"></table>`);
   $("#spreadTable").html(`
     <tr>
       <td id="pos1"></td>
@@ -239,10 +233,10 @@ window.celticCross = function(){
 
 window.threeCard = function(){
   spreadSelected = "Three Card";
-  cardWidth = `${(window.innerWidth/3)*.9}`;
+  cardWidth = `${(window.innerWidth/3)*.8}`;
   posOrder = [2, 1, 3];
   $("#spreadSelection").toggle();
-  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWdith)*.9}"></table>`);
+  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.9}"></table>`);
   $("#spreadTable").html(`
     <tr>
       <th>Underlying</th>
@@ -255,3 +249,75 @@ window.threeCard = function(){
       <td id="pos3"></td>
     </tr>`);
 };
+
+window.astroSpread = function(){
+  spreadSelected = "Astrological";
+  cardWidth = `${(window.innerWidth/7)*.8}`;
+  posOrder = [22,30,38,46,40,34,28,20,12,4,10,16];
+  $("#spreadSelection").toggle();
+  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.9}"></table>`);
+  $("#spreadTable").html(`
+    <tr>
+      <td id="pos1"></td>
+      <td id="pos2"></td>
+      <td id="pos3"></td>
+      <td id="pos4"></td>
+      <td id="pos5"></td>
+      <td id="pos6"></td>
+      <td id="pos7"></td>
+    </tr>
+    <tr>
+      <td id="pos8"></td>
+      <td id="pos9"></td>
+      <td id="pos10"></td>
+      <td id="pos11"></td>
+      <td id="pos12"></td>
+      <td id="pos13"></td>
+      <td id="pos14"></td>
+    </tr>
+    <tr>
+      <td id="pos15"></td>
+      <td id="pos16"></td>
+      <td id="pos17"></td>
+      <td id="pos18"></td>
+      <td id="pos19"></td>
+      <td id="pos20"></td>
+      <td id="pos21"></td>
+    </tr>
+    <tr>
+      <td id="pos22"></td>
+      <td id="pos23"></td>
+      <td id="pos"24></td>
+      <td id="pos25"></td>
+      <td id="pos26"></td>
+      <td id="pos27"></td>
+      <td id="pos28"></td>
+    </tr>
+    <tr>
+      <td id="pos29"></td>
+      <td id="pos30"></td>
+      <td id="pos31"></td>
+      <td id="pos32"></td>
+      <td id="pos33"></td>
+      <td id="pos34"></td>
+      <td id="pos35"></td>
+    </tr>
+    <tr>
+      <td id="pos36"></td>
+      <td id="pos37"></td>
+      <td id="pos38"></td>
+      <td id="pos39"></td>
+      <td id="pos40"></td>
+      <td id="pos41"></td>
+      <td id="pos42"></td>
+    </tr>
+    <tr>
+      <td id="pos43"></td>
+      <td id="pos44"></td>
+      <td id="pos45"></td>
+      <td id="pos46"></td>
+      <td id="pos47"></td>
+      <td id="pos48"></td>
+      <td id="pos49"></td>
+    </tr>`);
+}

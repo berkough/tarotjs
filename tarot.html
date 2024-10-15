@@ -16,11 +16,18 @@
 }
 
 button {
-  background-color: blue;
-  border-radius: 50%;
-  padding: 10px;
+  background-color: #1E90FF;
+  border-radius: 10%;
+  padding: 5px;
+  border: 0px;
+  font-size: 16px;
+  color: white;
+}
+
+#shufBtn {
 
 }
+
 
 .disabled {
   opacity: 0.6;
@@ -68,10 +75,9 @@ button {
   }
 }
 
-#cardBack {
+#shufBtn, #cardBack {
   text-align: center;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* VARIABLES */
-window.story.debug = false;
 window.deck = [];
 window.firstHalf = "first";
 window.secondHalf = "second";
@@ -81,7 +87,6 @@ window.spreadSelected = false;
 window.pos = 0;
 window.cardWidth = 0;
 window.posOrder = [];
-window.reset = false;
 
 window.majorArcana = [
     { Place: "0", Trump: "Fool", Value: 15 },
@@ -200,8 +205,7 @@ window.shuffle = function(){
       freshDeck = false;
       deck = []; 
       getDeck();                     
-      $("#cardBack").width("20%");
-      $("#cardback").css("text-align:left");
+      $("#cardBack").width("30%");
       $("#drawCard").toggle();
       $("#spreadSelection").toggle();
       $("#reset").toggle();
@@ -268,18 +272,16 @@ window.reset = function(){
     $("#spreadLayout").empty();
     $("#drawCard").toggle();
     $("#reset").toggle();
-  } else {
-    alert("Select a Spread before Resetting.")
   }
 };
 
 /* Spreads */
 window.celticCross = function(){
   spreadSelected = "Celtic Cross";
-  cardWidth = `${(window.innerWidth/4)*.9}`;
+  cardWidth = `${(window.innerWidth/4)*.8}`;
   posOrder = [6,6,6,5,7,2,10,16,12,8,4];
   $("#spreadSelection").toggle();
-  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWdith)*.9}"></table>`);
+  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.9}"></table>`);
   $("#spreadTable").html(`
     <tr>
       <td id="pos1"></td>
@@ -309,10 +311,10 @@ window.celticCross = function(){
 
 window.threeCard = function(){
   spreadSelected = "Three Card";
-  cardWidth = `${(window.innerWidth/3)*.9}`;
+  cardWidth = `${(window.innerWidth/3)*.8}`;
   posOrder = [2, 1, 3];
   $("#spreadSelection").toggle();
-  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWdith)*.9}"></table>`);
+  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.9}"></table>`);
   $("#spreadTable").html(`
     <tr>
       <th>Underlying</th>
@@ -324,13 +326,88 @@ window.threeCard = function(){
       <td id="pos2"></td>
       <td id="pos3"></td>
     </tr>`);
-};</script><tw-passagedata pid="1" name="Body" tags="" position="100,100" size="100,100">&lt;p id=&quot;spreadSelection&quot; style=&quot;display:none;&quot;&gt;
+};
+
+window.astroSpread = function(){
+  spreadSelected = "Astrological";
+  cardWidth = `${(window.innerWidth/7)*.8}`;
+  posOrder = [22,30,38,46,40,34,28,20,12,4,10,16];
+  $("#spreadSelection").toggle();
+  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.9}"></table>`);
+  $("#spreadTable").html(`
+    <tr>
+      <td id="pos1"></td>
+      <td id="pos2"></td>
+      <td id="pos3"></td>
+      <td id="pos4"></td>
+      <td id="pos5"></td>
+      <td id="pos6"></td>
+      <td id="pos7"></td>
+    </tr>
+    <tr>
+      <td id="pos8"></td>
+      <td id="pos9"></td>
+      <td id="pos10"></td>
+      <td id="pos11"></td>
+      <td id="pos12"></td>
+      <td id="pos13"></td>
+      <td id="pos14"></td>
+    </tr>
+    <tr>
+      <td id="pos15"></td>
+      <td id="pos16"></td>
+      <td id="pos17"></td>
+      <td id="pos18"></td>
+      <td id="pos19"></td>
+      <td id="pos20"></td>
+      <td id="pos21"></td>
+    </tr>
+    <tr>
+      <td id="pos22"></td>
+      <td id="pos23"></td>
+      <td id="pos"24></td>
+      <td id="pos25"></td>
+      <td id="pos26"></td>
+      <td id="pos27"></td>
+      <td id="pos28"></td>
+    </tr>
+    <tr>
+      <td id="pos29"></td>
+      <td id="pos30"></td>
+      <td id="pos31"></td>
+      <td id="pos32"></td>
+      <td id="pos33"></td>
+      <td id="pos34"></td>
+      <td id="pos35"></td>
+    </tr>
+    <tr>
+      <td id="pos36"></td>
+      <td id="pos37"></td>
+      <td id="pos38"></td>
+      <td id="pos39"></td>
+      <td id="pos40"></td>
+      <td id="pos41"></td>
+      <td id="pos42"></td>
+    </tr>
+    <tr>
+      <td id="pos43"></td>
+      <td id="pos44"></td>
+      <td id="pos45"></td>
+      <td id="pos46"></td>
+      <td id="pos47"></td>
+      <td id="pos48"></td>
+      <td id="pos49"></td>
+    </tr>`);
+}</script><tw-passagedata pid="1" name="Instructions" tags="" position="100,100" size="100,100">[[Main]]</tw-passagedata><tw-passagedata pid="2" name="Main" tags="" position="225,100" size="100,100">&lt;p id=&quot;bodyContainer&quot;&gt;&lt;%= story.render(&quot;SpreadBtns&quot;) %&gt;&lt;/p&gt;
+&lt;p&gt;&lt;button id=&quot;shufBtn&quot; onclick=&quot;shuffle();&quot;&gt;&lt;img id=&quot;cardBack&quot; src=&quot;cards/CardBack.jpg&quot;&gt;&lt;br&gt;Shuffle&lt;/button&gt;&lt;/p&gt;
+&lt;button id=&quot;drawCard&quot; style=&quot;display:none;&quot; onclick=&quot;drawACardM();&quot;&gt;Draw Card&lt;/button&gt;
+&lt;button id=&quot;reset&quot; onclick=&quot;reset();&quot; style=&quot;display:none;&quot;&gt;Reset&lt;/button&gt;
+&lt;p id=&quot;tableContainer&quot;&gt;&lt;%= story.render(&quot;SpreadTable&quot;) %&gt;&lt;/p&gt;</tw-passagedata><tw-passagedata pid="3" name="SpreadBtns" tags="" position="350,100" size="100,100">&lt;span id=&quot;spreadSelection&quot; style=&quot;display:none;&quot;&gt;
+    Select a Spread:&lt;br&gt;
     &lt;button id=&quot;celticCross&quot; onclick=&quot;celticCross();&quot;&gt;Celtic Cross&lt;/button&gt;
     &lt;button id=&quot;threeCard&quot; onclick=&quot;threeCard();&quot;&gt;Three Card&lt;/button&gt;
-&lt;/p&gt;
-&lt;p id=&quot;spreadLayout&quot;&gt;&lt;/p&gt;</tw-passagedata><tw-passagedata pid="2" name="Main" tags="" position="225,100" size="100,100">&lt;button id=&quot;shufBtn&quot; onclick=&quot;shuffle();&quot;&gt;&lt;img id=&quot;cardBack&quot; src=&quot;cards/CardBack.jpg&quot;&gt;&lt;/button&gt;&lt;button id=&quot;drawCard&quot; style=&quot;display:none;&quot; onclick=&quot;drawACardM();&quot;&gt;Draw Card&lt;/button&gt;
-&lt;button id=&quot;reset&quot; onclick=&quot;reset();&quot; style=&quot;display:none;&quot;&gt;Reset&lt;/button&gt;
-&lt;br&gt;&lt;p id=&quot;bodyContainer&quot;&gt;&lt;%= story.render(&quot;Body&quot;) %&gt;&lt;/p&gt;</tw-passagedata></tw-storydata>
+    &lt;button id=&quot;astroSpread&quot; onclick=&quot;astroSpread();&quot;&gt;Astrological&lt;/button&gt; 
+&lt;/span&gt;</tw-passagedata><tw-passagedata pid="4" name="SpreadTable" tags="" position="475,100" size="100,100">&lt;p id=&quot;spreadLayout&quot;&gt;&lt;/p&gt;</tw-passagedata></tw-storydata>
 		<script>
 		(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";window.either=function(){for(var n=[],t=0;t<arguments.length;t++)if(arguments[t]instanceof Array)for(var r=0;r<arguments[t].length;r++)n.push(arguments[t][r]);else n.push(arguments[t]);return n[_.random(n.length-1)]},window.hasVisited=function(){var n=null;if(1==arguments.length)return null!=(n=window.story.passage(arguments[0]))&&window.story.history.includes(n.id);for(var t=0;t<arguments.length;t++)if(null==(n=window.story.passage(arguments[t]))||0==window.story.history.includes(n.id))return!1;return!0},window.visited=function(){for(var n=[],t=[],r=0;r<arguments.length;r++){var e=window.story.passage(arguments[r]);null!=e&&(t=window.story.history.filter(function(n){return n==e.id})),n.push(t.length)}return Math.min.apply(Math,n)},window.renderToSelector=function(n,t){var r=window.story.passage(t);null!=r&&$(n).html(r.render())},window.getStyles=function(){return $.when.apply($,$.map(arguments,function(n){return $.get(n,function(n){$("<style>"+n+"</style>").appendTo("head")})}))};

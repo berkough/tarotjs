@@ -1,0 +1,7 @@
+:: SpreadBtns
+<span id="spreadSelection" style="display:none;">
+    Select a Spread:<br>
+    <button id="celticCross" onclick="celticCross();">Celtic Cross</button>
+    <button id="threeCard" onclick="threeCard();">Three Card</button>
+    <button id="astroSpread" onclick="astroSpread();">Astrological</button> 
+</span>
