@@ -14,6 +14,10 @@ Special thanks to [Luciella Elisabeth Scarlett](https://luciellaes.itch.io/rider
 
 You can play a demo of the app [HERE](https://berkough.itch.io/tarotjs).
 
+### Why Continue?
+
+The original script, which is held in the legacy directory
+
 ### tweesrc/ and tarot.html
 
 This will most likely become the main source going forward, though you'll see the remnants of me trying to build my vision of this application using several different workflows... While it might be cleaner to start a brand new source tree with all new code, I've decided that doesn't suit my lifestyle, or the time that I have to devote to coding each day, so the project will shift from the old workflow to the new one as I cannibalize the javascript that I like and port into the *tweesrc* directory.
@@ -42,4 +46,4 @@ This workflow will also allow me to add different spreads much more easily to th
 
 ### Misc Improvements
 
-- **UI**
+- **UI** (*This is constantly improving.*)

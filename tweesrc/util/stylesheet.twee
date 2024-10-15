@@ -1,24 +1,40 @@
 :: StoryStylesheet [stylesheet]
+@import url('https://fonts.googleapis.com/css2?family=Girassol&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=B612:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 body {
   background: black;
   color: white;
   text-align: center;
+  font-family: "B612", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
 }
 
 button {
   background-color: #1E90FF;
   border-radius: 10%;
-  padding: 5px;
+  margin: 4px;
+  padding: 10px;
   border: 0px;
   font-size: 20px;
   color: white;
 }
 
+p {
+  margin: 4px;
+  padding: 4px;
+  max-width: 100%;
+}
 
-
-.disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+#title {
+  font-family: "Girassol", serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
 }
 
 .shuffle {
