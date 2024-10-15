@@ -13,6 +13,7 @@
 		<!-- UUID://F2AA8B18-4B04-4121-8D06-67FB1E17DFE4// --><tw-storydata name="tarotjs" startnode="2" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="F2AA8B18-4B04-4121-8D06-67FB1E17DFE4" zoom="1" format="Snowman" format-version="2.0.2" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
   background: black;
   color: white;
+  text-align: center;
 }
 
 button {
@@ -20,13 +21,10 @@ button {
   border-radius: 10%;
   padding: 5px;
   border: 0px;
-  font-size: 16px;
+  font-size: 20px;
   color: white;
 }
 
-#shufBtn {
-
-}
 
 
 .disabled {
@@ -79,6 +77,7 @@ button {
   text-align: center;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* VARIABLES */
 window.deck = [];
+window.freshDeck = true;
 window.firstHalf = "first";
 window.secondHalf = "second";
 window.suitTrump = "";
@@ -86,6 +85,7 @@ window.cardHTML = {};
 window.spreadSelected = false;
 window.pos = 0;
 window.cardWidth = 0;
+window.cardHeight = 0;
 window.posOrder = [];
 
 window.majorArcana = [
@@ -113,6 +113,7 @@ window.majorArcana = [
     { Place: "XXI", Trump: "World", Value: 36 }
 ];
 
+window.suits = ["Cups", "Swords", "Wands", "Pentacles"];
 window.minorPlaces = [
       "Ace",
       "II",
@@ -129,9 +130,6 @@ window.minorPlaces = [
       "Queen",
       "King"
 ];
-
-window.suits = ["Cups", "Swords", "Wands", "Pentacles"];
-window.freshDeck = true;
 
 /* FUNCTIONS or METHODS */
 window.getDeck = function (){
@@ -279,7 +277,7 @@ window.reset = function(){
 window.celticCross = function(){
   spreadSelected = "Celtic Cross";
   cardWidth = `${(window.innerWidth/4)*.8}`;
-  posOrder = [6,6,6,5,7,2,10,16,12,8,4];
+  posOrder = [10,10,10,9,11,6,14,16,12,8,4];
   $("#spreadSelection").toggle();
   $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.9}"></table>`);
   $("#spreadTable").html(`
