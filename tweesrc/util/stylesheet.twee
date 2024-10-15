@@ -27,6 +27,7 @@ p {
   margin: 4px;
   padding: 4px;
   max-width: 100%;
+  text-align: center;
 }
 
 #title {

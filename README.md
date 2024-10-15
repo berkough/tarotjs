@@ -34,11 +34,12 @@ This workflow will also allow me to add different spreads much more easily to th
 
 ### Features to Impement
 
+- Full Book - All Card Meanings.
 - Reversals.
 - Screenshots.
 - Summary of Card Meanings.
 - Spread Template.
-- Full Book.
+- Manual Spreads
 
 ### Misc Improvements
 

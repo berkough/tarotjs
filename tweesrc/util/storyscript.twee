@@ -201,10 +201,10 @@ window.reset = function(){
 /* SPREADS */
 window.celticCross = function(){
   spreadSelected = "Celtic Cross";
-  cardWidth = `${(window.innerWidth/4)*.8}`;
+  cardWidth = `${(window.innerWidth/4)*.85}`;
   posOrder = [10,10,10,9,11,6,14,16,12,8,4];
   $("#spreadSelection").toggle();
-  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.9}"></table>`);
+  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.95}"></table>`);
   $("#spreadTable").html(`
     <tr>
       <td id="pos1"></td>
@@ -234,10 +234,10 @@ window.celticCross = function(){
 
 window.threeCard = function(){
   spreadSelected = "Three Card";
-  cardWidth = `${(window.innerWidth/3)*.8}`;
+  cardWidth = `${(window.innerWidth/3)*.85}`;
   posOrder = [2, 1, 3];
   $("#spreadSelection").toggle();
-  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.9}"></table>`);
+  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.95}"></table>`);
   $("#spreadTable").html(`
     <tr>
       <th>Underlying</th>
@@ -253,10 +253,10 @@ window.threeCard = function(){
 
 window.zodiacSpread = function(){
   spreadSelected = "Zodiac";
-  cardWidth = `${(window.innerWidth/7)*.8}`;
+  cardWidth = `${(window.innerWidth/7)*.85}`;
   posOrder = [22,30,38,46,40,34,28,20,12,4,10,16];
   $("#spreadSelection").toggle();
-  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.9}"></table>`);
+  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.95}"></table>`);
   $("#spreadTable").html(`
     <tr>
       <td id="pos1"></td>
