@@ -177,12 +177,21 @@ window.drawACardM = function(){
   }
 };
 
-window.advanceSpread = function(pos,card,cardHTML){
+window.advanceSpread = function(pos,card){
   console.log(pos,card);
   cardHTML = `<img id="${card.Place}-${suitTrump}" width="${cardWidth}" src="cards/${card.Place}-${suitTrump}.jpg">`;
   let cardPosition = "#pos"+posOrder[pos];
   console.log(cardPosition);
-  $(cardPosition).html(cardHTML);
+  if ($(cardPosition).children('img').length > 0){
+    $(cardPosition).css("position","absolute");
+    $(cardPosition).append(cardHTML);
+    let rDeg = Math.floor(Math.random() * 180-90);
+    let rPx = Math.floor(Math.random() * 10-5);
+    $(`#${card.Place}-${suitTrump}`).css({"position":"absolute","top":+rPx+"px","left":+rPx+"px","transform":"rotate("+rDeg+"deg)"});
+  } else {
+    $(cardPosition).html(cardHTML);
+  }
+  
 };
 
 window.reset = function(){
@@ -202,7 +211,7 @@ window.reset = function(){
 window.celticCross = function(){
   spreadSelected = "Celtic Cross";
   cardWidth = `${(window.innerWidth/4)*.85}`;
-  posOrder = [10,10,10,9,11,6,14,16,12,8,4];
+  posOrder = [10,10,10,6,14,11,9,16,12,8,4];
   $("#spreadSelection").toggle();
   $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.95}"></table>`);
   $("#spreadTable").html(`
@@ -288,7 +297,7 @@ window.zodiacSpread = function(){
     <tr>
       <td id="pos22"></td>
       <td id="pos23"></td>
-      <td id="pos"24></td>
+      <td id="pos24"></td>
       <td id="pos25"></td>
       <td id="pos26"></td>
       <td id="pos27"></td>
