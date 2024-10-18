@@ -2,6 +2,7 @@
 
 /* VARIABLES */
 window.deck = [];
+window.card = {};
 window.freshDeck = true;
 window.firstHalf = "first";
 window.secondHalf = "second";
@@ -19,7 +20,7 @@ window.majorArcana = [
     { Place: "II", Trump: "HighPriestess", Value: 17 },
     { Place: "III", Trump: "Empress", Value: 18 },
     { Place: "IV", Trump: "Emperor", Value: 19 },
-    { Place: "V", Trump: "Heirophant", Value: 20 },
+    { Place: "V", Trump: "Hierophant", Value: 20 },
     { Place: "VI", Trump: "Lovers", Value: 21 },
     { Place: "VII", Trump: "Chariot", Value: 22 },
     { Place: "VIII", Trump: "Strength", Value: 23 },
@@ -168,7 +169,7 @@ window.suitTrumpM = function(i){
 
 window.drawACardM = function(){
   if (spreadSelected) {
-    let card = deck[0];
+    card = deck[0];
     console.log(card);
     suitTrumpM(0);
     advanceSpread(pos,card);
@@ -179,7 +180,7 @@ window.drawACardM = function(){
 
 window.advanceSpread = function(pos,card){
   console.log(pos,card);
-  cardHTML = `<img id="${card.Place}-${suitTrump}" width="${cardWidth}" src="cards/${card.Place}-${suitTrump}.jpg">`;
+  cardHTML = `<img id="${card.Place}-${suitTrump}" width="${cardWidth}" onclick="popup();" src="cards/${card.Place}-${suitTrump}.jpg">`;
   let cardPosition = "#pos"+posOrder[pos];
   console.log(cardPosition);
   if ($(cardPosition).children('img').length > 0){
@@ -205,6 +206,10 @@ window.reset = function(){
     $("#drawCard").toggle();
     $("#reset").toggle();
   }
+};
+
+window.popup = function(){
+  console.log("I've been clicked!");
 };
 
 /* SPREADS */
@@ -330,4 +335,4 @@ window.zodiacSpread = function(){
       <td id="pos48"></td>
       <td id="pos49"></td>
     </tr>`);
-}
+};

@@ -1,0 +1,4 @@
+:: PopUp
+<div id="cardPopUp" class="modal">
+    <%= story.render(`${}`)%>
+</div>
