@@ -38,7 +38,6 @@ p {
   margin: 4px;
   padding: 4px;
   max-width: 100%;
-  text-align: center;
 }
 
 #title {
@@ -104,35 +103,18 @@ p {
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  width: 100%;
+  height: 80%;
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
 }
 
-/* Modal Content (Image) */
 .modal-content {
+  text-align: left;
   margin: auto;
   display: block;
   width: 80%;
   max-width: 700px;
-}
-
-/* Caption of Modal Image (Image Text) - Same Width as the Image */
-#caption {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-  text-align: center;
-  color: #ccc;
-  padding: 10px 0;
-  height: 150px;
-}
-
-/* Add Animation - Zoom in the Modal */
-.modal-content, #caption {
+  background-color: rgba(0,0,0,0.6);
   animation-name: zoom;
   animation-duration: 0.6s;
 }
@@ -178,6 +160,7 @@ window.pos = 0;
 window.cardWidth = 0;
 window.cardHeight = 0;
 window.posOrder = [];
+window.cardPassage = "0-Fool";
 
 window.majorArcana = [
     { Place: "0", Trump: "Fool", Value: 15 },
@@ -345,7 +328,7 @@ window.drawACardM = function(){
 
 window.advanceSpread = function(pos,card){
   console.log(pos,card);
-  cardHTML = `<img id="${card.Place}-${suitTrump}" width="${cardWidth}" onclick="popup();" src="cards/${card.Place}-${suitTrump}.jpg">`;
+  cardHTML = `<img id="${card.Place}-${suitTrump}" width="${cardWidth}" class="drawn" onclick="popup($(this).attr('id'));" src="cards/${card.Place}-${suitTrump}.jpg">`;
   let cardPosition = "#pos"+posOrder[pos];
   console.log(cardPosition);
   if ($(cardPosition).children('img').length > 0){
@@ -373,8 +356,16 @@ window.reset = function(){
   }
 };
 
-window.popup = function(){
-  console.log("I've been clicked!");
+window.popup = function(drawnCard){
+  console.log(drawnCard);
+  $("#cardPopUp").css({"background-image":`url(cards/${drawnCard}.jpg)`,"background-position":"center", "background-repeat":"no-repeat"})
+  $("#cardPopUp").html(`
+    <div class="modal-content">
+      ${story.render(drawnCard)}
+      <span class="close" onclick="$('#cardPopUp').toggle();">&times;</span>
+    </div>
+  `);
+  $('#cardPopUp').toggle();
 };
 
 /* SPREADS */
@@ -418,11 +409,6 @@ window.threeCard = function(){
   $("#spreadSelection").toggle();
   $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.95}"></table>`);
   $("#spreadTable").html(`
-    <tr>
-      <th>Underlying</th>
-      <th>Subject</th>
-      <th>Advice</th>
-    </tr>
     <tr>
       <td id="pos1"></td>
       <td id="pos2"></td>
@@ -548,14 +534,12 @@ It has more than one message on the macrocosmic side and is, for example, the st
 &lt;button id=&quot;drawCard&quot; style=&quot;display:none;&quot; onclick=&quot;drawACardM();&quot;&gt;Draw Card&lt;/button&gt;
 &lt;button id=&quot;reset&quot; onclick=&quot;reset();&quot; style=&quot;display:none;&quot;&gt;Reset&lt;/button&gt;
 &lt;p id=&quot;tableContainer&quot;&gt;&lt;%= story.render(&quot;SpreadTable&quot;) %&gt;&lt;/p&gt;
-&lt;%= story.render(&quot;PopUp&quot;) %&gt;</tw-passagedata><tw-passagedata pid="81" name="PopUp" tags="" position="100,1100" size="100,100">&lt;div id=&quot;cardPopUp&quot; class=&quot;modal&quot;&gt;
-    &lt;%= story.render(`${}`)%&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="82" name="SpreadBtns" tags="" position="225,1100" size="100,100">&lt;div id=&quot;spreadSelection&quot; style=&quot;display:none;&quot;&gt;
+&lt;div id=&quot;cardPopUp&quot; class=&quot;modal&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="81" name="SpreadBtns" tags="" position="100,1100" size="100,100">&lt;div id=&quot;spreadSelection&quot; style=&quot;display:none;&quot;&gt;
     Select a Spread:&lt;br&gt;
     &lt;button id=&quot;celticCross&quot; onclick=&quot;celticCross();&quot;&gt;Celtic Cross&lt;/button&gt;
     &lt;button id=&quot;threeCard&quot; onclick=&quot;threeCard();&quot;&gt;Three Card&lt;/button&gt;
     &lt;button id=&quot;astroSpread&quot; onclick=&quot;zodiacSpread();&quot;&gt;Zodiac&lt;/button&gt; 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="83" name="SpreadTable" tags="" position="350,1100" size="100,100">&lt;p id=&quot;spreadLayout&quot;&gt;&lt;/p&gt;</tw-passagedata></tw-storydata>
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="82" name="SpreadTable" tags="" position="225,1100" size="100,100">&lt;p id=&quot;spreadLayout&quot;&gt;&lt;/p&gt;</tw-passagedata></tw-storydata>
 		<script>
 		(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";window.either=function(){for(var n=[],t=0;t<arguments.length;t++)if(arguments[t]instanceof Array)for(var r=0;r<arguments[t].length;r++)n.push(arguments[t][r]);else n.push(arguments[t]);return n[_.random(n.length-1)]},window.hasVisited=function(){var n=null;if(1==arguments.length)return null!=(n=window.story.passage(arguments[0]))&&window.story.history.includes(n.id);for(var t=0;t<arguments.length;t++)if(null==(n=window.story.passage(arguments[t]))||0==window.story.history.includes(n.id))return!1;return!0},window.visited=function(){for(var n=[],t=[],r=0;r<arguments.length;r++){var e=window.story.passage(arguments[r]);null!=e&&(t=window.story.history.filter(function(n){return n==e.id})),n.push(t.length)}return Math.min.apply(Math,n)},window.renderToSelector=function(n,t){var r=window.story.passage(t);null!=r&&$(n).html(r.render())},window.getStyles=function(){return $.when.apply($,$.map(arguments,function(n){return $.get(n,function(n){$("<style>"+n+"</style>").appendTo("head")})}))};

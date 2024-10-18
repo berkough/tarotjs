@@ -5,4 +5,4 @@
 <button id="drawCard" style="display:none;" onclick="drawACardM();">Draw Card</button>
 <button id="reset" onclick="reset();" style="display:none;">Reset</button>
 <p id="tableContainer"><%= story.render("SpreadTable") %></p>
-<%= story.render("PopUp") %>
+<div id="cardPopUp" class="modal"></div>

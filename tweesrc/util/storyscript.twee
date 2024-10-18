@@ -13,6 +13,7 @@ window.pos = 0;
 window.cardWidth = 0;
 window.cardHeight = 0;
 window.posOrder = [];
+window.cardPassage = "0-Fool";
 
 window.majorArcana = [
     { Place: "0", Trump: "Fool", Value: 15 },
@@ -180,7 +181,7 @@ window.drawACardM = function(){
 
 window.advanceSpread = function(pos,card){
   console.log(pos,card);
-  cardHTML = `<img id="${card.Place}-${suitTrump}" width="${cardWidth}" onclick="popup();" src="cards/${card.Place}-${suitTrump}.jpg">`;
+  cardHTML = `<img id="${card.Place}-${suitTrump}" width="${cardWidth}" class="drawn" onclick="popup($(this).attr('id'));" src="cards/${card.Place}-${suitTrump}.jpg">`;
   let cardPosition = "#pos"+posOrder[pos];
   console.log(cardPosition);
   if ($(cardPosition).children('img').length > 0){
@@ -208,8 +209,16 @@ window.reset = function(){
   }
 };
 
-window.popup = function(){
-  console.log("I've been clicked!");
+window.popup = function(drawnCard){
+  console.log(drawnCard);
+  $("#cardPopUp").css({"background-image":`url(cards/${drawnCard}.jpg)`,"background-position":"center", "background-repeat":"no-repeat"})
+  $("#cardPopUp").html(`
+    <div class="modal-content">
+      ${story.render(drawnCard)}
+      <span class="close" onclick="$('#cardPopUp').toggle();">&times;</span>
+    </div>
+  `);
+  $('#cardPopUp').toggle();
 };
 
 /* SPREADS */
@@ -253,11 +262,6 @@ window.threeCard = function(){
   $("#spreadSelection").toggle();
   $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.95}"></table>`);
   $("#spreadTable").html(`
-    <tr>
-      <th>Underlying</th>
-      <th>Subject</th>
-      <th>Advice</th>
-    </tr>
     <tr>
       <td id="pos1"></td>
       <td id="pos2"></td>
