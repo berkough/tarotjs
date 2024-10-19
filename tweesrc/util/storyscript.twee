@@ -214,6 +214,8 @@ window.popup = function(drawnCard){
   $("#cardPopUp").css({"background-image":`url(cards/${drawnCard}.jpg)`,"background-position":"center", "background-repeat":"no-repeat"})
   $("#cardPopUp").html(`
     <div class="modal-content">
+      <img src="cards/${drawnCard}.jpg" width="30%"><br>
+      <p class="title">${drawnCard}</p>
       ${story.render(drawnCard)}
       <span class="close" onclick="$('#cardPopUp').toggle();">&times;</span>
     </div>
