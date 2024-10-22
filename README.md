@@ -4,6 +4,8 @@
 
 ### Beginnings
 
+For my dev log and more minutia regarding the updates to this repository, make sure you visit [my itch.io page](https://berkough.itch.io/tarotjs) OR visit my personal blog. I'm not always writing about web development on there, so [peruse at your own risk](https://www.berkough.com).
+
 This project stems from a few different aspirations and interestests... I've been interested in coding the mechanics of a deck of cards using javascript for a while now. In an effort to find some code or tutorials that already accomplished the thing that I wanted to do, I came across Walter Guevara's website, "*That Software Dude*," he has [an article](https://www.thatsoftwaredude.com/content/6196/coding-a-card-deck-in-javascript) talking about exactly what I was looking for; how to code a deck of cards in javascript.
 
 Since I didn't just want to replicate and type the code that Guevara put together verbatim, I thought it would be interesting to use Tarot instead, since it does share similarities with regular playing cards. [The Internet Sacred Text Archive](https://www.sacred-texts.com/tarot/pkt/tarot0.htm) has a similar javascript-based spread, but it is fairly limited and was written almost a quarter of a century ago. It's just really old javascript and it doesn't even read like a modern js file.
@@ -34,7 +36,7 @@ This workflow will also allow me to add different spreads much more easily to th
 
 ### Features to Impement
 
-- Full Book - All Card Meanings.
+- Full Book - ~~All Card Meanings.~~
 - Reversals.
 - Screenshots.
 - Summary of Card Meanings.
