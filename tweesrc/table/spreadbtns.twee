@@ -1,4 +1,10 @@
 :: SpreadBtns
+<div id="deckSelection" style="display:none;">
+    Select a Deck:<br>
+    <button id="rws" onclick="selectADeck($(this).attr('id'));">Rider-Waite-Smith</button>
+    <button id="cbd" onclick="selectADeck($(this).attr('id'));">Marseille</button>
+</div>
+<br>
 <div id="spreadSelection" style="display:none;">
     Select a Spread:<br>
     <button id="celticCross" onclick="celticCross();">Celtic Cross</button>

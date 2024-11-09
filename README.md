@@ -12,7 +12,7 @@ Since I didn't want to simply replicate and type the code that Guevara put toget
 
 I have also seen projects using [E Kelen's "tarot-api,"](https://github.com/ekelen/tarot-api) but it might be useful to expand on that work, or make something entirely self-contained.
 
-Special thanks to [Luciella Elisabeth Scarlett](https://luciellaes.itch.io/rider-waite-smith-tarot-cards-cc0) for cleaning up the scans from [Wikipedia](https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot).
+Special thanks to [Luciella Elisabeth Scarlett](https://luciellaes.itch.io/rider-waite-smith-tarot-cards-cc0) for cleaning up the scans from [Wikipedia](https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot), and also special thanks to Dr. Yoav Ben-Dov for his [CBD Tarot de Marseille](https://www.cbdtarot.com).
 
 You can play a demo of the app [HERE](https://berkough.itch.io/tarotjs).
 
@@ -41,6 +41,8 @@ This workflow will also allow me to add different spreads much more easily to th
 - Reversals.
   - I would like to implement a random element (probably in the *drawACardM* function, or as a separate function that occurs when drawing a card) that will reverse the card for those who want reversals.
 - Screenshots.
+- Deck Selection - R-W-S or CBD Marseille.
+  - 2024-11-08: You now can select a deck type before you do your reading. Shout out to Dr. Yoav Ben-Dov for his [CBD Tarot de Marseille](https://www.cbdtarot.com) card images.
 - Summary of Card Meanings.
 - Spread Template.
 - Manual Spreads.

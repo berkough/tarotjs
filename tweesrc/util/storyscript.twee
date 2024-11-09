@@ -13,7 +13,7 @@ window.pos = 0;
 window.cardWidth = 0;
 window.cardHeight = 0;
 window.posOrder = [];
-window.cardPassage = "0-Fool";
+window.deckType = "rws";
 
 window.majorArcana = [
     { Place: "0", Trump: "Fool", Value: 15 },
@@ -133,6 +133,7 @@ window.shuffle = function(){
       $("#cardBack").width("30%");
       $("#drawCard").toggle();
       $("#spreadSelection").toggle();
+      $("#deckSelection").toggle();
       $("#reset").toggle();
     }
 
@@ -168,6 +169,11 @@ window.suitTrumpM = function(i){
 
 };
 
+window.selectADeck = function(id){
+  deckType = id;
+  $('#deckSelection').toggle();
+};
+
 window.drawACardM = function(){
   if (spreadSelected) {
     card = deck[0];
@@ -181,7 +187,7 @@ window.drawACardM = function(){
 
 window.advanceSpread = function(pos,card){
   console.log(pos,card);
-  cardHTML = `<img id="${card.Place}-${suitTrump}" width="${cardWidth}" class="drawn" onclick="popup($(this).attr('id'));" src="cards/${card.Place}-${suitTrump}.jpg">`;
+  cardHTML = `<img id="${card.Place}-${suitTrump}" width="${cardWidth}" class="drawn" onclick="popup($(this).attr('id'));" src="cards/${deckType}/${card.Place}-${suitTrump}.jpg">`;
   let cardPosition = "#pos"+posOrder[pos];
   console.log(cardPosition);
   if ($(cardPosition).children('img').length > 0){
@@ -211,134 +217,14 @@ window.reset = function(){
 
 window.popup = function(drawnCard){
   console.log(drawnCard);
-  $("#cardPopUp").css({"background-image":`url(cards/${drawnCard}.jpg)`,"background-position":"center", "background-repeat":"no-repeat"})
+  $("#cardPopUp").css({"background-image":`url(cards/${deckType}/${drawnCard}.jpg)`,"background-position":"center", "background-repeat":"no-repeat"})
   $("#cardPopUp").html(`
     <div class="modal-content">
-      <img src="cards/${drawnCard}.jpg" width="30%"><br>
+      <img src="cards/${deckType}/${drawnCard}.jpg" width="30%"><br>
       <p class="title">${drawnCard}</p>
       ${story.render(drawnCard)}
       <span class="close" onclick="$('#cardPopUp').toggle();">&times;</span>
     </div>
   `);
   $('#cardPopUp').toggle();
-};
-
-/* SPREADS */
-window.celticCross = function(){
-  spreadSelected = "Celtic Cross";
-  cardWidth = `${(window.innerWidth/4)*.85}`;
-  posOrder = [10,10,10,6,14,11,9,16,12,8,4];
-  $("#spreadSelection").toggle();
-  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.95}"></table>`);
-  $("#spreadTable").html(`
-    <tr>
-      <td id="pos1"></td>
-      <td id="pos2"></td>
-      <td id="pos3"></td>
-      <td id="pos4"></td>
-    </tr>
-    <tr>
-      <td id="pos5"></td>
-      <td id="pos6"></td>
-      <td id="pos7"></td>
-      <td id="pos8"></td>
-    </tr>
-    <tr>
-      <td id="pos9"></td>
-      <td id="pos10"></td>
-      <td id="pos11"></td>
-      <td id="pos12"></td>
-    </tr>
-    <tr>
-      <td id="pos13"></td>
-      <td id="pos14"></td>
-      <td id="pos15"></td>
-      <td id="pos16"></td>
-    </tr>`);
-};
-
-window.threeCard = function(){
-  spreadSelected = "Three Card";
-  cardWidth = `${(window.innerWidth/3)*.85}`;
-  posOrder = [2, 1, 3];
-  $("#spreadSelection").toggle();
-  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.95}"></table>`);
-  $("#spreadTable").html(`
-    <tr>
-      <td id="pos1"></td>
-      <td id="pos2"></td>
-      <td id="pos3"></td>
-    </tr>`);
-};
-
-window.zodiacSpread = function(){
-  spreadSelected = "Zodiac";
-  cardWidth = `${(window.innerWidth/7)*.85}`;
-  posOrder = [22,30,38,46,40,34,28,20,12,4,10,16];
-  $("#spreadSelection").toggle();
-  $("#spreadLayout").html(`<table id="spreadTable" max-width="${(window.innerWidth)*.95}"></table>`);
-  $("#spreadTable").html(`
-    <tr>
-      <td id="pos1"></td>
-      <td id="pos2"></td>
-      <td id="pos3"></td>
-      <td id="pos4"></td>
-      <td id="pos5"></td>
-      <td id="pos6"></td>
-      <td id="pos7"></td>
-    </tr>
-    <tr>
-      <td id="pos8"></td>
-      <td id="pos9"></td>
-      <td id="pos10"></td>
-      <td id="pos11"></td>
-      <td id="pos12"></td>
-      <td id="pos13"></td>
-      <td id="pos14"></td>
-    </tr>
-    <tr>
-      <td id="pos15"></td>
-      <td id="pos16"></td>
-      <td id="pos17"></td>
-      <td id="pos18"></td>
-      <td id="pos19"></td>
-      <td id="pos20"></td>
-      <td id="pos21"></td>
-    </tr>
-    <tr>
-      <td id="pos22"></td>
-      <td id="pos23"></td>
-      <td id="pos24"></td>
-      <td id="pos25"></td>
-      <td id="pos26"></td>
-      <td id="pos27"></td>
-      <td id="pos28"></td>
-    </tr>
-    <tr>
-      <td id="pos29"></td>
-      <td id="pos30"></td>
-      <td id="pos31"></td>
-      <td id="pos32"></td>
-      <td id="pos33"></td>
-      <td id="pos34"></td>
-      <td id="pos35"></td>
-    </tr>
-    <tr>
-      <td id="pos36"></td>
-      <td id="pos37"></td>
-      <td id="pos38"></td>
-      <td id="pos39"></td>
-      <td id="pos40"></td>
-      <td id="pos41"></td>
-      <td id="pos42"></td>
-    </tr>
-    <tr>
-      <td id="pos43"></td>
-      <td id="pos44"></td>
-      <td id="pos45"></td>
-      <td id="pos46"></td>
-      <td id="pos47"></td>
-      <td id="pos48"></td>
-      <td id="pos49"></td>
-    </tr>`);
 };
