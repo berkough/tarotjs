@@ -124,7 +124,6 @@ p {
 .close {
   position: absolute;
   top: 100px;
-  right: 35px;
   color: #f1f1f1;
   font-size: 40px;
   font-weight: bold;
@@ -135,4 +134,8 @@ p {
   color: #bbb;
   text-decoration: none;
   cursor: pointer;
+}
+
+.reverse {
+  transform: rotate(180deg);
 }

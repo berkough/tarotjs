@@ -13,7 +13,7 @@ window.pos = 0;
 window.cardWidth = 0;
 window.cardHeight = 0;
 window.posOrder = [];
-window.deckType = "rws";
+window.deckType = false;
 
 window.majorArcana = [
     { Place: "0", Trump: "Fool", Value: 15 },
@@ -152,6 +152,7 @@ window.shuffle = function(){
     return deck;
 };
 
+
 window.splitDeck = function(){
     let half = Math.ceil(deck.length) / 2;
     return (
@@ -159,6 +160,7 @@ window.splitDeck = function(){
       (secondHalf = deck.slice(half, deck.length))
     );
 };
+
 
 window.suitTrumpM = function(i){
     if (deck[i].Value >= 1 && deck[i].Value <= 14) {
@@ -169,10 +171,12 @@ window.suitTrumpM = function(i){
 
 };
 
+
 window.selectADeck = function(id){
   deckType = id;
   $('#deckSelection').toggle();
 };
+
 
 window.drawACardM = function(){
   if (spreadSelected) {
@@ -184,6 +188,7 @@ window.drawACardM = function(){
     pos += 1;
   }
 };
+
 
 window.advanceSpread = function(pos,card){
   console.log(pos,card);
@@ -202,29 +207,94 @@ window.advanceSpread = function(pos,card){
   
 };
 
+
 window.reset = function(){
-  if (spreadSelected){
+  if (spreadSelected || deckType){
     freshDeck = true;
     pos = 0;
     posOrder = [];
     spreadSelected = false;
+    deckType = false;
     $("#cardBack").width("100%")
     $("#spreadLayout").empty();
-    $("#drawCard").toggle();
+    $("#drawCard").hide();
+    $("#deckSelection").hide();
+    $("#spreadSelection").hide();
     $("#reset").toggle();
   }
 };
 
+
 window.popup = function(drawnCard){
+  
   console.log(drawnCard);
+  
+  let style;
+  if (window.innerWidth > 500){
+   setTimeout(() => {style = $("div.modal-content").css("width")},200);
+  } else {
+    style = "40px";
+  }
+  console.log(style);
+  
   $("#cardPopUp").css({"background-image":`url(cards/${deckType}/${drawnCard}.jpg)`,"background-position":"center", "background-repeat":"no-repeat"})
   $("#cardPopUp").html(`
     <div class="modal-content">
       <img src="cards/${deckType}/${drawnCard}.jpg" width="30%"><br>
       <p class="title">${drawnCard}</p>
       ${story.render(drawnCard)}
-      <span class="close" onclick="$('#cardPopUp').toggle();">&times;</span>
+      <span class="close" onclick="$('#cardPopUp').toggle();" style="right:${style}">&times;</span>
     </div>
   `);
   $('#cardPopUp').toggle();
+};
+
+
+window.cardWidthM = function(){
+  switch(spreadSelected){
+    case "Celtic Cross":
+        if (window.innerWidth < 500){
+          console.log(spreadSelected+": "+window.innerWidth/4*.85);
+          return (window.innerWidth/4*.85);
+        } else {
+          console.log(spreadSelected+": 200");
+          return 200;
+    }
+    break;
+    case "Three Card":
+      if (window.innerWidth < 500){
+        console.log(spreadSelected+": "+window.innerWidth/3*.85)
+        return (window.innerWidth/3*.85);
+      } else {
+        console.log(spreadSelected+": 250")
+        return 250;
+      }
+      break;
+    case "Zodiac":
+      if (window.innerWidth < 500){
+        console.log(spreadSelected+": "+window.innerWidth/7*.85);
+        return (window.innerWidth/7*.85);
+      } else {
+        console.log(spreadSelected+": 100")
+        return 100;
+      }
+      break;
+    default:
+      return 200;
+  }
+};
+
+
+window.maxWidthM = function(){
+  console.log("Max-Width");
+  switch(spreadSelected){
+    case "":
+      break;
+    case "":
+      break;
+    case "":
+      break;
+      default:
+        return (window.innerWidth*.5);
+  }
 };
