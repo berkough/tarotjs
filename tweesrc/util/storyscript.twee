@@ -226,16 +226,7 @@ window.reset = function(){
 
 
 window.popup = function(drawnCard){
-  
   console.log(drawnCard);
-  
-  let style;
-  if (window.innerWidth > 500){
-   setTimeout(() => {style = $("div.modal-content").css("width")},200);
-  } else {
-    style = "40px";
-  }
-  console.log(style);
   
   $("#cardPopUp").css({"background-image":`url(cards/${deckType}/${drawnCard}.jpg)`,"background-position":"center", "background-repeat":"no-repeat"})
   $("#cardPopUp").html(`
@@ -243,7 +234,7 @@ window.popup = function(drawnCard){
       <img src="cards/${deckType}/${drawnCard}.jpg" width="30%"><br>
       <p class="title">${drawnCard}</p>
       ${story.render(drawnCard)}
-      <span class="close" onclick="$('#cardPopUp').toggle();" style="right:${style}">&times;</span>
+      <span class="close" onclick="$('#cardPopUp').toggle();">&times;</span>
     </div>
   `);
   $('#cardPopUp').toggle();
