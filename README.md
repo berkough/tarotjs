@@ -41,7 +41,7 @@ This workflow will also allow me to add different spreads much more easily to th
 - Reversals.
   - I would like to implement a random element (probably in the *drawACardM* function, or as a separate function that occurs when drawing a card) that will reverse the card for those who want reversals.
 - Screenshots.
-- Deck Selection - R-W-S or CBD Marseille.
+- [ x ] Deck Selection - R-W-S or CBD Marseille.
   - 2024-11-08: You now can select a deck type before you do your reading. Shout out to Dr. Yoav Ben-Dov for his [CBD Tarot de Marseille](https://www.cbdtarot.com) card images.
 - Summary of Card Meanings.
 - Spread Template.
@@ -49,3 +49,4 @@ This workflow will also allow me to add different spreads much more easily to th
 - Icons (Material, Font Awesome, etc.).
 - Jumpers (?)
   - These are the cards that just shoot out of the deck when you're shuffling...
+- 
