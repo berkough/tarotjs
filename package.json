@@ -1,0 +1,28 @@
+{
+  "name": "tarotjs",
+  "version": "1.9.5",
+  "description": "A digital tarot deck",
+  "keywords": [
+    "tarot",
+    "deck",
+    "cards"
+  ],
+  "homepage": "https://github.com/berkough/tarotjs#readme",
+  "bugs": {
+    "url": "https://github.com/berkough/tarotjs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/berkough/tarotjs.git"
+  },
+  "license": "BSD-3-Clause",
+  "author": "Mathew Kane",
+  "type": "commonjs",
+  "main": "tweesrc/storydata.twee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "dom-to-image": "^2.6.0"
+  }
+}

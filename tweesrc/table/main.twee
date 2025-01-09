@@ -3,6 +3,7 @@
 <%= story.render("SpreadBtns") %>
 <button id="shufBtn" onclick="shuffle();"><br><img id="cardBack" src="cards/CardBack.jpg" width="95%"><br>Shuffle</button><br>
 <button id="drawCard" style="display:none;" onclick="drawACardM();">Draw Card</button>
+<button id="scrnBtn" style="display:none;" onclick="screenshot();">Share Spread</button>
 <button id="reset" onclick="reset();" style="display:none;">Reset</button>
 <div id="tableContainer"><%= story.render("SpreadTable") %></div>
 <div id="cardPopUp" class="modal"></div>

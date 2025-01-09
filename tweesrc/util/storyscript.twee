@@ -134,6 +134,7 @@ window.shuffle = function(){
       $("#drawCard").toggle();
       $("#spreadSelection").toggle();
       $("#deckSelection").toggle();
+      $("#scrnBtn").toggle();
       $("#reset").toggle();
     }
 
@@ -220,6 +221,7 @@ window.reset = function(){
     $("#drawCard").hide();
     $("#deckSelection").hide();
     $("#spreadSelection").hide();
+    $("#scrnBtn").hide();
     $("#reset").toggle();
   }
 };
@@ -288,4 +290,14 @@ window.maxWidthM = function(){
       default:
         return (window.innerWidth*.5);
   }
+};
+
+window.screenshot = function (){
+  domtoimage.toJpeg(document.getElementById('spreadLayout'), { quality: 0.95 })
+      .then(function (dataUrl) {
+          var link = document.createElement('a');
+          link.download = 'my-spread.jpeg';
+          link.href = dataUrl;
+          link.click();
+      });
 };

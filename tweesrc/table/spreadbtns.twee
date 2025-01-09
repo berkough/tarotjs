@@ -7,7 +7,7 @@
 <br>
 <div id="spreadSelection" style="display:none;">
     Select a Spread:<br>
-    <button id="celticCross" onclick="celticCross();">Celtic Cross</button>
     <button id="threeCard" onclick="threeCard();">Three Card</button>
     <button id="astroSpread" onclick="zodiacSpread();">Zodiac</button> 
+    <button id="celticCross" onclick="celticCross();">Celtic Cross</button>
 </div>
