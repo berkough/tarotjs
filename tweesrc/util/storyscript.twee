@@ -14,6 +14,7 @@ window.cardWidth = 0;
 window.cardHeight = 0;
 window.posOrder = [];
 window.deckType = false;
+window.cardReversed = false;
 
 window.majorArcana = [
     { Place: "0", Trump: "Fool", Value: 15 },
@@ -180,11 +181,15 @@ window.selectADeck = function(id){
 
 
 window.drawACardM = function(){
+  console.log("drawACardM called, spreadSelected:", spreadSelected);
   if (spreadSelected) {
     card = deck[0];
     console.log(card);
     suitTrumpM(0);
-    advanceSpread(pos,card);
+    let reversalChance = Math.random() * 0.5;
+    cardReversed = Math.random() < reversalChance;
+    console.log("cardReversed:", cardReversed, "reversalChance:", reversalChance);
+    advanceSpread(pos, card);
     deck.shift();
     pos += 1;
   }
@@ -193,17 +198,21 @@ window.drawACardM = function(){
 
 window.advanceSpread = function(pos,card){
   console.log(pos,card);
-  cardHTML = `<img id="${card.Place}-${suitTrump}" width="${cardWidth}" class="drawn" onclick="popup($(this).attr('id'));" src="cards/${deckType}/${card.Place}-${suitTrump}.jpg">`;
+  cardHTML = `<img id="${card.Place}-${suitTrump}" width="${cardWidth}" class="drawn" data-reversed="${cardReversed}" onclick="popup($(this).attr('id'), $(this).attr('data-reversed'));" src="cards/${deckType}/${card.Place}-${suitTrump}.jpg">`;
   let cardPosition = "#pos"+posOrder[pos];
   console.log(cardPosition);
   if ($(cardPosition).children('img').length > 0){
     $(cardPosition).css("position","absolute");
     $(cardPosition).append(cardHTML);
-    let rDeg = Math.floor(Math.random() * 180-90);
-    let rPx = Math.floor(Math.random() * 10-5);
+    let baseRotation = cardReversed ? 180 : 0;
+    let rDeg = Math.floor(Math.random() * 20 - 10) + baseRotation;
+    let rPx = Math.floor(Math.random() * 10 - 5);
     $(`#${card.Place}-${suitTrump}`).css({"position":"absolute","top":+rPx+"px","left":+rPx+"px","transform":"rotate("+rDeg+"deg)"});
   } else {
     $(cardPosition).html(cardHTML);
+    if (cardReversed) {
+      $(`#${card.Place}-${suitTrump}`).css("transform", "rotate(180deg)");
+    }
   }
   
 };
@@ -227,14 +236,17 @@ window.reset = function(){
 };
 
 
-window.popup = function(drawnCard){
+window.popup = function(drawnCard, isReversed){
   console.log(drawnCard);
+  isReversed = isReversed === 'true' || isReversed === true;
+  let rotation = isReversed ? "rotate(180deg)" : "";
+  let titleText = isReversed ? drawnCard + " (Reversed)" : drawnCard;
   
   $("#cardPopUp").css({"background-image":`url(cards/${deckType}/${drawnCard}.jpg)`,"background-position":"center", "background-repeat":"no-repeat"})
   $("#cardPopUp").html(`
     <div class="modal-content">
-      <img src="cards/${deckType}/${drawnCard}.jpg" width="30%"><br>
-      <p class="title">${drawnCard}</p>
+      <img src="cards/${deckType}/${drawnCard}.jpg" width="30%" style="transform: ${rotation}"><br>
+      <p class="title">${titleText}</p>
       ${story.render(drawnCard)}
       <span class="close" onclick="$('#cardPopUp').toggle();">&times;</span>
     </div>

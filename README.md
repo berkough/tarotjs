@@ -38,8 +38,8 @@ This workflow will also allow me to add different spreads much more easily to th
 
 - Full Book - ~~All Card Meanings.~~
   - 2024-10-24: As of today all the card meanings are in there from A. E. Waite's *Pictorial Key to the Tarot* (sourced from [Sacred Texts](https://sacred-texts.com/tarot/pkt/index.htm)). But I am going in and editing each of the card descriptions where I see fit. Generally speaking there will just be external links to an explanation of the thing that I think needs explaining. Minimal changes to the actual langauge of the text are being made, mainly spelling choices, for example: "show" instead of "shew". I have not yet finished updating all of the cards or implementing my own personal edits.
-- Reversals.
-  - I would like to implement a random element (probably in the *drawACardM* function, or as a separate function that occurs when drawing a card) that will reverse the card for those who want reversals.
+- ~~Reversals.~~
+  - 2026-03-31: Reversals are now implemented. Each time a card is drawn, the app randomly determines if the card should appear reversed. The reversal probability itself is randomized (0-50%) on each draw, making the occurrence of reversals unpredictable. Reversed cards display upside down on the spread table, and the popup shows the card rotated 180° with "(Reversed)" appended to the title.
 - Screenshots.
   - 2025-01-08: As of today this feature is in BETA. It is currently utilizing [tsayen's dom-to-image](https://github.com/tsayen/dom-to-image).
 -  Deck Selection - R-W-S or CBD Marseille.
